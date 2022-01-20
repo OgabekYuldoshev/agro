@@ -1,8 +1,8 @@
-import SwiperNavigation from "../components/SwiperNavigation"
-import HoverCard from "../components/HoverCards"
+import SwiperNavigation from "../../components/SwiperNavigation"
+import HoverCard from "../../components/HoverCards"
 import * as RS from "reactstrap"
-import SwiperPartner from "../components/SwiperPartner"
-import SwiperProducts from "../components/SwiperProducts"
+import SwiperPartner from "../../components/SwiperPartner"
+import SwiperProducts from "../../components/SwiperProducts"
 
 const dataFake = [
   {

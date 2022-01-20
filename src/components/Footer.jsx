@@ -3,7 +3,7 @@ import * as I from "react-feather"
 
 export default () => {
     return (
-        <footer className="px-5 bg-success text-white">
+        <footer style={{ background: '#65A603' }} className="px-5 text-white">
             <RS.Row xl={2} className="py-4">
                 <RS.Col>
                     <RS.Row>

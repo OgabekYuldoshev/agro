@@ -1,7 +1,7 @@
 import { useState } from "react"
 import * as I from "react-feather"
 import * as RS from 'reactstrap'
-
+import { Link } from "react-router-dom"
 const fakeData = [
     {
         title: 'Biz Haqimizda',
@@ -47,7 +47,7 @@ export default () => {
 
     return (
         <>
-            <nav className="px-5 bg-success text-white">
+            <nav style={{ background: '#65A603' }} className="px-5 text-white">
                 <div className=" d-flex align-items-center justify-content-between border-bottom">
                     <span className="">
                         <I.Phone size={18} />
@@ -66,7 +66,9 @@ export default () => {
                 </div>
                 <RS.Row xl={4} className="py-2">
                     <RS.Col>
-                        <h1 className="text-white">Agro Sanoat</h1>
+                        <Link to='/'>
+                            <h1 className="text-white">Agro Sanoat</h1>
+                        </Link>
                     </RS.Col>
                     <RS.Col xl={6}>
                         <RS.InputGroup>
