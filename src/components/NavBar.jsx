@@ -1,7 +1,7 @@
 import { useState } from "react"
 import * as I from "react-feather"
 import * as RS from 'reactstrap'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 const fakeData = [
     {
         title: 'Biz Haqimizda',
@@ -29,25 +29,29 @@ export default () => {
     const [language, setLanguage] = useState('UZ')
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
+    const history = useHistory()
 
     const menu = [
         {
             name: 'Savat',
-            icon: <I.ShoppingCart />
+            icon: <I.ShoppingCart />,
+            link: '/checkout'
         },
         {
-            name: 'Wish list',
-            icon: <I.Heart />
+            name: 'Wishlist',
+            icon: <I.Heart />,
+            link: '/wishlist'
         },
         {
             name: 'Register',
-            icon: <I.AtSign />
+            icon: <I.AtSign />,
+            link: '/login'
         }
     ]
 
     return (
         <>
-            <nav style={{ background: '#65A603' }} className="px-5 text-white">
+            <nav style={{ background: '#43A047' }} className="px-5 text-white">
                 <div className=" d-flex align-items-center justify-content-between border-bottom">
                     <span className="">
                         <I.Phone size={18} />
@@ -81,7 +85,7 @@ export default () => {
                     <RS.Col className="d-flex justify-content-end gap-2">
                         {
                             menu?.map((m, i) => (
-                                <div key={i} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
+                                <div onClick={() => history.push(m.link)} key={i} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
                                     {m.icon}
                                     <span>{m.name}</span>
                                 </div>

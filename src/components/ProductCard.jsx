@@ -6,12 +6,12 @@ export default () => {
     return (
         <RS.Card className='border rounded'>
             <div>
-                <Link to={`/product-detail/ogabek`}>
+                <Link to={`/product/ogabek`}>
                     <img className='img-fluid card-img-top' src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="he" />
                 </Link>
             </div>
             <RS.CardBody>
-                <Link to={`/product-detail/ogabek`}>
+                <Link to={`/product/ogabek`}>
                     <h6>Smart Watch</h6>
                 </Link>
                 <div>

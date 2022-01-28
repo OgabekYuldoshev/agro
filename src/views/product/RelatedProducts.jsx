@@ -47,6 +47,8 @@ const RelatedProducts = () => {
     }
   }
 
+  console.log("=====================")
+
   return (
     <Fragment>
       <div className='mt-4 mb-2 text-center'>

@@ -10,12 +10,22 @@ const DefaultRoute = '/'
 const Routes = [
   {
     path: '/',
-    component: lazy(() => import('../../views/Home')),
+    component: lazy(() => import('../../views/home')),
     exact: true
   },
   {
-    path: '/product-detail/:slug',
-    component: lazy(() => import('../../views/ProductDetail')),
+    path: '/wishlist',
+    component: lazy(() => import('../../views/wishlist')),
+    exact: true
+  },
+  {
+    path: '/checkout',
+    component: lazy(() => import('../../views/checkout')),
+    exact: true
+  },
+  {
+    path: '/product/:slug',
+    component: lazy(() => import('../../views/product')),
     exact: true
   },
   {
