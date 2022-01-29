@@ -32,7 +32,7 @@ const dataFake = [
 ]
 
 
-const Home = () => {
+const Main = () => {
   return (
     <>
       <div className="mt-2">
@@ -54,4 +54,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Main

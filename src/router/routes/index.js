@@ -1,16 +1,10 @@
 import { lazy } from 'react'
 
-// ** Document title
-const TemplateTitle = '%s - HeloF'
-
-// ** Default Route
-const DefaultRoute = '/'
-
 // ** Merge Routes
 const Routes = [
   {
     path: '/',
-    component: lazy(() => import('../../views/home')),
+    component: lazy(() => import('../../views/main')),
     exact: true
   },
   {
@@ -41,4 +35,4 @@ const Routes = [
   }
 ]
 
-export { DefaultRoute, TemplateTitle, Routes }
+export { Routes }

@@ -5,11 +5,11 @@ import { lazy } from 'react'
 // import LayoutWrapper from '@layouts/components/layout-wrapper'
 
 // ** Router Components
-import { BrowserRouter as AppRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as AppRouter, Route, Switch } from 'react-router-dom'
 
 // ** Routes & Default Routes
 import { Routes } from './routes'
-
+F
 import DefaultLayout from '@src/layouts/DefaultLayout'
 
 const Router = () => {
