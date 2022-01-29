@@ -7,14 +7,14 @@ import InputNumber from 'rc-input-number'
 import { X, Heart, Star, Plus, Minus } from 'react-feather'
 
 // ** Reactstrap Imports
-import { Card, CardBody, CardText, Button, Badge, InputGroup, Input, InputGroupText, Row, Col } from 'reactstrap'
+import { Card, CardBody, CardText, Button, Badge, Row, Col } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 
-const Cart = ({ stepper }) => {
+const Cart = (props) => {
   // ** Props
-  // const { products, stepper, deleteCartItem, dispatch, addToWishlist, deleteWishlistItem, getCartItems } = props
+  const { products, stepper } = props
 
   // // ** Function to convert Date
   // const formatDate = (value, formatting = { month: 'short', day: 'numeric', year: 'numeric' }) => {
@@ -32,29 +32,31 @@ const Cart = ({ stepper }) => {
   //   dispatch(getCartItems())
   // }
 
+  console.log(products)
+
   // ** Render cart items
   const renderCart = () => {
-    return new Array(10).fill().map(() => {
+    return products?.map((product, index) => {
       return (
-        <Card>
+        <Card key={index}>
           <CardBody>
             <Row xl={4}>
               <Col>
                 <div className='item-img'>
-                  <Link to={`/products/ogabek`}>
-                    <img className='img-fluid' width={200} height={300} src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="ogabek" />
+                  <Link to={`/products/${product?.item?.slug}`}>
+                    <img className='img-fluid' width={200} height={300} src={product?.item?.image} alt={product?.item?.name} />
                   </Link>
                 </div>
               </Col>
               <Col xl={6}>
                 <div className='item-name'>
                   <h6 className='mb-0'>
-                    <Link to={`/products/ogabek`}>Apple</Link>
+                    <Link to={`/product/${product?.item?.slug}`}>{product?.item?.name}</Link>
                   </h6>
                   <span className='item-company'>
                     By
                     <a className='ms-25' href='/' onClick={e => e.preventDefault()}>
-                      Ogabek
+                      {product?.item?.brand}
                     </a>
                   </span>
                   {/* <div className='item-rating'>
@@ -76,13 +78,13 @@ const Cart = ({ stepper }) => {
                 </div>
                 <span className='text-success mb-1'>In Stock</span>
                 <div className='item-quantity'>
-                  <span className='quantity-title me-50'>Qty</span>
+                  <span className='quantity-title me-50'>Quantity</span>
                   <InputNumber
                     min={1}
                     max={10}
                     upHandler={<Plus />}
                     className='cart-input'
-                    defaultValue={4}
+                    defaultValue={product?.qty}
                     downHandler={<Minus />}
                   />
                 </div>
@@ -92,8 +94,8 @@ const Cart = ({ stepper }) => {
                 <div className='item-options text-center'>
                   <div className='item-wrapper'>
                     <div className='item-cost'>
-                      <h4 className='item-price'>$300</h4>
-                      {true && (
+                      <h4 className='item-price'>${product?.item?.price}</h4>
+                      {product?.item?.hasFreeShipping && (
                         <CardText className='shipping'>
                           <Badge color='light-success' pill>
                             Free Shipping

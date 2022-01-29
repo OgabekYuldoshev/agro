@@ -1,27 +1,14 @@
-// ** React Imports
 import { Fragment } from 'react'
-
-// ** Third Party Components
-// import classnames from 'classnames'
-// import { Star } from 'react-feather'
 import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-
-// ** Reactstrap Imports
+import { slider } from "@db"
 import { CardText } from 'reactstrap'
-
-// ** Related products images
 import ProductCard from "../../components/ProductCard"
 // ** Styles
 import '@styles/react/libs/swiper/swiper.scss'
 
 const RelatedProducts = () => {
   SwiperCore.use([Navigation])
-
-  // ** Related products Slides
-  const slides = [1, 2, 3, 4, 5, 6, 7]
-
-  // ** Slider params
   const params = {
     className: 'swiper-responsive-breakpoints swiper-container px-4 py-2',
     slidesPerView: 5,
@@ -46,9 +33,6 @@ const RelatedProducts = () => {
       }
     }
   }
-
-  console.log("=====================")
-
   return (
     <Fragment>
       <div className='mt-4 mb-2 text-center'>
@@ -56,10 +40,10 @@ const RelatedProducts = () => {
         <CardText>People also search for this items</CardText>
       </div>
       <Swiper {...params}>
-        {slides.map(slide => {
+        {slider.map(item => {
           return (
-            <SwiperSlide key={slide.name}>
-              <ProductCard />
+            <SwiperSlide key={item.id}>
+              <ProductCard item={item} />
             </SwiperSlide>
           )
         })}

@@ -2,6 +2,7 @@ import { useState } from "react"
 import * as I from "react-feather"
 import * as RS from 'reactstrap'
 import { Link, useHistory } from "react-router-dom"
+import CartDropdown from "components/CartDropdown"
 const fakeData = [
     {
         title: 'Biz Haqimizda',
@@ -30,24 +31,6 @@ export default () => {
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory()
-
-    const menu = [
-        {
-            name: 'Savat',
-            icon: <I.ShoppingCart />,
-            link: '/checkout'
-        },
-        {
-            name: 'Wishlist',
-            icon: <I.Heart />,
-            link: '/wishlist'
-        },
-        {
-            name: 'Register',
-            icon: <I.AtSign />,
-            link: '/login'
-        }
-    ]
 
     return (
         <>
@@ -82,15 +65,14 @@ export default () => {
                             <RS.Input type='text' placeholder="Qidirish" />
                         </RS.InputGroup>
                     </RS.Col>
-                    <RS.Col className="d-flex justify-content-end gap-2">
-                        {
-                            menu?.map((m, i) => (
-                                <div onClick={() => history.push(m.link)} key={i} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
-                                    {m.icon}
-                                    <span>{m.name}</span>
-                                </div>
-                            ))
-                        }
+                    <RS.Col className="d-flex justify-content-end align-items-center gap-2">
+                        <CartDropdown />
+                        <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
+                            <I.Heart size={25} />
+                        </div>
+                        <div onClick={() => history.push('/login')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
+                            <I.LogIn size={25} />
+                        </div>
                     </RS.Col>
                 </RS.Row>
                 <RS.Collapse isOpen={isOpen}>

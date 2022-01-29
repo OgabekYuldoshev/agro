@@ -14,11 +14,8 @@ import Payment from './steps/Payment'
 import { ShoppingCart, Home, CreditCard } from 'react-feather'
 
 // ** Store & Actions
-// import { useDispatch, useSelector } from 'react-redux'
-// import { getCartItems, deleteCartItem, deleteWishlistItem, addToWishlist } from '../store'
-
-// ** Styles
-import '@styles/base/pages/app-ecommerce.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteAllProducts } from '@store/ecommerce'
 
 const Checkout = () => {
   // ** Ref & State
@@ -26,8 +23,8 @@ const Checkout = () => {
   const [stepper, setStepper] = useState(null)
 
   // // ** Store Vars
-  // const dispatch = useDispatch()
-  // const store = useSelector(state => state.ecommerce)
+  const dispatch = useDispatch()
+  const store = useSelector(state => state.ecommerce)
 
   // // ** Get Cart Items on mount
   // useEffect(() => {
@@ -43,9 +40,9 @@ const Checkout = () => {
       content: (
         <Cart
           stepper={stepper}
-        // dispatch={dispatch}
-        // products={store.cart}
-        // getCartItems={getCartItems}
+          dispatch={dispatch}
+          products={store.cart}
+          deleteAllProducts={deleteAllProducts}
         // addToWishlist={addToWishlist}
         // deleteCartItem={deleteCartItem}
         // deleteWishlistItem={deleteWishlistItem}

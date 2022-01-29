@@ -1,6 +1,6 @@
 // ** Third Party Components
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-
+import { slider } from "@db"
 import '@styles/react/libs/swiper/swiper.scss'
 import SwiperCore, {
   Navigation
@@ -47,9 +47,9 @@ const SwiperProducts = ({ title }) => {
       <h1 className='mb-2'>{title}</h1>
       <Swiper {...params}>
         {
-          new Array(10).fill().map((item) => (
+          slider.map((item) => (
             <SwiperSlide>
-              <ProductCard key={item} />
+              <ProductCard key={item} item={item} />
             </SwiperSlide>
           ))
         }

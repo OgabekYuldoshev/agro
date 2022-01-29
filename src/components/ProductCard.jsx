@@ -1,30 +1,52 @@
 import { Link } from 'react-router-dom'
 import * as RS from 'reactstrap'
 import * as I from 'react-feather'
+import { useDispatch } from "react-redux"
+import { addToCart, removeFromCart } from "@store/ecommerce"
+import { inCart } from "@utils"
 
-export default () => {
+export default ({ item }) => {
+    const dispatch = useDispatch()
+    const handleAddToCart = () => {
+        dispatch(addToCart({
+            item,
+            qty: 1
+        }))
+    }
+    const handleRemove = () => {
+        dispatch(removeFromCart(item))
+    }
     return (
         <RS.Card className='border rounded'>
             <div>
-                <Link to={`/product/ogabek`}>
-                    <img className='img-fluid card-img-top' src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="he" />
+                <Link to={`/product/${item?.slug}`}>
+                    <img className='img-fluid card-img-top' src={item?.image} alt="he" />
                 </Link>
             </div>
             <RS.CardBody>
-                <Link to={`/product/ogabek`}>
-                    <h6>Smart Watch</h6>
+                <Link to={`/product/${item?.slug}`}>
+                    <h6>{item?.name}</h6>
                 </Link>
                 <div>
-                    $300
+                    ${item?.price}
                 </div>
             </RS.CardBody>
             <div className='border-top py-1 mx-1 d-flex justify-content-between'>
                 <RS.Button.Ripple size='sm' className='btn-icon rounded-circle cursor-pointer' outline color='primary'>
                     <I.Heart size={16} />
                 </RS.Button.Ripple>
-                <RS.Button.Ripple size='sm' className='btn-icon rounded-circle cursor-pointer' outline color='primary'>
-                    <I.ShoppingCart size={16} />
-                </RS.Button.Ripple>
+                {
+                    inCart(item) ? (
+                        <RS.Button.Ripple onClick={handleRemove} size='sm' className='btn-icon rounded-circle cursor-pointer' outline color='danger'>
+                            <I.Trash size={16} />
+                        </RS.Button.Ripple>
+                    ) : (
+                        <RS.Button.Ripple onClick={handleAddToCart} size='sm' className='btn-icon rounded-circle cursor-pointer' outline color='primary'>
+                            <I.ShoppingCart size={16} />
+                        </RS.Button.Ripple>
+                    )
+                }
+
             </div>
         </RS.Card>
     )

@@ -5,7 +5,6 @@ import ReactImageZoom from 'react-image-zoom'
 // ** Third Party Components
 import classnames from 'classnames'
 import { Star, ShoppingCart, DollarSign, Heart, Share2, Facebook, Twitter, Youtube, Instagram } from 'react-feather'
-
 // ** Reactstrap Imports
 import {
   Row,
@@ -17,11 +16,14 @@ import {
   DropdownToggle,
   UncontrolledButtonDropdown
 } from 'reactstrap'
+import { inCart } from "@utils"
+import { useHistory } from 'react-router-dom'
 
-const Product = () => {
+const Product = (props) => {
   // ** Props
-  // const { data, deleteWishlistItem, dispatch, addToWishlist, getProduct, productId, addToCart } = props
+  const { item, dispatch, addToCart } = props
 
+  const history = useHistory()
   // ** State
   // const [selectedColor, setSelectedColor] = useState('primary')
 
@@ -72,19 +74,19 @@ const Product = () => {
     <Row className='my-2'>
       <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
         <div className='d-flex align-items-center justify-content-center'>
-          <ReactImageZoom className='img-fluid product-img' width={500} height={400} zoomPosition="original" zoomWidth={500} img="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80" />
+          <ReactImageZoom className='img-fluid product-img' width={500} height={400} zoomPosition="original" zoomWidth={500} img={item?.image} />
         </div>
       </Col>
       <Col md='7' xs='12'>
-        <h4>Apple</h4>
+        <h4>{item?.name}</h4>
         <CardText tag='span' className='item-company'>
           By
           <a className='company-name' href='/' onClick={e => e.preventDefault()}>
-            Ogabek
+            {item?.brand}
           </a>
         </CardText>
         <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
-          <h4 className='item-price me-1'>$300</h4>
+          <h4 className='item-price me-1'>${item?.price}</h4>
           {/* <ul className='unstyled-list list-inline'>
             {new Array(5).fill().map((listItem, index) => {
               return (
@@ -105,11 +107,11 @@ const Product = () => {
         </CardText>
         <CardText>
           <p>
-            lorem100
+            {item?.description}
           </p>
         </CardText>
         <ul className='product-features list-unstyled'>
-          {false && (
+          {item?.hasFreeShipping && (
             <li>
               <ShoppingCart size={19} />
               <span>Free Shipping</span>
@@ -127,22 +129,33 @@ const Product = () => {
         </div>
         <hr /> */}
         <div className='d-flex flex-column flex-sm-row pt-1'>
-          <Button
-            // tag={CartBtnTag}
-            className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
-            color='primary'
-          // onClick={() => handleCartBtn(data.id, data.isInCart)}
-          /*eslint-disable */
-          // {...(data.isInCart
-          //   ? {
-          //     to: '/apps/ecommerce/checkout'
-          //   }
-          //   : {})}
-          /*eslint-enable */
-          >
-            <ShoppingCart className='me-50' size={14} />
-            {true ? 'View in cart' : 'Move to cart'}
-          </Button>
+          {
+            inCart(item) ? (
+              <Button
+                className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
+                color='primary'
+                outline
+                onClick={() => history.push('/checkout')}
+              >
+                <ShoppingCart className='me-50' size={14} />
+                View in cart
+              </Button>
+            ) : (
+              <Button
+                className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
+                color='success'
+                onClick={
+                  () => dispatch(addToCart({
+                    item,
+                    qty: 1
+                  }))}
+              >
+                <ShoppingCart className='me-50' size={14} />
+                Add to Cart
+              </Button>
+            )
+          }
+
           <Button
             className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
             color='secondary'
@@ -157,7 +170,7 @@ const Product = () => {
             />
             <span>Wishlist</span>
           </Button>
-          <UncontrolledButtonDropdown className='dropdown-icon-wrapper btn-share'>
+          {/* <UncontrolledButtonDropdown className='dropdown-icon-wrapper btn-share'>
             <DropdownToggle className='btn-icon hide-arrow' color='secondary' caret outline>
               <Share2 size={14} />
             </DropdownToggle>
@@ -175,10 +188,10 @@ const Product = () => {
                 <Instagram size={14} />
               </DropdownItem>
             </DropdownMenu>
-          </UncontrolledButtonDropdown>
+          </UncontrolledButtonDropdown> */}
         </div>
       </Col>
-    </Row>
+    </Row >
   )
 }
 

@@ -3,7 +3,7 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Vuexy',
+    appName: 'Qorasuv Agro Kimyo',
     appLogoImage: require('@src/assets/images/logo/logo.svg').default
   },
   layout: {

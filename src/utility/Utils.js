@@ -1,3 +1,18 @@
+import { useSelector } from "react-redux"
+
+
+export const inCart = (item) => {
+  const store = useSelector(state => state.ecommerce)
+  const found = store.cart.find((i) => {
+    return i.item.id === item.id
+  })
+  if (found) {
+    return true
+  } else {
+    return false
+  }
+}
+
 // ** Checks if an object is empty (returns boolean)
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 
