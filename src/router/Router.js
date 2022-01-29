@@ -9,7 +9,6 @@ import { BrowserRouter as AppRouter, Route, Switch } from 'react-router-dom'
 
 // ** Routes & Default Routes
 import { Routes } from './routes'
-F
 import DefaultLayout from '@src/layouts/DefaultLayout'
 
 const Router = () => {
