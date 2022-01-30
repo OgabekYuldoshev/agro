@@ -12,7 +12,7 @@ import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem, Badge, Button, Ro
 
 // ** Store & Actions
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteAllProducts } from '@store/ecommerce'
+import { deleteAllProducts, updateProduct } from '@store/ecommerce'
 
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
@@ -77,8 +77,9 @@ const CartDropdown = () => {
                                         <div>
                                             <InputNumber
                                                 min={1}
-                                                max={10}
+                                                max={50}
                                                 upHandler={<Plus />}
+                                                onChange={(val) => dispatch(updateProduct({ id: product?.item.id, qty: val }))}
                                                 className='cart-input'
                                                 defaultValue={product?.qty}
                                                 downHandler={<Minus />}

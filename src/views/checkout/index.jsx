@@ -15,7 +15,8 @@ import { ShoppingCart, Home, CreditCard } from 'react-feather'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteAllProducts } from '@store/ecommerce'
+import { deleteAllProducts, removeFromCart, updateProduct } from '@store/ecommerce'
+import Empty from '../../components/Empty'
 
 const Checkout = () => {
   // ** Ref & State
@@ -43,6 +44,8 @@ const Checkout = () => {
           dispatch={dispatch}
           products={store.cart}
           deleteAllProducts={deleteAllProducts}
+          removeFromCart={removeFromCart}
+          updateProduct={updateProduct}
         // addToWishlist={addToWishlist}
         // deleteCartItem={deleteCartItem}
         // deleteWishlistItem={deleteWishlistItem}
@@ -68,16 +71,20 @@ const Checkout = () => {
   return (
     <Fragment>
       <h1 className='mt-2'>Checkout</h1>
-      <Wizard
-        ref={ref}
-        steps={steps}
-        type='modern-horizontal'
-        className="mb-2"
-        instance={el => setStepper(el)}
-        options={{
-          linear: false
-        }}
-      />
+      {
+        store?.cart?.length ? (
+          <Wizard
+            ref={ref}
+            steps={steps}
+            type='modern-horizontal'
+            className="mb-2"
+            instance={el => setStepper(el)}
+            options={{
+              linear: false
+            }}
+          />
+        ) : <Empty label="Your cart is empty!" />
+      }
     </Fragment>
   )
 }

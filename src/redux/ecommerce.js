@@ -41,14 +41,10 @@ export const appEcommerceSlice = createSlice({
       toast.success("Product successful added to cart!", toastOption)
     },
 
-    addCountCart: (state, item) => {
-      const found = state.cart.find(f => { return f.item.id === item.id })
-      if (found.qty > 1) {
-        found.qty--
-      } else {
-        const index = state.cart.findIndex(f => f.item.id === item.id)
-        state.cart.splice(index, 1)
-      }
+    updateProduct: (state, action) => {
+      const { id, qty } = action?.payload
+      const found = state.cart.find(f => { return f.item.id === id })
+      found.qty = qty
       localStorage.setItem("cart", JSON.stringify(state.cart))
     },
 
@@ -82,6 +78,6 @@ export const appEcommerceSlice = createSlice({
   // }
 })
 
-export const { addToCart, checkLocalStorage, deleteAllProducts, removeFromCart } = appEcommerceSlice.actions
+export const { addToCart, checkLocalStorage, deleteAllProducts, removeFromCart, updateProduct } = appEcommerceSlice.actions
 
 export default appEcommerceSlice.reducer

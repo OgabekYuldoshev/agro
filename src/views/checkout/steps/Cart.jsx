@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import InputNumber from 'rc-input-number'
 import { X, Heart, Star, Plus, Minus } from 'react-feather'
+import { useDispatch } from "react-redux"
 
 // ** Reactstrap Imports
 import { Card, CardBody, CardText, Button, Badge, Row, Col } from 'reactstrap'
@@ -14,8 +15,9 @@ import '@styles/react/libs/input-number/input-number.scss'
 
 const Cart = (props) => {
   // ** Props
-  const { products, stepper } = props
-
+  const { products, stepper, removeFromCart, updateProduct } = props
+  const dispatch = useDispatch()
+  const handleRemove = (item) => dispatch(removeFromCart(item))
   // // ** Function to convert Date
   // const formatDate = (value, formatting = { month: 'short', day: 'numeric', year: 'numeric' }) => {
   //   if (!value) return value
@@ -31,8 +33,6 @@ const Cart = (props) => {
   //   }
   //   dispatch(getCartItems())
   // }
-
-  console.log(products)
 
   // ** Render cart items
   const renderCart = () => {
@@ -81,10 +81,11 @@ const Cart = (props) => {
                   <span className='quantity-title me-50'>Quantity</span>
                   <InputNumber
                     min={1}
-                    max={10}
+                    max={50}
                     upHandler={<Plus />}
                     className='cart-input'
                     defaultValue={product?.qty}
+                    onChange={(val) => dispatch(updateProduct({ id: product?.item?.id, qty: val }))}
                     downHandler={<Minus />}
                   />
                 </div>
@@ -105,7 +106,7 @@ const Cart = (props) => {
                     </div>
                   </div>
                   <div className="d-flex flex-column gap-1">
-                    <Button className='mt-1 remove-wishlist' color='light'>
+                    <Button onClick={() => handleRemove(product?.item)} className='mt-1 remove-wishlist' color='light'>
                       <X size={14} className='me-25' />
                       <span>Remove</span>
                     </Button>
@@ -133,7 +134,7 @@ const Cart = (props) => {
 
   return (
     <Row xl={2}>
-      <Col xl={9}>{true ? renderCart() : <h4>Your cart is empty</h4>}</Col>
+      <Col xl={9}>{renderCart()}</Col>
       <Col xl={3}>
         <Card>
           <CardBody>
