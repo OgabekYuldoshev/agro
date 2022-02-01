@@ -1,6 +1,7 @@
 {
   "name": "qorasuv-agro-kimyo",
   "version": "8.0.0",
+  "homepage": "http://qorasuvagro.uz/",
   "private": true,
   "dependencies": {
     "@casl/ability": "^5.2.2",
