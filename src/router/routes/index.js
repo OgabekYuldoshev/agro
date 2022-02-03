@@ -8,6 +8,11 @@ const Routes = [
     exact: true
   },
   {
+    path: '/category',
+    component: lazy(() => import('../../views/category')),
+    exact: true
+  },
+  {
     path: '/wishlist',
     component: lazy(() => import('../../views/wishlist')),
     exact: true
@@ -21,13 +26,6 @@ const Routes = [
     path: '/product/:slug',
     component: lazy(() => import('../../views/product')),
     exact: true
-  },
-  {
-    path: '/login',
-    component: lazy(() => import('../../views/Login')),
-    meta: {
-      authRoute: true
-    }
   },
   {
     path: '/error',

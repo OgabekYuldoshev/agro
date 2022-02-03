@@ -8,7 +8,6 @@ import { store } from './redux/store'
 
 // ** Intl & ThemeColors Context
 import { ToastContainer } from 'react-toastify'
-import { ThemeContext } from './utility/context/ThemeColors'
 
 // ** Spinner (Splash Screen)
 import Spinner from './@core/components/spinner/Fallback-spinner'
@@ -41,10 +40,8 @@ const LazyApp = lazy(() => import('./App'))
 ReactDOM.render(
   <Provider store={store}>
     <Suspense fallback={<Spinner />}>
-      <ThemeContext>
-        <LazyApp />
-        <ToastContainer newestOnTop />
-      </ThemeContext>
+      <LazyApp />
+      <ToastContainer newestOnTop />
     </Suspense>
   </Provider>,
   document.getElementById('root')

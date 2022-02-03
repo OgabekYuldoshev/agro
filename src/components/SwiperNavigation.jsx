@@ -17,24 +17,20 @@ import img5 from '@src/assets/images/banner/banner-10.jpg'
 import img6 from '@src/assets/images/banner/banner-11.jpg'
 
 const params = {
-  spaceBetween: 30,
-  centeredSlides: true,
   autoplay: {
-    delay: 2500,
-    disableOnInteraction: false
+    delay: 5000
   },
   pagination: {
     clickable: true
-  },
-  navigation: true
+  }
 }
 
 SwiperCore.use([Autoplay])
 
 
-const SwiperAutoplay = ({ isRtl }) => {
+const SwiperAutoplay = () => {
   return (
-    <Swiper dir={isRtl ? 'rtl' : 'ltr'} {...params}>
+    <Swiper {...params}>
       <SwiperSlide>
         <img src={img1} alt='swiper 1' className='img-fluid' />
       </SwiperSlide>

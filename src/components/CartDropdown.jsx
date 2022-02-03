@@ -41,7 +41,7 @@ const CartDropdown = () => {
 
     // ** Loops through Cart Array to return Cart Items
     const renderCartItems = () => {
-        if (store.cart.length) {
+        if (store?.cart.length) {
             let total = 0
 
             return (
@@ -51,7 +51,7 @@ const CartDropdown = () => {
                             wheelPropagation: false
                         }}
                     >
-                        {store.cart.map(product => {
+                        {store?.cart.map(product => {
                             total += product?.qty * product?.item?.price
 
                             return (
@@ -110,9 +110,9 @@ const CartDropdown = () => {
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle tag='a'>
                 <ShoppingCart size={25} />
-                {store.cart.length > 0 && (
+                {store?.cart?.length > 0 && (
                     <Badge pill color='primary' className='badge-up'>
-                        {store.cart.length}
+                        {store?.cart?.length}
                     </Badge>
                 )}
             </DropdownToggle>
@@ -120,7 +120,7 @@ const CartDropdown = () => {
                 <DropdownItem tag='div' className='d-flex border-bottom' header>
                     <h4 className='mb-0 me-auto'>My Cart</h4>
                     <Badge color='light-primary' pill>
-                        {store.cart.length || 0} Items
+                        {store?.cart?.length || 0} Items
                     </Badge>
                     <div className='ml-2 cursor-pointer' onClick={() => dispatch(deleteAllProducts())}>
                         <Trash id='delete' color='red' size={20} />

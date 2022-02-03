@@ -1,4 +1,3 @@
-import SwiperNavigation from "../../components/SwiperNavigation"
 import HoverCard from "../../components/HoverCards"
 import * as RS from "reactstrap"
 import SwiperPartner from "../../components/SwiperPartner"
@@ -35,10 +34,8 @@ const dataFake = [
 const Main = () => {
   return (
     <>
-      <div className="mt-2">
-        <SwiperNavigation />
-      </div>
-      <RS.Row xl={3} className="mt-2">
+      <SwiperProducts title="Yangilari" />
+      <RS.Row xl={3} md={2} sm={1} xs={1} className="mt-2">
         {
           dataFake?.map((item, index) => (
             <RS.Col key={index}>
@@ -47,7 +44,6 @@ const Main = () => {
           ))
         }
       </RS.Row>
-      <SwiperProducts title="Yangilari" />
       <SwiperPartner title="Hamkorlar" />
       <SwiperProducts title="Tavfsiya etilganlari" />
     </>

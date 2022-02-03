@@ -1,14 +1,10 @@
 // ** Reducers Imports
-import navbar from './navbar'
-import layout from './layout'
-import auth from './authentication'
+import auth from './Auth'
 import ecommerce from './ecommerce'
 
 
 const rootReducer = {
   auth,
-  navbar,
-  layout,
   ecommerce
 }
 
