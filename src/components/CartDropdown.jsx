@@ -11,35 +11,16 @@ import { ShoppingCart, X, Plus, Minus, Trash } from 'react-feather'
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem, Badge, Button, Row, Col, UncontrolledTooltip } from 'reactstrap'
 
 // ** Store & Actions
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteAllProducts, updateProduct } from '@store/ecommerce'
-
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
-const CartDropdown = () => {
-    // ** State
+const CartDropdown = ({ store }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
-
-    // ** Store Vars
     const dispatch = useDispatch()
-    const store = useSelector(state => state.ecommerce)
-    // // ** ComponentDidMount
-    // useEffect(() => {
-    //     dispatch(getCartItems())
-    // }, [])
-
-    // // ** Function to toggle Dropdown
     const toggle = () => setDropdownOpen(prevState => !prevState)
-
-    // // ** Function to call on Dropdown Item Click
-    // const handleDropdownItemClick = id => {
-    //     dispatch(getProduct(id))
-    //     toggle()
-    // }
-
-    // ** Loops through Cart Array to return Cart Items
     const renderCartItems = () => {
         if (store?.cart.length) {
             let total = 0
@@ -111,7 +92,7 @@ const CartDropdown = () => {
             <DropdownToggle tag='a'>
                 <ShoppingCart size={25} />
                 {store?.cart?.length > 0 && (
-                    <Badge pill color='primary' className='badge-up'>
+                    <Badge pill color='danger' className='badge-up'>
                         {store?.cart?.length}
                     </Badge>
                 )}

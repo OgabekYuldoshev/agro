@@ -41,7 +41,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Suspense fallback={<Spinner />}>
       <LazyApp />
-      <ToastContainer newestOnTop />
+      <ToastContainer newestOnTop autoClose={3000} position='top-center' hideProgressBar />
     </Suspense>
   </Provider>,
   document.getElementById('root')

@@ -1,13 +1,15 @@
 // ** Redux Imports
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { http } from "@utils"
+import { toast } from "react-toastify"
 
 export const loadUser = createAsyncThunk('app/getProfile', async () => {
+
   const token = localStorage.getItem('accessToken')
   if (token) {
     http.defaults.headers["Authorization"] = `Bearer ${token}`
   }
-  const response = await http.get('/admin/admin-profile')
+  const response = await http.get('/auth/user-profile')
   if (response?.data?.data) {
     return {
       isAuth: true,
@@ -22,7 +24,12 @@ export const loadUser = createAsyncThunk('app/getProfile', async () => {
 })
 
 export const login = createAsyncThunk('app/Login', async (data) => {
-  const response = await http.post('/admin/login', data)
+  const response = await http.post('/auth/login', data)
+  return response.data
+})
+
+export const register = createAsyncThunk('app/Register', async (data) => {
+  const response = await http.post('/auth/register', data)
   return response.data
 })
 
@@ -31,6 +38,7 @@ export const authSlice = createSlice({
   initialState: {
     userData: {},
     isAuth: false,
+    modal: false,
     accessToken: localStorage.getItem('accessToken')
   },
   reducers: {
@@ -40,30 +48,36 @@ export const authSlice = createSlice({
       state.isAuth = false
       localStorage.removeItem('userData')
       localStorage.removeItem('accessToken')
+      toast.success("Siz muvaffaqiyatli profilingizdan chiqdingiz!")
+    },
+    handleAuthModal: state => {
+      state.modal = !state.modal
     }
-    // checkAuthUser: state => {
-    //   const token = JSON.parse(localStorage.getItem('accessToken'))
-    //   if (token) {
-    //     loadUser()
-    //     state.isAuth = true
-    //   } else {
-    //   }
-    // }
   },
-  extraReducers: builder => {
-    builder
-      .addCase(login.fulfilled, (state, action) => {
-        state.accessToken = action?.payload?.access_token
-        localStorage.setItem('accessToken', action.payload.access_token)
-      })
-      .addCase(loadUser.fulfilled, (state, action) => {
-        state.userData = action?.payload?.user
-        state.isAuth = action?.payload?.isAuth
-        localStorage.setItem('userData', JSON.stringify(action.payload))
-      })
+  extraReducers: {
+    [login.fulfilled]: (state, action) => {
+      state.accessToken = action?.payload?.access_token
+      localStorage.setItem('accessToken', action.payload.access_token)
+      state.modal = false
+      toast.success("Siz muvaffaqiyatli profilingizga kirdingiz!")
+    },
+    [login.rejected]: () => {
+      toast.error("Username yoki Parol xato !")
+    },
+    [loadUser.fulfilled]: (state, action) => {
+      state.userData = action?.payload?.user
+      state.isAuth = action?.payload?.isAuth
+      localStorage.setItem('userData', JSON.stringify(action.payload))
+    },
+    [register.fulfilled]: () => {
+      toast.success("Siz muvaffaqiyatli ro'yxatdan o'tdingiz!")
+    },
+    [register.rejected]: () => {
+      toast.error("Tizimda xatolik bor !")
+    }
   }
 })
 
-export const { handleLogout } = authSlice.actions
+export const { handleLogout, handleAuthModal } = authSlice.actions
 
 export default authSlice.reducer

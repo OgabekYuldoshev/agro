@@ -2,39 +2,34 @@ import { useState } from "react"
 import * as I from "react-feather"
 import * as RS from 'reactstrap'
 import { Link, useHistory } from "react-router-dom"
+import { handleAuthModal, handleLogout } from "../redux/Auth"
 import CartDropdown from "components/CartDropdown"
 import AuthComponent from "components/Auth"
 import CategoryComponent from "components/Category"
 import LOGO from "@src/assets/images/logo/logo.png"
-// const fakeData = [
-//     {
-//         title: 'Biz Haqimizda',
-//         child: ['Kompanya haqida', 'Jamoa haqida', 'Hamkorlar']
-//     },
-//     {
-//         title: 'Mahsulotlar',
-//         child: ['Kompanya haqida', 'Jamoa haqida', 'Hamkorlar']
-//     },
-//     {
-//         title: 'Xizmatlar',
-//         child: ['Kompanya haqida', 'Jamoa haqida', 'Hamkorlar']
-//     },
-//     {
-//         title: 'Media',
-//         child: ['Kompanya haqida', 'Jamoa haqida', 'Hamkorlar']
-//     },
-//     {
-//         title: 'Aloqa',
-//         child: ['Kompanya haqida', 'Jamoa haqida', 'Hamkorlar']
-//     }
-// ]
+import { useDispatch, useSelector } from "react-redux"
+
+const styleBar = {
+    width: '100%',
+    background: '#7367F0',
+    position: 'fixed',
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '20px 50px',
+    bottom: 0,
+    zIndex: 10,
+    left: 0
+}
 
 export default () => {
     const [language, setLanguage] = useState('UZ')
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory()
-
+    const dispatch = useDispatch()
+    const openAuthModal = () => dispatch(handleAuthModal())
+    const auth = useSelector(state => state.auth)
+    const ecommerce = useSelector(state => state.ecommerce)
     return (
         <>
             <nav style={{ background: '#7367F0' }} className="px-xl-5 px-2 text-white">
@@ -63,42 +58,71 @@ export default () => {
                         <I.List onClick={toggle} size={25} className="d-block d-lg-none" />
                     </RS.Col>
                     <RS.Col xl={6} className="d-flex align-items-center gap-1 mb-1 mb-lg-0">
-                        {/* <RS.InputGroup className="d-none d-lg-block"> */}
                         <RS.Button color="light" onClick={toggle} className="d-none d-lg-block" >
                             <I.List size={12} />
                         </RS.Button>
                         <RS.Input type='text' placeholder="Qidirish" />
-                        {/* </RS.InputGroup> */}
-                        {/* <RS.Input type='text' placeholder="Qidirish" className="d-block d-lg-none mb-2" /> */}
                         <CategoryComponent open={isOpen} toggle={toggle} />
                     </RS.Col>
                     <RS.Col className="d-none d-lg-flex justify-content-end align-items-center gap-2">
-                        <CartDropdown />
+                        <CartDropdown store={ecommerce} />
                         <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
                             <I.Heart size={25} />
                         </div>
-                        <AuthComponent />
+                        {
+                            auth.isAuth ? (
+                                <DropdownMenu data={auth} />
+
+                            ) : (
+                                <div onClick={openAuthModal} className="cursor-pointer">
+                                    <I.LogIn size={25} />
+                                </div>
+                            )
+                        }
                     </RS.Col>
                 </RS.Row>
-                {/* <RS.Collapse isOpen={isOpen}>
-                    <RS.Row xl={5} className="py-1 border-top">
-                        {
-                            fakeData?.map((data, i) => (
-                                <RS.Col key={i}>
-                                    <h4 className="text-white pb-1">{data.title}</h4>
-                                    <div className="px-2 d-flex flex-column justify-content-center">
-                                        {
-                                            data?.child?.map((ch, index) => (
-                                                <span className="mb-1 cursor-pointer" key={index}>{ch}</span>
-                                            ))
-                                        }
-                                    </div>
-                                </RS.Col>
-                            ))
-                        }
-                    </RS.Row>
-                </RS.Collapse> */}
+                <div style={styleBar} className="d-lg-none">
+                    <CartDropdown store={ecommerce} />
+                    <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
+                        <I.Heart size={25} />
+                    </div>
+                    {
+                        auth.isAuth ? (
+                            <DropdownMenu data={auth} />
+                        ) : (
+                            <div onClick={openAuthModal} className="cursor-pointer">
+                                <I.LogIn size={25} />
+                            </div>
+                        )
+                    }
+                </div>
+                <AuthComponent toggle={openAuthModal} />
             </nav>
         </>
+    )
+}
+
+const DropdownMenu = ({ data }) => {
+    const dispatch = useDispatch()
+    return (
+        <RS.UncontrolledButtonDropdown>
+            <RS.DropdownToggle tag='div' className="cursor-pointer">
+                <I.User size={25} />
+            </RS.DropdownToggle>
+            <RS.DropdownMenu>
+                <RS.DropdownItem tag={Link} to="/profile" className="d-flex align-items-center gap-1">
+                    <I.User size={18} />
+                    <span>
+                        {data?.userData?.first_name}
+                    </span>
+                </RS.DropdownItem>
+                <RS.DropdownItem tag='span' onClick={() => dispatch(handleLogout())} className="text-danger d-flex align-items-center gap-1">
+                    <I.LogOut size={18} />
+                    <span>
+                        Log Out
+                    </span>
+                </RS.DropdownItem>
+            </RS.DropdownMenu>
+        </RS.UncontrolledButtonDropdown>
     )
 }

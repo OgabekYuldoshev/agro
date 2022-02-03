@@ -5,8 +5,6 @@ import {
 } from '@reduxjs/toolkit'
 import { toast } from "react-toastify"
 
-const toastOption = { hideProgressBar: true, autoClose: 3000, position: toast.POSITION.BOTTOM_RIGHT }
-
 // ** Axios Imports
 // import axios from 'axios'
 
@@ -38,7 +36,7 @@ export const appEcommerceSlice = createSlice({
         }
         localStorage.setItem("cart", JSON.stringify(state.cart))
       }
-      toast.success("Product successful added to cart!", toastOption)
+      toast.success("Product successful added to cart!")
     },
 
     updateProduct: (state, action) => {
@@ -53,13 +51,13 @@ export const appEcommerceSlice = createSlice({
       const index = state.cart.findIndex(f => f.item.id === product?.id)
       state.cart.splice(index, 1)
       localStorage.setItem("cart", JSON.stringify(state.cart))
-      toast.success("Product successful removed from cart!", toastOption)
+      toast.success("Product successful removed from cart!")
     },
 
     deleteAllProducts: (state) => {
       localStorage.removeItem('cart')
       state.cart = []
-      toast.success("All product successful removed from cart!", toastOption)
+      toast.success("All product successful removed from cart!")
     },
 
     checkLocalStorage: (state) => {
