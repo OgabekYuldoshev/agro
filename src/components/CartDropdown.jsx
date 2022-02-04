@@ -38,7 +38,7 @@ const CartDropdown = ({ store }) => {
                             return (
                                 <Row xl={3} key={product?.item.id} className='d-flex align-items-center my-1'>
                                     <Col>
-                                        <img className='d-block rounded me-1' src={product?.item?.image} alt={product?.item?.name} height={100} />
+                                        <img className='d-block rounded me-1' src={require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} height={100} />
                                     </Col>
 
                                     {/* <X size={30} /> */}
@@ -51,7 +51,7 @@ const CartDropdown = ({ store }) => {
                                                 {product?.item.name}
                                             </Link>
                                         </h6>
-                                        <small>by {product?.item.brand}</small>
+                                        <small>by {product?.item.partner_id}</small>
                                     </Col>
                                     <Col className='d-flex flex-column align-items-center justify-content-center'>
                                         <h5 >${product?.item.price}</h5>

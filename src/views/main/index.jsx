@@ -1,43 +1,26 @@
+import { useEffect } from "react"
 import HoverCard from "../../components/HoverCards"
 import * as RS from "reactstrap"
 import SwiperPartner from "../../components/SwiperPartner"
 import SwiperProducts from "../../components/SwiperProducts"
-
-const dataFake = [
-  {
-    name: "O'g'itlar",
-    slug: 'ogit'
-  },
-  {
-    name: "O'g'itlar",
-    slug: 'ogit'
-  },
-  {
-    name: "O'g'itlar",
-    slug: 'ogit'
-  },
-  {
-    name: "O'g'itlar",
-    slug: 'ogit'
-  },
-  {
-    name: "O'g'itlar",
-    slug: 'ogit'
-  },
-  {
-    name: "O'g'itlar",
-    slug: 'ogit'
-  }
-]
+import { home } from '@store/app'
+import { useDispatch, useSelector } from "react-redux"
 
 
 const Main = () => {
+  const dispatch = useDispatch()
+  const app = useSelector(state => state.app)
+
+  useEffect(() => {
+    dispatch(home())
+  }, [])
+
   return (
     <>
-      <SwiperProducts title="Yangilari" />
+      <SwiperProducts data={app?.newProducts} title="Yangilari" />
       <RS.Row xl={3} md={2} sm={1} xs={1} className="mt-2">
         {
-          dataFake?.map((item, index) => (
+          app?.categories?.map((item, index) => (
             <RS.Col key={index}>
               <HoverCard {...item} />
             </RS.Col>
@@ -45,7 +28,7 @@ const Main = () => {
         }
       </RS.Row>
       <SwiperPartner title="Hamkorlar" />
-      <SwiperProducts title="Tavfsiya etilganlari" />
+      <SwiperProducts data={app?.recProducts} title="Tavfsiya etilganlari" />
     </>
   )
 }

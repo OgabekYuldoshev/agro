@@ -74,7 +74,7 @@ const Product = (props) => {
     <Row className='my-2'>
       <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
         <div className='d-flex align-items-center justify-content-center'>
-          <ReactImageZoom className='img-fluid product-img' width={500} height={400} zoomPosition="original" zoomWidth={500} img={item?.image} />
+          <ReactImageZoom className='img-fluid product-img' width={500} height={400} zoomPosition="original" zoomWidth={500} img={require('@src/assets/images/pages/eCommerce/26.png').default} />
         </div>
       </Col>
       <Col md='7' xs='12'>
@@ -82,7 +82,7 @@ const Product = (props) => {
         <CardText tag='span' className='item-company'>
           By
           <a className='company-name' href='/' onClick={e => e.preventDefault()}>
-            {item?.brand}
+            {item?.partner_id}
           </a>
         </CardText>
         <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
@@ -107,16 +107,16 @@ const Product = (props) => {
         </CardText>
         <CardText>
           <p>
-            {item?.description}
+            {item?.specification}
           </p>
         </CardText>
         <ul className='product-features list-unstyled'>
-          {item?.hasFreeShipping && (
+          {/* {item?.hasFreeShipping && (
             <li>
               <ShoppingCart size={19} />
               <span>Free Shipping</span>
             </li>
-          )}
+          )} */}
           <li>
             <DollarSign size={19} />
             <span>EMI options available</span>

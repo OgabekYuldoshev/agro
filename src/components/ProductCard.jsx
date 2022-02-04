@@ -19,12 +19,12 @@ export default ({ item }) => {
     return (
         <RS.Card className='border rounded'>
             <div>
-                <Link to={`/product/${item?.slug}`}>
-                    <img className='img-fluid card-img-top' src={item?.image} alt="he" />
+                <Link to={`/product/${item?.id}`}>
+                    <img className='img-fluid card-img-top' src={require('@src/assets/images/pages/eCommerce/26.png').default} alt="he" />
                 </Link>
             </div>
             <RS.CardBody>
-                <Link to={`/product/${item?.slug}`}>
+                <Link to={`/product/${item?.id}`}>
                     <h6>{item?.name}</h6>
                 </Link>
                 <div>

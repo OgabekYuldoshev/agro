@@ -43,20 +43,20 @@ const Cart = (props) => {
             <Row xl={4}>
               <Col>
                 <div className='item-img'>
-                  <Link to={`/products/${product?.item?.slug}`}>
-                    <img className='img-fluid' width={200} height={300} src={product?.item?.image} alt={product?.item?.name} />
+                  <Link to={`/products/${product?.item?.id}`}>
+                    <img className='img-fluid' width={200} height={300} src={require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} />
                   </Link>
                 </div>
               </Col>
               <Col xl={6}>
                 <div className='item-name'>
                   <h6 className='mb-0'>
-                    <Link to={`/product/${product?.item?.slug}`}>{product?.item?.name}</Link>
+                    <Link to={`/product/${product?.item?.id}`}>{product?.item?.name}</Link>
                   </h6>
                   <span className='item-company'>
                     By
                     <a className='ms-25' href='/' onClick={e => e.preventDefault()}>
-                      {product?.item?.brand}
+                      {product?.item?.partner_id}
                     </a>
                   </span>
                   {/* <div className='item-rating'>

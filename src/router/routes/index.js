@@ -23,7 +23,7 @@ const Routes = [
     exact: true
   },
   {
-    path: '/product/:slug',
+    path: '/product/:id',
     component: lazy(() => import('../../views/product')),
     exact: true
   },

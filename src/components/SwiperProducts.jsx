@@ -1,6 +1,6 @@
 // ** Third Party Components
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-import { slider } from "@db"
+// import { slider } from "@db"
 import '@styles/react/libs/swiper/swiper.scss'
 import SwiperCore, {
   Navigation
@@ -41,13 +41,13 @@ const params = {
 
 SwiperCore.use([Navigation])
 
-const SwiperProducts = ({ title }) => {
+const SwiperProducts = ({ title, data }) => {
   return (
     <div className='my-2'>
       <h1 className='mb-2'>{title}</h1>
       <Swiper {...params}>
         {
-          slider.map((item) => (
+          data?.map((item) => (
             <SwiperSlide>
               <ProductCard key={item} item={item} />
             </SwiperSlide>
