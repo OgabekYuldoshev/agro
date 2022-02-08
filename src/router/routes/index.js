@@ -18,6 +18,11 @@ const Routes = [
     exact: true
   },
   {
+    path: '/profile',
+    component: lazy(() => import('../../views/profile')),
+    exact: true
+  },
+  {
     path: '/checkout',
     component: lazy(() => import('../../views/checkout')),
     exact: true
