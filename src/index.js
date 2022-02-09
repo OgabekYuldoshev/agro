@@ -15,6 +15,9 @@ import Spinner from './@core/components/spinner/Fallback-spinner'
 // ** Ripple Button
 import './@core/components/ripple-button'
 
+// language
+import './configs/i18n'
+
 // ** PrismJS
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
@@ -30,6 +33,7 @@ import '@styles/react/libs/toastify/toastify.scss'
 import './@core/assets/fonts/feather/iconfont.css'
 import './@core/scss/core.scss'
 import './assets/scss/style.scss'
+import './style.scss'
 
 // ** Service Worker
 import * as serviceWorker from './serviceWorker'

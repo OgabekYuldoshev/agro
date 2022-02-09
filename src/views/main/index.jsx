@@ -3,6 +3,8 @@ import HoverCard from "../../components/HoverCards"
 import * as RS from "reactstrap"
 import SwiperPartner from "../../components/SwiperPartner"
 import SwiperProducts from "../../components/SwiperProducts"
+import SwiperNavigation from "../../components/SwiperNavigation"
+
 import { home } from '@store/app'
 import { useDispatch, useSelector } from "react-redux"
 
@@ -17,6 +19,7 @@ const Main = () => {
 
   return (
     <>
+      <SwiperNavigation />
       <SwiperProducts data={app?.newProducts} title="Yangilari" />
       <RS.Row xl={3} md={2} sm={1} xs={1} className="mt-2">
         {

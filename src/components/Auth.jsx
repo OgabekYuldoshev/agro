@@ -4,8 +4,12 @@ import { useFormik } from "formik"
 import { Modal, ModalBody, ModalHeader, TabContent, TabPane, Nav, NavItem, NavLink, Form, Input, Row, Col, Label, Button } from "reactstrap"
 import * as Yup from 'yup'
 import { login, register } from "@store/Auth"
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-const AuthComponents = ({ toggle }) => {
+const MySwal = withReactContent(Swal)
+
+const AuthComponents = ({ t, toggle }) => {
     const [active, setActive] = useState('1')
     const store = useSelector(state => state.auth)
 
@@ -24,7 +28,7 @@ const AuthComponents = ({ toggle }) => {
             >
                 <ModalHeader className='bg-transparent' toggle={toggle}></ModalHeader>
                 <ModalBody className='px-sm-3 mx-40 pb-5'>
-                    <h2 className='text-center mb-1'>Ro'yxatdan o'tish yoki Profilga kirish</h2>
+                    <h2 className='text-center mb-1'>{t('signin_or_signup')}</h2>
                     <Nav className='justify-content-center' tabs>
                         <NavItem>
                             <NavLink
@@ -33,7 +37,7 @@ const AuthComponents = ({ toggle }) => {
                                     toggleTab('1')
                                 }}
                             >
-                                Profilga kirish
+                                {t('login')}
                             </NavLink>
                         </NavItem>
                         <NavItem>
@@ -43,16 +47,16 @@ const AuthComponents = ({ toggle }) => {
                                     toggleTab('2')
                                 }}
                             >
-                                Ro'yxatdan o'tish
+                                {t('register')}
                             </NavLink>
                         </NavItem>
                     </Nav>
                     <TabContent className='py-50' activeTab={active}>
                         <TabPane tabId='1'>
-                            <Login toggle={toggle} />
+                            <Login t={t} toggle={toggle} />
                         </TabPane>
                         <TabPane tabId='2'>
-                            <Register toggle={toggle} tab={toggleTab} />
+                            <Register t={t} toggle={toggle} tab={toggleTab} />
                         </TabPane>
                     </TabContent>
                 </ModalBody>
@@ -62,18 +66,15 @@ const AuthComponents = ({ toggle }) => {
 }
 
 const LoginValidation = Yup.object().shape({
-    username: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
+    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
     password: Yup.string().min(6, 'Too Short!').required('Required')
 })
 
-const Login = ({ toggle }) => {
+const Login = ({ t, toggle }) => {
     const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
-            username: null,
+            email: null,
             password: null
         },
         validationSchema: LoginValidation,
@@ -85,27 +86,28 @@ const Login = ({ toggle }) => {
         <Form onSubmit={formik.handleSubmit}>
             <Row xs={1}>
                 <Col>
-                    <Label>Username</Label>
+                    <Label>{t("email")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        invalid={formik?.errors['username'] && formik?.touched['username'] && true}
-                        name="username"
-                        placeholder="Username" />
+                        invalid={formik?.errors['email'] && formik?.touched['email'] && true}
+                        type="email"
+                        name="email"
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mt-2">
-                    <Label>Parol</Label>
+                    <Label>{t("password")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         invalid={formik?.errors['password'] && formik?.touched['password'] && true}
                         name="password"
                         type="password"
-                        placeholder="Parol" />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
-                    <Button onClick={toggle} type="reset" color="danger" outline>Bekor qilish</Button>
-                    <Button type="submit" color="primary">Kirish</Button>
+                    <Button onClick={toggle} type="reset" color="danger" outline>{t('cancel')}</Button>
+                    <Button type="submit" color="primary">{t('signin')}</Button>
                 </Col>
             </Row>
         </Form>
@@ -130,23 +132,75 @@ const RegisterValidation = Yup.object().shape({
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
-    username: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
+    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
     password: Yup.string().min(6, 'Too Short!').required('Required'),
     password_confirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match')
 })
 
-const Register = ({ toggle, tab }) => {
+const Register = ({ t, tab }) => {
     const dispatch = useDispatch()
+
+    // const handleWarning = () => {
+    //     return MySwal.fire({
+    //         title: 'Warning!',
+    //         text: ' You clicked the button!',
+    //         icon: 'warning',
+    //         customClass: {
+    //             confirmButton: 'btn btn-primary'
+    //         },
+    //         buttonsStyling: false
+    //     })
+    // }
+
+    const handleAjax = () => {
+        MySwal.fire({
+            icon: 'warning',
+            title: t('email_confirmation'),
+            text: t('send_code_text'),
+            input: 'text',
+            inputPlaceholder: t("placeholder:code"),
+            inputAttributes: {
+                maxlength: 4
+            },
+            customClass: {
+                input: 'mx-3 mt-2 text-center',
+                confirmButton: 'btn btn-success'
+            },
+            buttonsStyling: false,
+            confirmButtonText: t("confirmation"),
+            showLoaderOnConfirm: true,
+            preConfirm(login) {
+                return fetch(`//api.github.com/users/${login}`)
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response.json()
+                    })
+                    .catch(function (error) {
+                        MySwal.showValidationMessage(`Request failed:  ${error}`)
+                    })
+            }
+        }).then(function (result) {
+            if (result.value) {
+                MySwal.fire({
+                    icon: 'success',
+                    timer: 4000,
+                    title: t('email_verified'),
+                    text: t('signup_end'),
+                    showConfirmButton: false
+                })
+            }
+        })
+    }
+
 
     const formik = useFormik({
         initialValues: {
             first_name: null,
             last_name: null,
             second_name: null,
-            username: null,
+            email: null,
             phone_number: null,
             password: null,
             password_confirmation: null
@@ -160,76 +214,78 @@ const Register = ({ toggle, tab }) => {
         <Form onSubmit={formik.handleSubmit}>
             <Row xl={1}>
                 <Col className="mb-1" xl={4}>
-                    <Label>Ismingiz</Label>
+                    <Label>{t("first_name")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         name="first_name"
                         invalid={formik?.errors["first_name"] && formik?.touched["first_name"] && true}
-                        placeholder="Ismingizni kiriting..." />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mb-1" xl={4}>
-                    <Label>Familyangiz</Label>
+                    <Label>{t("last_name")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         invalid={formik?.errors['last_name'] && formik?.touched["last_name"] && true}
                         name="last_name"
-                        placeholder="Familyangiz kiriting..." />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mb-1" xl={4}>
-                    <Label>Sharfingiz</Label>
+                    <Label>{t("second_name")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         name="second_name"
                         invalid={formik?.errors['second_name'] && formik?.touched["second_name"] && true}
-                        placeholder="Sharfingiz kiriting..." />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
-                    <Label>Username</Label>
+                    <Label>{t("email")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        invalid={formik?.errors['username'] && formik?.touched["username"] && true}
-                        name="username"
-                        placeholder="Username kiriting..." />
+                        invalid={formik?.errors['email'] && formik?.touched["email"] && true}
+                        name="email"
+                        type="email"
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
-                    <Label>Telfon raqam</Label>
+                    <Label>{t("phone_number")}</Label>
                     <Input
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         name="phone_number"
                         invalid={formik?.errors['phone_number'] && formik?.touched["phone_number"] && true}
-                        placeholder="Telfon raqam kiriting..." />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
-                    <Label>Parol</Label>
+                    <Label>{t("password")}</Label>
                     <Input
                         type="password"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         invalid={formik?.errors['password'] && formik?.touched["password"] && true}
                         name="password"
-                        placeholder="Parol kiriting..." />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
-                    <Label>Parolni tasdiqlang</Label>
+                    <Label>{t("password_confirmation")}</Label>
                     <Input
                         type="password"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         name="password_confirmation"
                         invalid={formik?.errors['password_confirmation'] && formik?.touched["password_confirmation"] && true}
-                        placeholder="Parolni tasdiqlansh..." />
+                        placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
-                    <Button onClick={toggle} type="reset" color="danger" outline>Bekor qilish</Button>
-                    <Button color="primary" type="submit">Ro'yxatdan O'tish</Button>
+                    <Button onClick={handleAjax} type="reset" color="danger" outline>{t('cancel')}</Button>
+                    <Button color="primary" type="submit">{t('signup')}</Button>
                 </Col>
             </Row>
         </Form>
     )
 }
+
 export default AuthComponents

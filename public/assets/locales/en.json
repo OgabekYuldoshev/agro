@@ -1,0 +1,33 @@
+{
+  "search": "Search",
+  "menu": "Menu",
+  "total": "Total",
+  "checkout": "Checkout",
+  "your_card_empty": "Your cart is empty!",
+  "my_cart": "My Cart",
+  "delete": "Delete",
+  "all": "All",
+  "logout": "Log Out",
+  "item": "Item",
+  "items": "Items",
+  "signin_or_signup": "Register or Login",
+  "login": "Sign In",
+  "register": "Sign Up",
+  "email": "Email",
+  "password": "Password",
+  "password_confirmation": "Confirmation password",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "second_name": "Second Name",
+  "phone_number": "Phone number",
+  "cancel": "Cancel",
+  "email_verified": "Your email has been successfully verified!",
+  "signup_end": "Registration completed successfully!",
+  "confirmation": "Confirmation",
+  "email_confirmation": "Email confirmation",
+  "send_code_text": "We have sent a confirmation code to your email. Please check your email and enter a confirmation code to register!",
+  "placeholder": {
+    "enter": "Enter",
+    "code": "Enter the code"
+  }
+}

@@ -8,6 +8,7 @@ import AuthComponent from "components/Auth"
 import CategoryComponent from "components/Category"
 import LOGO from "@src/assets/images/logo/logo.png"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 const styleBar = {
     width: '100%',
@@ -22,7 +23,7 @@ const styleBar = {
 }
 
 export default () => {
-    const [language, setLanguage] = useState('UZ')
+    const { i18n, t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory()
@@ -32,7 +33,7 @@ export default () => {
     const ecommerce = useSelector(state => state.ecommerce)
     return (
         <>
-            <nav style={{ background: '#7367F0' }} className="px-xl-5 px-2 text-white">
+            <nav style={{ background: '#7367F0' }} className="layout text-white">
                 <div className=" d-flex align-items-center justify-content-between border-bottom">
                     <span className="">
                         <I.Phone size={18} />
@@ -40,12 +41,12 @@ export default () => {
                     </span>
                     <RS.UncontrolledButtonDropdown>
                         <RS.DropdownToggle className="text-white" color='flat-white' outline caret>
-                            {language}
+                            {i18n.language}
                         </RS.DropdownToggle>
                         <RS.DropdownMenu>
-                            <RS.DropdownItem tag='uz' onClick={() => setLanguage('UZ')}>UZ</RS.DropdownItem>
-                            <RS.DropdownItem tag='ru' onClick={() => setLanguage('RU')}>RU</RS.DropdownItem>
-                            <RS.DropdownItem tag='en' onClick={() => setLanguage('EN')}>EN</RS.DropdownItem>
+                            <RS.DropdownItem tag='uz' onClick={() => i18n.changeLanguage('uz')}>UZ</RS.DropdownItem>
+                            <RS.DropdownItem tag='ru' onClick={() => i18n.changeLanguage('ru')}>RU</RS.DropdownItem>
+                            <RS.DropdownItem tag='en' onClick={() => i18n.changeLanguage('en')}>EN</RS.DropdownItem>
                         </RS.DropdownMenu>
                     </RS.UncontrolledButtonDropdown>
                 </div>
@@ -61,17 +62,17 @@ export default () => {
                         <RS.Button color="light" onClick={toggle} className="d-none d-lg-block" >
                             <I.List size={12} />
                         </RS.Button>
-                        <RS.Input type='text' placeholder="Qidirish" />
-                        <CategoryComponent open={isOpen} toggle={toggle} />
+                        <RS.Input type='text' placeholder={t('search')} />
+                        <CategoryComponent t={t} open={isOpen} toggle={toggle} />
                     </RS.Col>
                     <RS.Col className="d-none d-lg-flex justify-content-end align-items-center gap-2">
-                        <CartDropdown store={ecommerce} />
+                        <CartDropdown t={t} store={ecommerce} />
                         <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
                             <I.Heart size={25} />
                         </div>
                         {
                             auth.isAuth ? (
-                                <DropdownMenu data={auth} />
+                                <DropdownMenu t={t} data={auth} />
 
                             ) : (
                                 <div onClick={openAuthModal} className="cursor-pointer">
@@ -82,7 +83,7 @@ export default () => {
                     </RS.Col>
                 </RS.Row>
                 <div style={styleBar} className="d-lg-none">
-                    <CartDropdown store={ecommerce} />
+                    <CartDropdown t={t} store={ecommerce} />
                     <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
                         <I.Heart size={25} />
                     </div>
@@ -96,13 +97,13 @@ export default () => {
                         )
                     }
                 </div>
-                <AuthComponent toggle={openAuthModal} />
+                <AuthComponent t={t} toggle={openAuthModal} />
             </nav>
         </>
     )
 }
 
-const DropdownMenu = ({ data }) => {
+const DropdownMenu = ({ t, data }) => {
     const dispatch = useDispatch()
     return (
         <RS.UncontrolledButtonDropdown>
@@ -119,7 +120,7 @@ const DropdownMenu = ({ data }) => {
                 <RS.DropdownItem tag='span' onClick={() => dispatch(handleLogout())} className="text-danger d-flex align-items-center gap-1">
                     <I.LogOut size={18} />
                     <span>
-                        Log Out
+                        {t('logout')}
                     </span>
                 </RS.DropdownItem>
             </RS.DropdownMenu>

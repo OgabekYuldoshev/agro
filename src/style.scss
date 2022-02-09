@@ -1,0 +1,15 @@
+.layout {
+    padding: 0px 150px;
+}
+
+@media screen and (max-width: 900px) {
+    .layout {
+        padding: 0px 50px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .layout {
+        padding: 0px 20px;
+    }
+}

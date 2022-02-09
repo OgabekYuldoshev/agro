@@ -1,10 +1,10 @@
-import { Button, Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap'
+import { Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap'
 
-const Category = ({ open, toggle }) => {
+const Category = ({t, open, toggle }) => {
     return (
         <div className='demo-inline-spacing'>
             <Offcanvas direction="start" isOpen={open} toggle={toggle}>
-                <OffcanvasHeader toggle={toggle}>Menu</OffcanvasHeader>
+                <OffcanvasHeader toggle={toggle}>{t('menu')}</OffcanvasHeader>
                 <OffcanvasBody>
                     Hello
                 </OffcanvasBody>

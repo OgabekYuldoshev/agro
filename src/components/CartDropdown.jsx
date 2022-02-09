@@ -17,7 +17,7 @@ import { deleteAllProducts, updateProduct } from '@store/ecommerce'
 import '@styles/react/libs/input-number/input-number.scss'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
-const CartDropdown = ({ store }) => {
+const CartDropdown = ({ t, store }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const dispatch = useDispatch()
     const toggle = () => setDropdownOpen(prevState => !prevState)
@@ -73,17 +73,17 @@ const CartDropdown = ({ store }) => {
                     </PerfectScrollbar>
                     <li className='border-top pt-1'>
                         <div className='d-flex justify-content-between mb-1'>
-                            <h6 className='mb-0'>Total:</h6>
+                            <h6 className='mb-0'>{t('total')}:</h6>
                             <h6 className='text-primary mb-0'>${Number(total.toFixed(2))}</h6>
                         </div>
                         <Button tag={Link} to='/checkout' color='primary' block onClick={toggle}>
-                            Checkout
+                            {t('checkout')}
                         </Button>
                     </li>
                 </>
             )
         } else {
-            return <p className='m-0 p-1 text-center'>Your cart is empty</p>
+            return <p className='m-0 p-1 text-center'>{t('your_card_empty')}</p>
         }
     }
 
@@ -99,14 +99,14 @@ const CartDropdown = ({ store }) => {
             </DropdownToggle>
             <DropdownMenu end tag='ul' style={{ width: '550px', padding: '20px' }}>
                 <DropdownItem tag='div' className='d-flex border-bottom' header>
-                    <h4 className='mb-0 me-auto'>My Cart</h4>
+                    <h4 className='mb-0 me-auto'>{t('my_cart')}</h4>
                     <Badge color='light-primary' pill>
-                        {store?.cart?.length || 0} Items
+                        {store?.cart?.length || 0} {t('item')}
                     </Badge>
                     <div className='ml-2 cursor-pointer' onClick={() => dispatch(deleteAllProducts())}>
                         <Trash id='delete' color='red' size={20} />
                         <UncontrolledTooltip placement='bottom' target='delete'>
-                            Delete all
+                            {t('delete')}
                         </UncontrolledTooltip>
                     </div>
                 </DropdownItem>
