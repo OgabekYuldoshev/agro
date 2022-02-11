@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Row, Col, TabContent, TabPane, Nav, NavItem, NavLink, Card, CardBody, CardHeader, CardFooter } from "reactstrap"
 import { Home, Lock, Navigation, Trash } from "react-feather"
-import ProductCardInfo from "./ProductCardInfo"
+import UserCard from "./UserCard"
 import Account from "./Account"
 import Address from "./Address"
 import Sercurity from "./Sercurity"
@@ -23,7 +23,7 @@ const ProfilePage = () => {
     return (
         <Row xl={2} className="my-2">
             <Col xl={3}>
-                <ProductCardInfo data={store.userData} />
+                <UserCard data={store.userData} />
             </Col>
             <Col xl={9}>
                 <Nav tabs>

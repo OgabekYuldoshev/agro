@@ -1,6 +1,6 @@
 import { Card, CardBody, Label, Row, Col } from "reactstrap"
 import Avatar from '@components/avatar'
-import { Heart, ShoppingCart } from "react-feather"
+import { Heart, ShoppingCart, Clipboard } from "react-feather"
 import { useSelector } from "react-redux"
 
 const ProfilePage = ({ data }) => {
@@ -25,28 +25,16 @@ const ProfilePage = ({ data }) => {
                         <b>1</b>
                     </Col>
                 </Row>
-                <Row sm={1} className="gap-2">
+                {/* <Row sm={1} xl={2} className="gap-2">
                     <Col className="d-flex align-items-center gap-2">
                         <span>Username:</span>
-                        <b>{data.username}</b>
+                        <b>{data.email}</b>
                     </Col>
                     <Col className="d-flex align-items-center gap-2">
                         <span>Phone:</span>
                         <b>{data.phone_number}</b>
                     </Col>
-                    <Col className="d-flex align-items-center gap-2">
-                        <span>Phone:</span>
-                        <b>{data.phone_number}</b>
-                    </Col>
-                    <Col className="d-flex align-items-center gap-2">
-                        <span>Phone:</span>
-                        <b>{data.phone_number}</b>
-                    </Col>
-                    <Col className="d-flex align-items-center gap-2">
-                        <span>Phone:</span>
-                        <b>{data.phone_number}</b>
-                    </Col>
-                </Row>
+                </Row> */}
             </CardBody>
         </Card>
     )

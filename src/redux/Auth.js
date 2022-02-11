@@ -35,15 +35,13 @@ export const register = createAsyncThunk('app/Register', async (data) => {
 
 export const updateUser = createAsyncThunk('app/UpdateUser', async (data) => {
   const response = await http.post('/auth/my-profile-update', data)
-  console.log(response)
   return response.data
 })
 
-// export const updateUser = createAsyncThunk('app/UpdateUser', async (data) => {
-//   const response = await http.post('/auth/my-profile-update', data)
-//   console.log(response)
-//   return response.data
-// })
+export const changePassword = createAsyncThunk('app/ChangePassword', async (data) => {
+  const response = await http.post('/auth/my-profile-password-update', data)
+  return response.data
+})
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -90,7 +88,13 @@ export const authSlice = createSlice({
     [updateUser.fulfilled]: () => {
       toast.success("Account muvaffaqiyatli yangilandi!")
     },
-    [login.rejected]: () => {
+    [updateUser.rejected]: () => {
+      toast.error("Serverda Xatolik")
+    },
+    [changePassword.fulfilled]: () => {
+      toast.success("Parol muvaffaqiyatli yangilandi!")
+    },
+    [changePassword.rejected]: () => {
       toast.error("Serverda Xatolik")
     }
   }
