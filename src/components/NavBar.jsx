@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next'
 
 const styleBar = {
     width: '100%',
-    background: '#7367F0',
     position: 'fixed',
     display: 'flex',
     justifyContent: 'space-between',
@@ -33,7 +32,7 @@ export default () => {
     const ecommerce = useSelector(state => state.ecommerce)
     return (
         <>
-            <nav style={{ background: '#7367F0' }} className="layout text-white">
+            <nav className="bg-primary layout text-white">
                 <div className=" d-flex align-items-center justify-content-between border-bottom">
                     <span className="">
                         <I.Phone size={18} />
@@ -82,14 +81,14 @@ export default () => {
                         }
                     </RS.Col>
                 </RS.Row>
-                <div style={styleBar} className="d-lg-none">
+                <div style={styleBar} className="bg-primary d-lg-none">
                     <CartDropdown t={t} store={ecommerce} />
                     <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
                         <I.Heart size={25} />
                     </div>
                     {
                         auth.isAuth ? (
-                            <DropdownMenu data={auth} />
+                            <DropdownMenu t={t} data={auth} />
                         ) : (
                             <div onClick={openAuthModal} className="cursor-pointer">
                                 <I.LogIn size={25} />

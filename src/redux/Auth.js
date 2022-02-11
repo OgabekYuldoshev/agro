@@ -9,7 +9,7 @@ export const loadUser = createAsyncThunk('app/getProfile', async () => {
   if (token) {
     http.defaults.headers["Authorization"] = `Bearer ${token}`
   }
-  const response = await http.get('/auth/user-profile')
+  const response = await http.get('/auth/my-profile')
   if (response?.data?.data) {
     return {
       isAuth: true,
@@ -32,6 +32,18 @@ export const register = createAsyncThunk('app/Register', async (data) => {
   const response = await http.post('/auth/register', data)
   return response.data
 })
+
+export const updateUser = createAsyncThunk('app/UpdateUser', async (data) => {
+  const response = await http.post('/auth/my-profile-update', data)
+  console.log(response)
+  return response.data
+})
+
+// export const updateUser = createAsyncThunk('app/UpdateUser', async (data) => {
+//   const response = await http.post('/auth/my-profile-update', data)
+//   console.log(response)
+//   return response.data
+// })
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -74,6 +86,12 @@ export const authSlice = createSlice({
     },
     [register.rejected]: () => {
       toast.error("Tizimda xatolik bor !")
+    },
+    [updateUser.fulfilled]: () => {
+      toast.success("Account muvaffaqiyatli yangilandi!")
+    },
+    [login.rejected]: () => {
+      toast.error("Serverda Xatolik")
     }
   }
 })

@@ -3,7 +3,8 @@ import { useSelector } from "react-redux"
 import axios from "axios"
 
 export const http = axios.create({
-  baseURL: 'https://api.qorasuvagro.uz/api',
+  // baseURL: 'https://api.qorasuvagro.uz/api',
+  baseURL: 'https://guarded-cliffs-29944.herokuapp.com/api',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json; charset=utf-8'

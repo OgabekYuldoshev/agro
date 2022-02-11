@@ -106,7 +106,10 @@ const Login = ({ t, toggle }) => {
                         placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
-                    <Button onClick={toggle} type="reset" color="danger" outline>{t('cancel')}</Button>
+                    <Button onClick={() => {
+                        formik.resetForm()
+                        toggle()
+                    }} type="reset" color="danger" outline>{t('cancel')}</Button>
                     <Button type="submit" color="primary">{t('signin')}</Button>
                 </Col>
             </Row>
@@ -137,62 +140,60 @@ const RegisterValidation = Yup.object().shape({
     password_confirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match')
 })
 
-const Register = ({ t, tab }) => {
+const Register = ({ t, tab, toggle }) => {
     const dispatch = useDispatch()
 
-    // const handleWarning = () => {
-    //     return MySwal.fire({
-    //         title: 'Warning!',
-    //         text: ' You clicked the button!',
-    //         icon: 'warning',
-    //         customClass: {
-    //             confirmButton: 'btn btn-primary'
-    //         },
-    //         buttonsStyling: false
-    //     })
-    // }
-
-    const handleAjax = () => {
-        MySwal.fire({
-            icon: 'warning',
-            title: t('email_confirmation'),
-            text: t('send_code_text'),
-            input: 'text',
-            inputPlaceholder: t("placeholder:code"),
-            inputAttributes: {
-                maxlength: 4
-            },
-            customClass: {
-                input: 'mx-3 mt-2 text-center',
-                confirmButton: 'btn btn-success'
-            },
-            buttonsStyling: false,
-            confirmButtonText: t("confirmation"),
-            showLoaderOnConfirm: true,
-            preConfirm(login) {
-                return fetch(`//api.github.com/users/${login}`)
-                    .then(function (response) {
-                        if (!response.ok) {
-                            throw new Error(response.statusText)
-                        }
-                        return response.json()
-                    })
-                    .catch(function (error) {
-                        MySwal.showValidationMessage(`Request failed:  ${error}`)
-                    })
-            }
-        }).then(function (result) {
-            if (result.value) {
-                MySwal.fire({
-                    icon: 'success',
-                    timer: 4000,
-                    title: t('email_verified'),
-                    text: t('signup_end'),
-                    showConfirmButton: false
-                })
-            }
+    const handleVerif = () => {
+        return MySwal.fire({
+            icon: 'success',
+            timer: 4000,
+            title: t('email_verified'),
+            text: t('signup_end'),
+            showConfirmButton: false
         })
     }
+
+    // const handleAjax = () => {
+    //     MySwal.fire({
+    //         icon: 'warning',
+    //         title: t('email_confirmation'),
+    //         text: t('send_code_text'),
+    //         input: 'text',
+    //         inputPlaceholder: t("placeholder:code"),
+    //         inputAttributes: {
+    //             maxlength: 4
+    //         },
+    //         customClass: {
+    //             input: 'mx-3 mt-2 text-center',
+    //             confirmButton: 'btn btn-success'
+    //         },
+    //         buttonsStyling: false,
+    //         confirmButtonText: t("confirmation"),
+    //         showLoaderOnConfirm: true,
+    //         preConfirm(login) {
+    //             return fetch(`//api.github.com/users/${login}`)
+    //                 .then(function (response) {
+    //                     if (!response.ok) {
+    //                         throw new Error(response.statusText)
+    //                     }
+    //                     return response.json()
+    //                 })
+    //                 .catch(function (error) {
+    //                     MySwal.showValidationMessage(`Request failed:  ${error}`)
+    //                 })
+    //         }
+    //     }).then(function (result) {
+    //         if (result.value) {
+    //             MySwal.fire({
+    //                 icon: 'success',
+    //                 timer: 4000,
+    //                 title: t('email_verified'),
+    //                 text: t('signup_end'),
+    //                 showConfirmButton: false
+    //             })
+    //         }
+    //     })
+    // }
 
 
     const formik = useFormik({
@@ -207,7 +208,10 @@ const Register = ({ t, tab }) => {
         },
         validationSchema: RegisterValidation,
         onSubmit: values => {
-            dispatch(register(values)).then(() => tab('1'))
+            dispatch(register(values)).then(() => {
+                tab('1')
+                handleVerif()
+            })
         }
     })
     return (
@@ -280,7 +284,10 @@ const Register = ({ t, tab }) => {
                         placeholder={t("placeholder:enter")} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
-                    <Button onClick={handleAjax} type="reset" color="danger" outline>{t('cancel')}</Button>
+                    <Button onClick={() => {
+                        formik.resetForm()
+                        toggle()
+                    }} type="reset" color="danger" outline>{t('cancel')}</Button>
                     <Button color="primary" type="submit">{t('signup')}</Button>
                 </Col>
             </Row>
