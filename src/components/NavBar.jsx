@@ -9,6 +9,8 @@ import CategoryComponent from "components/Category"
 import LOGO from "@src/assets/images/logo/logo.png"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
+import { clearWishlist } from '@store/Wishlist'
+
 
 const styleBar = {
     width: '100%',
@@ -29,6 +31,7 @@ export default () => {
     const dispatch = useDispatch()
     const openAuthModal = () => dispatch(handleAuthModal())
     const auth = useSelector(state => state.auth)
+    const wishlist = useSelector(state => state.wishlist?.wishlist)
     const ecommerce = useSelector(state => state.ecommerce)
     return (
         <>
@@ -66,7 +69,14 @@ export default () => {
                     </RS.Col>
                     <RS.Col className="d-none d-lg-flex justify-content-end align-items-center gap-2">
                         <CartDropdown t={t} store={ecommerce} />
-                        <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
+                        <div onClick={() => history.push('/wishlist')} className="d-flex position-relative flex-column justify-content-center align-items-center cursor-pointer">
+                            {
+                                wishlist.length !== 0 && (
+                                    <RS.Badge pill color='danger' className='badge-up'>
+                                        {wishlist.length}
+                                    </RS.Badge>
+                                )
+                            }
                             <I.Heart size={25} />
                         </div>
                         {
@@ -83,7 +93,14 @@ export default () => {
                 </RS.Row>
                 <div style={styleBar} className="bg-primary d-lg-none">
                     <CartDropdown t={t} store={ecommerce} />
-                    <div onClick={() => history.push('/wishlist')} className="d-flex flex-column justify-content-center align-items-center cursor-pointer">
+                    <div onClick={() => history.push('/wishlist')} className="d-flex position-relative flex-column justify-content-center align-items-center cursor-pointer">
+                        {
+                            wishlist.length !== 0 && (
+                                <RS.Badge pill color='danger' className='badge-up'>
+                                    {wishlist.length}
+                                </RS.Badge>
+                            )
+                        }
                         <I.Heart size={25} />
                     </div>
                     {
@@ -104,6 +121,10 @@ export default () => {
 
 const DropdownMenu = ({ t, data }) => {
     const dispatch = useDispatch()
+    const logOut = () => {
+        dispatch(handleLogout())
+        dispatch(clearWishlist())
+    }
     return (
         <RS.UncontrolledButtonDropdown>
             <RS.DropdownToggle tag='div' className="cursor-pointer">
@@ -116,7 +137,7 @@ const DropdownMenu = ({ t, data }) => {
                         {data?.userData?.first_name}
                     </span>
                 </RS.DropdownItem>
-                <RS.DropdownItem tag='span' onClick={() => dispatch(handleLogout())} className="text-danger d-flex align-items-center gap-1">
+                <RS.DropdownItem tag='span' onClick={logOut} className="text-danger d-flex align-items-center gap-1">
                     <I.LogOut size={18} />
                     <span>
                         {t('logout')}

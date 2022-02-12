@@ -12,7 +12,7 @@ import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem, Badge, Button, Ro
 
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
-import { deleteAllProducts, updateProduct } from '@store/ecommerce'
+import { deleteAllProducts, updateProduct } from '@store/Ecommerce'
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import 'react-perfect-scrollbar/dist/css/styles.css'

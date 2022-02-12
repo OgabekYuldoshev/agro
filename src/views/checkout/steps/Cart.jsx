@@ -2,10 +2,11 @@
 import { Link } from 'react-router-dom'
 
 // ** Third Party Components
-import classnames from 'classnames'
 import InputNumber from 'rc-input-number'
 import { X, Heart, Star, Plus, Minus } from 'react-feather'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { addToWishList, deleteFromWishList } from "@store/Wishlist"
+import { inWishList } from "@utils"
 
 // ** Reactstrap Imports
 import { Card, CardBody, CardText, Button, Badge, Row, Col } from 'reactstrap'
@@ -18,6 +19,13 @@ const Cart = (props) => {
   const { products, stepper, removeFromCart, updateProduct } = props
   const dispatch = useDispatch()
   const handleRemove = (item) => dispatch(removeFromCart(item))
+  const wishlist = useSelector(state => state.wishlist?.wishlist)
+  const handleRemoveFromWishlist = (item) => {
+    const found = wishlist?.find((product) => product.products.id === item.id)
+    if (found) return dispatch(deleteFromWishList(found.id))
+    return toast.error("Bunaqa mahsulot wishlistda topilmadi!")
+  }
+
   // // ** Function to convert Date
   // const formatDate = (value, formatting = { month: 'short', day: 'numeric', year: 'numeric' }) => {
   //   if (!value) return value
@@ -106,22 +114,37 @@ const Cart = (props) => {
                     </div>
                   </div>
                   <div className="d-flex flex-column gap-1">
-                    <Button onClick={() => handleRemove(product?.item)} className='mt-1 remove-wishlist' color='light'>
+                    <Button onClick={() => handleRemove(product?.item)} className='mt-1 remove-wishlist' outline color='danger'>
                       <X size={14} className='me-25' />
                       <span>Remove</span>
                     </Button>
-                    <Button
-                      className='btn-cart'
-                      color='primary'
-                    >
-                      <Heart
-                        size={14}
-                        className={classnames('me-25', {
-                          'fill-current': true
-                        })}
-                      />
-                      <span className='text-truncate'>Wishlist</span>
-                    </Button>
+                    {
+                      inWishList(product?.item) ? (
+                        <Button
+                          className='btn-cart'
+                          color='primary'
+                          onClick={() => handleRemoveFromWishlist(product?.item)}
+                        >
+                          <Heart
+                            fill='red'
+                            size={14}
+                          />
+                          <span className='text-truncate'>Remove From Wishlist</span>
+                        </Button>
+                      ) : (
+                        <Button
+                          className='btn-cart'
+                          color='primary'
+                          onClick={() => dispatch(addToWishList(product?.item?.id))}
+                        >
+                          <Heart
+                            size={14}
+                          />
+                          <span className='text-truncate'>Wishlist</span>
+                        </Button>
+                      )
+                    }
+
                   </div>
                 </div>
               </Col>

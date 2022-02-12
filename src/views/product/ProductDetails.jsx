@@ -3,25 +3,20 @@
 // import { Link } from 'react-router-dom'
 import ReactImageZoom from 'react-image-zoom'
 // ** Third Party Components
-import classnames from 'classnames'
 import { Star, ShoppingCart, DollarSign, Heart, Share2, Facebook, Twitter, Youtube, Instagram } from 'react-feather'
 // ** Reactstrap Imports
 import {
   Row,
   Col,
   Button,
-  CardText,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  UncontrolledButtonDropdown
+  CardText
 } from 'reactstrap'
-import { inCart } from "@utils"
+import { inCart, inWishList } from "@utils"
 import { useHistory } from 'react-router-dom'
 
 const Product = (props) => {
   // ** Props
-  const { item, dispatch, addToCart } = props
+  const { item, dispatch, addToCart, handleRemoveFromWishlist, addToWishList } = props
 
   const history = useHistory()
   // ** State
@@ -74,7 +69,7 @@ const Product = (props) => {
     <Row className='my-2'>
       <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
         <div className='d-flex align-items-center justify-content-center'>
-          <ReactImageZoom className='img-fluid product-img' width={500} height={400} zoomPosition="original" zoomWidth={500} img={require('@src/assets/images/pages/eCommerce/26.png').default} />
+          <ReactImageZoom className='img-fluid product-img' width={300} height={400} zoomPosition="original" zoomWidth={500} img={require('@src/assets/images/pages/eCommerce/26.png').default} />
         </div>
       </Col>
       <Col md='7' xs='12'>
@@ -156,20 +151,34 @@ const Product = (props) => {
             )
           }
 
-          <Button
-            className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
-            color='secondary'
-            outline
-          // onClick={() => handleWishlist(data.isInWishlist)}
-          >
-            <Heart
-              size={14}
-              className={classnames('me-50', {
-                'text-danger': true
-              })}
-            />
-            <span>Wishlist</span>
-          </Button>
+          {
+            inWishList(item) ? (
+              <Button
+                className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
+                color='danger'
+                outline
+                onClick={() => handleRemoveFromWishlist(item)}
+              >
+                <Heart
+                  fill='red'
+                  size={15}
+                />
+                <span>Remove from Wishlist</span>
+              </Button>
+            ) : (
+              <Button
+                className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
+                color='secondary'
+                outline
+                onClick={() => dispatch(addToWishList(item.id))}
+              >
+                <Heart
+                  size={15}
+                />
+                <span>Wishlist</span>
+              </Button>
+            )
+          }
           {/* <UncontrolledButtonDropdown className='dropdown-icon-wrapper btn-share'>
             <DropdownToggle className='btn-icon hide-arrow' color='secondary' caret outline>
               <Share2 size={14} />

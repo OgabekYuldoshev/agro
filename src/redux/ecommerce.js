@@ -15,7 +15,7 @@ import { toast } from "react-toastify"
 
 
 export const appEcommerceSlice = createSlice({
-  name: 'appEcommerce',
+  name: 'ecommerce',
   initialState: {
     cart: []
   },

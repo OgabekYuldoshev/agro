@@ -23,6 +23,19 @@ export const inCart = (item) => {
   }
 }
 
+export const inWishList = (item) => {
+  const store = useSelector(state => state.wishlist)
+  const found = store.wishlist.find((i) => {
+    return i.products.id === item.id
+  })
+  if (found) {
+    return true
+  } else {
+    return false
+  }
+}
+
+
 // ** Checks if an object is empty (returns boolean)
 export const isObjEmpty = obj => Object.keys(obj).length === 0
 

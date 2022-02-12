@@ -5,7 +5,7 @@ import SwiperPartner from "../../components/SwiperPartner"
 import SwiperProducts from "../../components/SwiperProducts"
 import SwiperNavigation from "../../components/SwiperNavigation"
 
-import { home } from '@store/app'
+import { home } from '@store/App'
 import { useDispatch, useSelector } from "react-redux"
 
 

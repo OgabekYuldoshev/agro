@@ -2,8 +2,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { http } from "@utils"
 import { toast } from "react-toastify"
+import { clearWishlist } from './Wishlist'
 
-export const loadUser = createAsyncThunk('app/getProfile', async () => {
+export const loadUser = createAsyncThunk('app/getProfile', async (id, { dispatch }) => {
 
   const token = localStorage.getItem('accessToken')
   if (token) {
@@ -16,9 +17,9 @@ export const loadUser = createAsyncThunk('app/getProfile', async () => {
       user: response.data?.data
     }
   } else {
+    dispatch(clearWishlist())
     return {
-      isAuth: false,
-      user: response.data?.data
+      isAuth: false
     }
   }
 })
@@ -52,8 +53,7 @@ export const authSlice = createSlice({
     accessToken: localStorage.getItem('accessToken')
   },
   reducers: {
-    handleLogout: state => {
-      state.userData = {}
+    handleLogout: (state) => {
       state.accessToken = ''
       state.isAuth = false
       localStorage.removeItem('userData')
@@ -78,6 +78,10 @@ export const authSlice = createSlice({
       state.userData = action?.payload?.user
       state.isAuth = action?.payload?.isAuth
       localStorage.setItem('userData', JSON.stringify(action.payload))
+    },
+    [loadUser.rejected]: () => {
+      localStorage.removeItem('userData')
+      localStorage.removeItem('accessToken')
     },
     [register.fulfilled]: () => {
       toast.success("Siz muvaffaqiyatli ro'yxatdan o'tdingiz!")

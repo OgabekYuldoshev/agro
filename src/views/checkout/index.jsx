@@ -15,7 +15,7 @@ import { ShoppingCart, Home, CreditCard } from 'react-feather'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteAllProducts, removeFromCart, updateProduct } from '@store/ecommerce'
+import { deleteAllProducts, removeFromCart, updateProduct } from '@store/Ecommerce'
 import Empty from '../../components/Empty'
 
 const Checkout = () => {
