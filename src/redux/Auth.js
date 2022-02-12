@@ -5,7 +5,6 @@ import { toast } from "react-toastify"
 import { clearWishlist } from './Wishlist'
 
 export const loadUser = createAsyncThunk('app/getProfile', async (id, { dispatch }) => {
-
   const token = localStorage.getItem('accessToken')
   if (token) {
     http.defaults.headers["Authorization"] = `Bearer ${token}`

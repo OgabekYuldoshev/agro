@@ -8,25 +8,44 @@ export const home = createAsyncThunk('app/Home', async (data) => {
     return response.data
 })
 
+export const getAddress = createAsyncThunk('app/getAddress', async (undefined, { rejectWithValue }) => {
+    try {
+        const response = await http.get('/auth/my-address')
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const addAddress = createAsyncThunk('app/addAddress', async (data, { rejectWithValue, dispatch }) => {
+    try {
+        const response = await http.post('/auth/my-address', data)
+        dispatch(getAddress())
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const deleteAddress = createAsyncThunk('app/deleteAddress', async (id, { rejectWithValue, dispatch }) => {
+    try {
+        const response = await http.delete(`/auth/my-address/${id}`)
+        dispatch(getAddress())
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
 export const apphSlice = createSlice({
     name: 'app',
     initialState: {
         newProducts: [],
         categories: [],
-        recProducts: []
+        recProducts: [],
+        address: []
     },
     reducers: {
-        // handleLogout: state => {
-        //     state.userData = {}
-        //     state.accessToken = ''
-        //     state.isAuth = false
-        //     localStorage.removeItem('userData')
-        //     localStorage.removeItem('accessToken')
-        //     toast.success("Siz muvaffaqiyatli profilingizdan chiqdingiz!")
-        // },
-        // handleAuthModal: state => {
-        //     state.modal = !state.modal
-        // }
     },
     extraReducers: {
         [home.fulfilled]: (state, action) => {
@@ -37,6 +56,24 @@ export const apphSlice = createSlice({
         },
         [home.rejected]: () => {
             toast.error("Serverda xatolik!")
+        },
+        [getAddress.fulfilled]: (state, action) => {
+            state.address = action.payload
+        },
+        [getAddress.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
+        [addAddress.fulfilled]: () => {
+            toast.success("Yangi manzil yaratildi!")
+        },
+        [addAddress.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
+        [deleteAddress.fulfilled]: () => {
+            toast.success("Manzil o'chirildi!")
+        },
+        [deleteAddress.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
         }
     }
 })

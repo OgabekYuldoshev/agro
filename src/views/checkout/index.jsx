@@ -83,7 +83,7 @@ const Checkout = () => {
               linear: false
             }}
           />
-        ) : <Empty label="Your cart is empty!" />
+        ) : <Empty label="Your cart is empty!" type="empty" />
       }
     </Fragment>
   )

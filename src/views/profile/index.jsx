@@ -5,8 +5,9 @@ import UserCard from "./UserCard"
 import Account from "./Account"
 import Address from "./Address"
 import Sercurity from "./Sercurity"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import NotAuthorized from "../NotAuthorized"
+import { deleteAddress } from "@store/App"
 
 const ProfilePage = () => {
     const store = useSelector(state => state.auth)
@@ -76,10 +77,8 @@ const ProfilePage = () => {
                                 <Address data={store.userData} />
                             </CardBody>
                         </Card>
-                        <Row xl={3}>
-                            <Col>
-                                <CardAddress />
-                            </Col>
+                        <Row xl={3} sm={2} xs={1}>
+                            <CardAddress />
                         </Row>
                     </TabPane>
                     <TabPane tabId='3'>
@@ -97,17 +96,21 @@ const ProfilePage = () => {
 }
 
 const CardAddress = () => {
-    return (
-        <Card>
-            <CardBody>
-                <h5>Ogabek Yuldoshev</h5>
-                <p>9447 Glen Eagles Drive Lewis Center, OH 43035, 998945360773</p>
-            </CardBody>
-            <div className="px-2 py-1 border-top d-flex justify-content-end">
-                <Trash color="red" className="cursor-pointer" />
-            </div>
-        </Card>
-    )
+    const address = useSelector(state => state.app?.address)
+    const dispatch = useDispatch()
+    return address.map((add, index) => (
+        <Col>
+            <Card key={index}>
+                <CardBody>
+                    <h5>{add.receiver_name}</h5>
+                    <p>{add.street_name}, {add.district_name}, {add.region_name}, {add.phone_number}</p>
+                </CardBody>
+                <div className="px-2 py-1 border-top d-flex justify-content-end">
+                    <Trash color="red" onClick={() => dispatch(deleteAddress(add.id))} onclick className="cursor-pointer" />
+                </div>
+            </Card>
+        </Col>
+    ))
 }
 
 export default ProfilePage

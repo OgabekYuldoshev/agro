@@ -1,34 +1,33 @@
 // ** React Imports
 import { Link } from 'react-router-dom'
 
-// ** Reactstrap Imports
 import { Button } from 'reactstrap'
 
-// ** Custom Hooks
-// import { useSkin } from '@hooks/useSkin'
-
-// ** Styles
 import '@styles/base/pages/page-misc.scss'
+import { useDispatch } from 'react-redux'
+import { handleAuthModal } from "@store/Auth"
 
 const NotAuthorized = () => {
-  // ** Hooks
-  // const { skin } = useSkin()
+  const dispatch = useDispatch()
 
-  const illustration = 'not-authorized.svg',
-    source = require(`@src/assets/images/pages/${illustration}`).default
   return (
     <div className='misc-wrapper'>
       <div className='misc-inner p-2 p-sm-3'>
         <div className='w-100 text-center'>
-          <img className='img-fluid mb-2' src={source} alt='Not authorized page' />
+          <img className='mb-2' width={450} src={require(`@src/assets/images/site/security.svg`).default} alt='Not authorized page' />
           <h2 className='mb-1'>You are not authorized! 🔐</h2>
           <p className='mb-2'>
             The Webtrends Marketing Lab website in IIS uses the default IUSR account credentials to access the web pages
             it serves.
           </p>
-          <Button tag={Link} to='/' color='primary' className='btn-sm-block mb-1'>
-            Back to Home
-          </Button>
+          <div className='d-flex align-items-center gap-2 justify-content-center'>
+            <Button tag={Link} to='/' outline color='primary' className='btn-sm-block mb-1'>
+              Back to Home
+            </Button>
+            <Button color='primary' onClick={() => dispatch(handleAuthModal(true))} className='btn-sm-block mb-1'>
+              Sign In
+            </Button>
+          </div>
         </div>
       </div>
     </div>
