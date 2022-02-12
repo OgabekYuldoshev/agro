@@ -9,10 +9,20 @@ export const getWishLists = createAsyncThunk('app/getWishLists', async () => {
     return response.data?.data
 })
 
-export const addToWishList = createAsyncThunk('app/addToWishList', async (id, { dispatch }) => {
-    const response = await http.post('/wish-lists', { product_id: id })
-    dispatch(getWishLists())
-    return response.data
+export const addToWishList = createAsyncThunk('app/addToWishList', async (id, { dispatch, getState, rejectWithValue }) => {
+    const isAuth = getState()?.auth?.isAuth
+    if (isAuth) {
+        try {
+            const response = await http.post('/wish-lists', { product_id: id })
+            dispatch(getWishLists())
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    } else {
+        return rejectWithValue("Siz wishlistga qo'shish uchun ro'yxatdan o'tgan bolishingiz kerak!")
+    }
+
 })
 
 export const deleteFromWishList = createAsyncThunk('app/deleteFromWishList', async (id, { dispatch }) => {
@@ -43,8 +53,9 @@ export const wishlistSlice = createSlice({
         [addToWishList.fulfilled]: () => {
             toast.success("WishListga qo'shildi!")
         },
-        [addToWishList.rejected]: () => {
-            toast.error("Tizimda xatolik bor !")
+        [addToWishList.rejected]: (undefined, action) => {
+            if (action.payload?.message) toast.error(action.payload.message)
+            toast.warning(action.payload)
         },
         [deleteFromWishList.fulfilled]: () => {
             toast.success("WishListdan o'chirildi!")

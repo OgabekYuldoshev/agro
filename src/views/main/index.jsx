@@ -19,7 +19,7 @@ const Main = () => {
 
   return (
     <>
-      <SwiperNavigation />
+      <SwiperNavigation sliders={app?.sliders} />
       <SwiperProducts data={app?.newProducts} title="Yangilari" />
       <RS.Row xl={3} md={2} sm={1} xs={1} className="mt-2">
         {
@@ -30,7 +30,7 @@ const Main = () => {
           ))
         }
       </RS.Row>
-      <SwiperPartner title="Hamkorlar" />
+      <SwiperPartner data={app?.partners} title="Hamkorlar" />
       <SwiperProducts data={app?.recProducts} title="Tavfsiya etilganlari" />
     </>
   )

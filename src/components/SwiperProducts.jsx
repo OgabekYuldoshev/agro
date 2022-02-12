@@ -18,7 +18,6 @@ const params = {
   pagination: {
     clickable: true
   },
-  navigation: true,
   breakpoints: {
     1024: {
       slidesPerView: 4,
@@ -33,7 +32,7 @@ const params = {
       spaceBetween: 20
     },
     320: {
-      slidesPerView: 1,
+      slidesPerView: 2,
       spaceBetween: 10
     }
   }
@@ -47,8 +46,8 @@ const SwiperProducts = ({ title, data }) => {
       <h1 className='mb-2'>{title}</h1>
       <Swiper {...params}>
         {
-          data?.map((item) => (
-            <SwiperSlide>
+          data?.map((item, index) => (
+            <SwiperSlide key={index}>
               <ProductCard key={item} item={item} />
             </SwiperSlide>
           ))

@@ -1,6 +1,6 @@
 // ** Third Party Components
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-
+import { baseUrl } from "@utils"
 // ** Reactstrap Imports
 import '@styles/react/libs/swiper/swiper.scss'
 
@@ -28,9 +28,16 @@ const params = {
 SwiperCore.use([Autoplay])
 
 
-const SwiperAutoplay = () => {
+const SwiperAutoplay = ({ sliders }) => {
   return (
     <Swiper {...params}>
+      {
+        sliders.map((slide, index) => (
+          <SwiperSlide key={index} style={{ height: "10vh" }}>
+            <img src={baseUrl + slide.image} alt={slide.name} style={{ height: "100%", objectFit: 'cover', objectPosition: "center" }} />
+          </SwiperSlide>
+        ))
+      }
       <SwiperSlide>
         <img src={img1} alt='swiper 1' className='img-fluid' />
       </SwiperSlide>

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 
 const ProfilePage = ({ data }) => {
     const cart = useSelector(state => state.ecommerce?.cart)
+    const wishlist = useSelector(state => state.wishlist?.wishlist)
     return (
         <Card>
             <CardBody className="d-flex flex-column align-items-center ">
@@ -18,7 +19,7 @@ const ProfilePage = ({ data }) => {
                     </Col>
                     <Col className="d-flex gap-1 align-items-center">
                         <Avatar color='light-danger' icon={<Heart size={20} />} />
-                        <b>12</b>
+                        <b>{wishlist.length}</b>
                     </Col>
                     <Col className="d-flex gap-1 align-items-center">
                         <Avatar color='light-primary' icon={<Clipboard size={20} />} />

@@ -43,16 +43,20 @@ export const apphSlice = createSlice({
         newProducts: [],
         categories: [],
         recProducts: [],
-        address: []
+        partners: [],
+        address: [],
+        sliders: []
     },
     reducers: {
     },
     extraReducers: {
         [home.fulfilled]: (state, action) => {
-            const { categories, new_comers, recommended } = action?.payload
+            const { categories, new_comers, recommended, partners, sliders } = action?.payload
             state.categories = categories
             state.newProducts = new_comers
             state.recProducts = recommended
+            state.partners = partners
+            state.sliders = sliders
         },
         [home.rejected]: () => {
             toast.error("Serverda xatolik!")

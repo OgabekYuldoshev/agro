@@ -71,9 +71,9 @@ export default () => {
                         <CartDropdown t={t} store={ecommerce} />
                         <div onClick={() => history.push('/wishlist')} className="d-flex position-relative flex-column justify-content-center align-items-center cursor-pointer">
                             {
-                                wishlist.length !== 0 && (
+                                wishlist?.length !== 0 && (
                                     <RS.Badge pill color='danger' className='badge-up'>
-                                        {wishlist.length}
+                                        {wishlist?.length}
                                     </RS.Badge>
                                 )
                             }
@@ -95,9 +95,9 @@ export default () => {
                     <CartDropdown t={t} store={ecommerce} />
                     <div onClick={() => history.push('/wishlist')} className="d-flex position-relative flex-column justify-content-center align-items-center cursor-pointer">
                         {
-                            wishlist.length !== 0 && (
+                            wishlist?.length !== 0 && (
                                 <RS.Badge pill color='danger' className='badge-up'>
-                                    {wishlist.length}
+                                    {wishlist?.length}
                                 </RS.Badge>
                             )
                         }

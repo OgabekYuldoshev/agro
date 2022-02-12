@@ -1,6 +1,6 @@
 // ** Third Party Components
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-
+// import { baseUrl } from "@utils"
 import '@styles/react/libs/swiper/swiper.scss'
 import SwiperCore, {
   Navigation
@@ -17,14 +17,13 @@ const params = {
   pagination: {
     clickable: true
   },
-  navigation: true,
   breakpoints: {
     1024: {
-      slidesPerView: 7,
+      slidesPerView: 6,
       spaceBetween: 40
     },
     768: {
-      slidesPerView: 6,
+      slidesPerView: 5,
       spaceBetween: 30
     },
     640: {
@@ -40,15 +39,20 @@ const params = {
 
 SwiperCore.use([Navigation])
 
-const SwiperProducts = ({ title }) => {
+const SwiperProducts = ({ title, data }) => {
   return (
     <div className='my-2'>
       <h1 className='mb-2'>{title}</h1>
       <Swiper {...params}>
         {
-          new Array(10).fill().map((item) => (
-            <SwiperSlide>
-              <img width={200} height={100} src="https://www.clipartkey.com/mpngs/m/125-1254131_pepsi-old-pepsi-logo-png.png" alt={item} key={item} />
+          data.map((item, index) => (
+            <SwiperSlide key={index}>
+              <img
+                width={200}
+                height={200}
+                src="https://www.clipartkey.com/mpngs/m/125-1254131_pepsi-old-pepsi-logo-png.png"
+                // src={baseUrl + item?.image}
+                alt={item.name} />
             </SwiperSlide>
           ))
         }

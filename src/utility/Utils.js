@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 
 import axios from "axios"
+export const baseUrl = 'https://guarded-cliffs-29944.herokuapp.com/'
 
 export const http = axios.create({
   // baseURL: 'https://api.qorasuvagro.uz/api',
@@ -25,7 +26,7 @@ export const inCart = (item) => {
 
 export const inWishList = (item) => {
   const store = useSelector(state => state.wishlist)
-  const found = store.wishlist.find((i) => {
+  const found = store.wishlist?.find((i) => {
     return i.products.id === item.id
   })
   if (found) {

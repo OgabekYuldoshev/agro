@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { Button } from 'reactstrap'
 
-import '@styles/base/pages/page-misc.scss'
 import { useDispatch } from 'react-redux'
 import { handleAuthModal } from "@store/Auth"
 
@@ -14,7 +13,7 @@ const NotAuthorized = () => {
     <div className='misc-wrapper'>
       <div className='misc-inner p-2 p-sm-3'>
         <div className='w-100 text-center'>
-          <img className='mb-2' width={450} src={require(`@src/assets/images/site/security.svg`).default} alt='Not authorized page' />
+          <img className='mb-2' width={250} src={require(`@src/assets/images/site/security.svg`).default} alt='Not authorized page' />
           <h2 className='mb-1'>You are not authorized! 🔐</h2>
           <p className='mb-2'>
             The Webtrends Marketing Lab website in IIS uses the default IUSR account credentials to access the web pages
