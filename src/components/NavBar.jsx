@@ -92,7 +92,15 @@ export default () => {
                     </RS.Col>
                 </RS.Row>
                 <div style={styleBar} className="bg-primary d-lg-none">
-                    <CartDropdown t={t} store={ecommerce} />
+                    {/* <CartDropdown t={t} store={ecommerce} /> */}
+                    <div onClick={() => history.push('/checkout')} className="position-relative">
+                        <I.ShoppingCart size={25} />
+                        {ecommerce?.cart?.length > 0 && (
+                            <RS.Badge pill color='danger' className='badge-up'>
+                                {ecommerce?.cart?.length}
+                            </RS.Badge>
+                        )}
+                    </div>
                     <div onClick={() => history.push('/wishlist')} className="d-flex position-relative flex-column justify-content-center align-items-center cursor-pointer">
                         {
                             wishlist?.length !== 0 && (

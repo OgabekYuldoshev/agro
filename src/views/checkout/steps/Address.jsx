@@ -1,24 +1,61 @@
 // ** Third Party Components
 import { useFormik } from 'formik'
+import { getAddress, addAddress, deleteAddress } from "@store/App"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import * as Yup from "yup"
 
+const ValidSchema = Yup.object({
+  receiver_name: Yup.string()
+    .max(15)
+    .min(3)
+    .required("Required"),
+  region_name: Yup.string()
+    .min(3)
+    .max(20)
+    .required("Required"),
+  district_name: Yup.string()
+    .min(3)
+    .max(20)
+    .required("Required"),
+  street_name: Yup.string()
+    .min(3)
+    .max(20)
+    .required("Required"),
+  phone_number: Yup.string()
+    .min(3)
+    .max(20)
+    .required("Required")
+})
 // ** Reactstrap Imports
 import { Form, Input, Card, Label, CardHeader, CardTitle, CardBody, CardText, Button, Row, Col } from 'reactstrap'
+import { Trash } from 'react-feather'
 
 const Address = props => {
   // ** Props
   const { stepper } = props
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAddress())
+  }, [])
+
+  const address = useSelector(state => state.app?.address)
+  // const dispatch = useDispatch()
+
   const formik = useFormik({
     initialValues: {
-      fullname: '',
-      region: '',
-      district: '',
-      address: '',
-      phone: '',
-      postal_code: ''
+      receiver_name: '',
+      region_name: '',
+      district_name: '',
+      street_name: '',
+      phone_number: ''
     },
-    onSubmit: (values) => {
-      console.log(values)
+    validationSchema: ValidSchema,
+    onSubmit: (values, { resetForm }) => {
+      dispatch(addAddress(values))
+      resetForm()
     }
   })
 
@@ -39,7 +76,7 @@ const Address = props => {
                   <Label>Qabul qiluvchi ismi</Label>
                   <Input
                     onChange={formik.handleChange}
-                    name="fullname"
+                    name="receiver_name"
                     type="text"
                     placeholder="Kiriting..." />
                 </Col>
@@ -47,7 +84,7 @@ const Address = props => {
                   <Label>Viloyat</Label>
                   <Input
                     onChange={formik.handleChange}
-                    name="region"
+                    name="region_name"
                     type="text"
                     placeholder="Kiriting..." />
                 </Col>
@@ -55,7 +92,7 @@ const Address = props => {
                   <Label>Tuman</Label>
                   <Input
                     onChange={formik.handleChange}
-                    name="district"
+                    name="district_name"
                     type="text"
                     placeholder="Kiriting..." />
                 </Col>
@@ -63,7 +100,7 @@ const Address = props => {
                   <Label>Manzil</Label>
                   <Input
                     onChange={formik.handleChange}
-                    name="address"
+                    name="street_name"
                     type="text"
                     placeholder="Kiriting..." />
                 </Col>
@@ -71,48 +108,43 @@ const Address = props => {
                   <Label>Telefon nomer</Label>
                   <Input
                     onChange={formik.handleChange}
-                    name="phone"
-                    type="text"
-                    placeholder="Kiriting..." />
-                </Col>
-                <Col className="mb-1">
-                  <Label>Pochta indeksi</Label>
-                  <Input
-                    onChange={formik.handleChange}
-                    name="postal_code"
+                    name="phone_number"
                     type="text"
                     placeholder="Kiriting..." />
                 </Col>
               </Row>
               <div className="d-flex justify-content-end gap-2">
-                {/* <Button onClick={formik.handleReset} color="primary" outline>Formani tozalash</Button> */}
-                <Button type="submit" color="success">Saqlash</Button>
+                <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">Saqlash</Button>
               </div>
             </Form>
           </CardBody>
         </Card>
       </Col>
       <Col xl={3}>
-        <Card>
-          <CardHeader>
-            <CardTitle tag='h4'>John Doe</CardTitle>
-          </CardHeader>
-          <CardBody>
-            <CardText className='mb-0'>9447 Glen Eagles Drive</CardText>
-            <CardText>Lewis Center, OH 43035</CardText>
-            <CardText>UTC-5: Eastern Standard Time (EST)</CardText>
-            <CardText>202-555-0140</CardText>
-            <Button
-              block
-              type='button'
-              color='primary'
-              onClick={() => stepper.next()}
-              className='btn-next delivery-address mt-2'
-            >
-              Deliver To This Address
-            </Button>
-          </CardBody>
-        </Card>
+        {
+          address?.map((el, index) => (
+            <Card key={index}>
+              <CardHeader className='d-flex justify-content-between'>
+                <CardTitle tag='h4' >{el.receiver_name}</CardTitle>
+                <div className='cursor-pointer'>
+                  <Trash size={20} color="red" onClick={() => dispatch(deleteAddress(el.id))} />
+                </div>
+              </CardHeader>
+              <CardBody>
+                <CardText className='mb-0'>{el.street_name}, {el.district_name}, {el.region_name}, {el.phone_number}</CardText>
+                <Button
+                  block
+                  type='button'
+                  color='primary'
+                  onClick={() => stepper.next()}
+                  className='btn-next delivery-address mt-2'
+                >
+                  Deliver To This Address
+                </Button>
+              </CardBody>
+            </Card>
+          ))
+        }
       </Col>
     </Row>
   )

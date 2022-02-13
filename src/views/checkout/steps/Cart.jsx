@@ -6,6 +6,8 @@ import InputNumber from 'rc-input-number'
 import { X, Heart, Star, Plus, Minus } from 'react-feather'
 import { useDispatch, useSelector } from "react-redux"
 import { addToWishList, deleteFromWishList } from "@store/Wishlist"
+import { handleAuthModal } from "@store/Auth"
+
 import { inWishList } from "@utils"
 
 // ** Reactstrap Imports
@@ -13,6 +15,7 @@ import { Card, CardBody, CardText, Button, Badge, Row, Col } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
+import { toast } from 'react-toastify'
 
 const Cart = (props) => {
   // ** Props
@@ -20,6 +23,8 @@ const Cart = (props) => {
   const dispatch = useDispatch()
   const handleRemove = (item) => dispatch(removeFromCart(item))
   const wishlist = useSelector(state => state.wishlist?.wishlist)
+  const auth = useSelector(state => state.auth.isAuth)
+
   const handleRemoveFromWishlist = (item) => {
     const found = wishlist?.find((product) => product.products.id === item.id)
     if (found) return dispatch(deleteFromWishList(found.id))
@@ -197,7 +202,14 @@ const Cart = (props) => {
               <Button
                 block
                 color='primary'
-                onClick={() => stepper.next()}
+                onClick={() => {
+                  if (!auth) {
+                    toast.warning("Siz orderni davom ettirishingiz uchun ro'yxatdan o'tgan bolishingiz kerak")
+                    dispatch(handleAuthModal(true))
+                  } else {
+                    stepper.next()
+                  }
+                }}
                 classnames='btn-next place-order'
               >
                 Place Order

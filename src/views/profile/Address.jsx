@@ -49,7 +49,6 @@ const Address = () => {
             resetForm()
         }
     })
-    console.log(formik.touched)
     return (
         <>
             <h2>Address Qoshish</h2>

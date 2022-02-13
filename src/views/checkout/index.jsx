@@ -79,9 +79,9 @@ const Checkout = () => {
             type='modern-horizontal'
             className="mb-2"
             instance={el => setStepper(el)}
-            options={{
-              linear: false
-            }}
+          // options={{
+          //   linear: false
+          // }}
           />
         ) : <Empty label="Your cart is empty!" type="empty" />
       }
