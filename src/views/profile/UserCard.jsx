@@ -10,7 +10,7 @@ const ProfilePage = ({ data }) => {
         <Card>
             <CardBody className="d-flex flex-column align-items-center ">
                 <Avatar color='light-danger' content={data.first_name} initials size="xl" />
-                <h4 className="mt-2">{data.first_name} {data.last_name} {data.second_name}</h4>
+                <h4 className="mt-2 text-center">{data.first_name} {data.last_name} {data.second_name}</h4>
                 <hr />
                 <Row className="justify-content-between">
                     <Col className="d-flex gap-1 align-items-center">

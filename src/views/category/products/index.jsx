@@ -3,14 +3,13 @@ import { Fragment } from 'react'
 import { Row, Col } from "reactstrap"
 // ** Product components
 import ProductCard from "components/ProductCard"
-import { products } from "@db"
 // ** Third Party Components
 // import classnames from 'classnames'
 
 // // ** Reactstrap Imports
 // import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 
-const ProductsPage = () => {
+const ProductsPage = ({ data }) => {
   // ** Props
   // const {
   //   store,
@@ -68,11 +67,11 @@ const ProductsPage = () => {
   return (
     <div>
       <div>
-        {products.length ? (
+        {data.length ? (
           <Fragment>
             <Row xl={4}>
               {
-                products?.map((item, index) => (
+                data?.map((item, index) => (
                   <Col key={index} className="mt-2">
                     <ProductCard item={item} />
                   </Col>

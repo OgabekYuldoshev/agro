@@ -1,6 +1,7 @@
 // ** React Imports
-import { Fragment } from 'react'
 import { Row, Col } from "reactstrap"
+import { useEffect } from "react"
+import ReactSelect from "react-select"
 // ** Shop Components
 import Sidebar from './sidebar'
 import Products from './products'
@@ -9,10 +10,10 @@ import Products from './products'
 import Breadcrumbs from '@components/breadcrumbs'
 
 // // ** Store & Actions
-// import { useDispatch, useSelector } from 'react-redux'
-// import { addToCart, getProducts, getCartItems, addToWishlist, deleteCartItem, deleteWishlistItem } from '../store'
-
-// ** Styles
+import { useDispatch, useSelector } from 'react-redux'
+import { getCategoryProducts } from '@store/Category'
+import { useParams } from "react-router-dom"
+// import qs from "qs"
 import '@styles/react/apps/app-ecommerce.scss'
 
 const Shop = () => {
@@ -21,20 +22,18 @@ const Shop = () => {
     // const [sidebarOpen, setSidebarOpen] = useState(false)
 
     // ** Vars
-    // const dispatch = useDispatch()
-    // const store = useSelector(state => state.ecommerce)
+    const dispatch = useDispatch()
+    const { products } = useSelector(state => state.category)
+    const params = useParams()
 
-    // // ** Get products
-    // useEffect(() => {
-    //     dispatch(
-    //         getProducts({
-    //             q: '',
-    //             sortBy: 'featured',
-    //             perPage: 9,
-    //             page: 1
-    //         })
-    //     )
-    // }, [dispatch])
+    const query = {
+        category_id: params?.id
+    }
+    // const param = qs.stringify(query)
+
+    useEffect(() => {
+        dispatch(getCategoryProducts(query))
+    }, [dispatch])
 
     return (
         <div className='my-2'>
@@ -44,23 +43,24 @@ const Shop = () => {
                     <Sidebar sidebarOpen={true} />
                 </Col>
                 <Col xl={9}>
+                    <HeaderBar />
                     <Products
-                    // store={store}
-                    // dispatch={dispatch}
-                    // addToCart={addToCart}
-                    // activeView={activeView}
-                    // getProducts={getProducts}
-                    // sidebarOpen={sidebarOpen}
-                    // getCartItems={getCartItems}
-                    // setActiveView={setActiveView}
-                    // addToWishlist={addToWishlist}
-                    // setSidebarOpen={setSidebarOpen}
-                    // deleteCartItem={deleteCartItem}
-                    // deleteWishlistItem={deleteWishlistItem}
+                        data={products}
                     />
                 </Col>
             </Row>
         </div>
+    )
+}
+
+const HeaderBar = () => {
+    return (
+        <>
+            <ReactSelect
+                options={[25, 50, 75]}
+                getOptionLabel={option => option}
+                getOptionValue={option => option} />
+        </>
     )
 }
 export default Shop

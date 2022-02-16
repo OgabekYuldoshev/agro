@@ -8,7 +8,7 @@ const Routes = [
     exact: true
   },
   {
-    path: '/category',
+    path: '/category/:id',
     component: lazy(() => import('../../views/category')),
     exact: true
   },
