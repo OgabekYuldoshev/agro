@@ -32,7 +32,7 @@ const SwiperAutoplay = ({ sliders }) => {
   return (
     <Swiper {...params}>
       {
-        sliders.map((slide, index) => (
+        sliders?.map((slide, index) => (
           <SwiperSlide key={index} style={{ height: "10vh" }}>
             <img src={baseUrl + slide.image} alt={slide.name} style={{ height: "100%", objectFit: 'cover', objectPosition: "center" }} />
           </SwiperSlide>

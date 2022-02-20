@@ -45,7 +45,7 @@ const SwiperProducts = ({ title, data }) => {
       <h1 className='mb-2'>{title}</h1>
       <Swiper {...params}>
         {
-          data.map((item, index) => (
+          data?.map((item, index) => (
             <SwiperSlide key={index}>
               <img
                 width={200}

@@ -37,6 +37,37 @@ export const deleteAddress = createAsyncThunk('app/deleteAddress', async (id, { 
     }
 })
 
+// Page
+export const getPageContent = createAsyncThunk('app/getAddress', async (params, { rejectWithValue }) => {
+    try {
+        const response = await http.get('/page-contents', {
+            params
+        })
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+// Message
+export const sendMessage = createAsyncThunk('app/sendMessage', async (data, { rejectWithValue }) => {
+    try {
+        await http.post('/message-send', data)
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+// Order
+export const createOrder = createAsyncThunk('app/createOrder', async (data, { rejectWithValue }) => {
+    try {
+        const response = await http.post('/auth/order-lists-create', data)
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
 export const apphSlice = createSlice({
     name: 'app',
     initialState: {
@@ -45,7 +76,8 @@ export const apphSlice = createSlice({
         recProducts: [],
         partners: [],
         address: [],
-        sliders: []
+        sliders: [],
+        pages: []
     },
     reducers: {
     },
@@ -77,6 +109,27 @@ export const apphSlice = createSlice({
             toast.success("Manzil o'chirildi!")
         },
         [deleteAddress.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
+        // Page
+        [getPageContent.fulfilled]: (state, action) => {
+            state.pages = action.payload
+        },
+        [getPageContent.rejected]: (undefined, action) => {
+            toast.error(action.payload)
+        },
+        // Order
+        [createOrder.fulfilled]: () => {
+            toast.success("Buyurmangiz jo'natildi, tez orada siz bilan bo'glanishadi!")
+        },
+        [createOrder.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
+        // Send Message
+        [sendMessage.fulfilled]: () => {
+            toast.success("Sizning murojaatingiz yuborildi, sizga tez orada bog'lanishadi! ")
+        },
+        [sendMessage.rejected]: (undefined, action) => {
             toast.error(action.payload.message)
         }
     }
