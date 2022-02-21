@@ -4,7 +4,6 @@ import { useFormik } from "formik"
 import { useDispatch } from "react-redux"
 import * as yup from "yup"
 import { sendMessage } from "@store/App"
-import { unwrapResult } from "@reduxjs/toolkit"
 
 const ValidateSchema = yup.object({
     name: yup.string().required(),

@@ -35,7 +35,7 @@ export default () => {
     const ecommerce = useSelector(state => state.ecommerce)
     return (
         <>
-            <nav className="bg-primary layout text-white">
+            <nav className="bg-primary shadow layout text-white">
                 <div className=" d-flex align-items-center justify-content-between border-bottom">
                     <span className="">
                         <I.Phone size={18} />
