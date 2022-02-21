@@ -38,7 +38,7 @@ export const deleteAddress = createAsyncThunk('app/deleteAddress', async (id, { 
 })
 
 // Page
-export const getPageContent = createAsyncThunk('app/getAddress', async (params, { rejectWithValue }) => {
+export const getPageContent = createAsyncThunk('app/getPageContent', async (params, { rejectWithValue }) => {
     try {
         const response = await http.get('/page-contents', {
             params
@@ -68,6 +68,16 @@ export const createOrder = createAsyncThunk('app/createOrder', async (data, { re
     }
 })
 
+// Currency
+export const getCurrency = createAsyncThunk('app/getCurrency', async (undefined, { rejectWithValue }) => {
+    try {
+        const response = await http.get('/currencies')
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
 export const apphSlice = createSlice({
     name: 'app',
     initialState: {
@@ -77,11 +87,24 @@ export const apphSlice = createSlice({
         partners: [],
         address: [],
         sliders: [],
-        pages: []
+        pages: [],
+        currency: []
     },
     reducers: {
     },
     extraReducers: {
+        [getCurrency.fulfilled]: (state, action) => {
+            state.currency = action.payload
+        },
+        [getCurrency.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
+        [getAddress.fulfilled]: (state, action) => {
+            state.address = action.payload
+        },
+        [getAddress.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
         [home.fulfilled]: (state, action) => {
             const { categories, new_comers, recommended, partners, sliders } = action?.payload
             state.categories = categories
@@ -92,12 +115,6 @@ export const apphSlice = createSlice({
         },
         [home.rejected]: () => {
             toast.error("Serverda xatolik!")
-        },
-        [getAddress.fulfilled]: (state, action) => {
-            state.address = action.payload
-        },
-        [getAddress.rejected]: (undefined, action) => {
-            toast.error(action.payload.message)
         },
         [addAddress.fulfilled]: () => {
             toast.success("Yangi manzil yaratildi!")

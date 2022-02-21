@@ -33,7 +33,7 @@ import { Trash } from 'react-feather'
 
 const Address = props => {
   // ** Props
-  const { stepper } = props
+  const { stepper, setAddress } = props
 
   const dispatch = useDispatch()
 
@@ -42,7 +42,6 @@ const Address = props => {
   }, [])
 
   const address = useSelector(state => state.app?.address)
-  // const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -58,6 +57,11 @@ const Address = props => {
       resetForm()
     }
   })
+
+  const handleSelect = (id) => {
+    setAddress(id)
+    stepper.next()
+  }
 
   return (
     <Row xl={2}>
@@ -127,7 +131,7 @@ const Address = props => {
               <CardHeader className='d-flex justify-content-between'>
                 <CardTitle tag='h4' >{el.receiver_name}</CardTitle>
                 <div className='cursor-pointer'>
-                  <Trash size={20} color="red" onClick={() => dispatch(deleteAddress(el.id))} />
+                  <Trash size={20} color="red" onClick={() => dispatch(deleteAddress(el?.id))} />
                 </div>
               </CardHeader>
               <CardBody>
@@ -136,7 +140,7 @@ const Address = props => {
                   block
                   type='button'
                   color='primary'
-                  onClick={() => stepper.next()}
+                  onClick={() => handleSelect(el)}
                   className='btn-next delivery-address mt-2'
                 >
                   Deliver To This Address

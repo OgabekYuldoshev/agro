@@ -8,34 +8,61 @@ import BreadCrumbs from '@components/breadcrumbs'
 // ** Steps
 import Cart from './steps/Cart'
 import Address from './steps/Address'
-import Payment from './steps/Payment'
+import Info from './steps/Info'
 
 // ** Third Party Components
-import { ShoppingCart, Home, CreditCard } from 'react-feather'
+import { ShoppingCart, Home, CreditCard, Check } from 'react-feather'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteAllProducts, removeFromCart, updateProduct } from '@store/Ecommerce'
 import Empty from '../../components/Empty'
+import { createOrder } from '@store/App'
+import { unwrapResult } from '@reduxjs/toolkit'
+import { useHistory } from 'react-router-dom'
 
 const Checkout = () => {
   // ** Ref & State
+  const history = useHistory()
   const ref = useRef(null)
   const [stepper, setStepper] = useState(null)
+  const [address, setAddress] = useState(null)
+  const [form, setForm] = useState({
+    currency_id: null,
+    notes: null
+  })
+  console.log(form)
 
   // // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector(state => state.ecommerce)
 
-  // // ** Get Cart Items on mount
-  // useEffect(() => {
-  //   dispatch(getCartItems())
-  // }, [])
+  const handleSubmit = () => {
+    const order_lists = []
+    store?.cart.forEach((product) => {
+      order_lists.push({
+        product_id: product?.item?.id,
+        price_per_unit: product?.item?.id,
+        amount: product?.qty,
+        unit_id: product?.item?.unit_id,
+        nett_weight: product?.item?.nett_weight
+      })
+    })
+    dispatch(createOrder({
+      notes: form?.notes,
+      currency_id: form?.currency_id,
+      address_id: address?.id,
+      order_lists
+    })).then(unwrapResult).then(() => {
+      dispatch(deleteAllProducts())
+      history.push('/profile')
+    })
+  }
 
   const steps = [
     {
       id: 'cart',
-      title: 'Cart',
+      title: 'Savat',
       subtitle: 'Your Cart Items',
       icon: <ShoppingCart size={18} />,
       content: (
@@ -53,18 +80,18 @@ const Checkout = () => {
       )
     },
     {
-      id: 'Address',
-      title: 'Address',
+      id: 'address',
+      title: 'Manzil',
       subtitle: 'Enter Your Address',
       icon: <Home size={18} />,
-      content: <Address stepper={stepper} />
+      content: <Address setAddress={setAddress} stepper={stepper} />
     },
     {
-      id: 'payment',
-      title: 'Payment',
+      id: 'confirm',
+      title: 'Tasdiqlash',
       subtitle: 'Select Payment Method',
-      icon: <CreditCard size={18} />,
-      content: <Payment stepper={stepper} />
+      icon: <Check size={18} />,
+      content: <Info handleSubmit={handleSubmit} address={address} cart={store.cart} stepper={stepper} form setForm={setForm} form={form} />
     }
   ]
 
