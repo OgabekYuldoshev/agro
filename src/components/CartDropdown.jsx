@@ -5,11 +5,11 @@ import { Fragment, useState } from 'react'
 // ** Third Party Components
 import InputNumber from 'rc-input-number'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { ShoppingCart, X, Plus, Minus, Trash } from 'react-feather'
-
+import { ShoppingCart, Plus, Minus, Trash } from 'react-feather'
+import { baseUrl } from "@utils"
 // ** Reactstrap Imports
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem, Badge, Button, Row, Col, UncontrolledTooltip } from 'reactstrap'
-
+import { useTranslation } from "react-i18next"
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
 import { deleteAllProducts, updateProduct } from '@store/Ecommerce'
@@ -18,6 +18,7 @@ import '@styles/react/libs/input-number/input-number.scss'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 
 const CartDropdown = ({ t, store }) => {
+    const { i18n } = useTranslation()
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const dispatch = useDispatch()
     const toggle = () => setDropdownOpen(prevState => !prevState)
@@ -38,7 +39,7 @@ const CartDropdown = ({ t, store }) => {
                             return (
                                 <Row xl={3} key={product?.item.id} className='d-flex align-items-center my-1'>
                                     <Col>
-                                        <img className='d-block rounded me-1' src={require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} height={100} />
+                                        <img className='d-block rounded me-1' src={product?.item?.photos?.length ? baseUrl + product?.item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} height={100} />
                                     </Col>
 
                                     {/* <X size={30} /> */}
@@ -48,7 +49,7 @@ const CartDropdown = ({ t, store }) => {
                                                 className='text-body'
                                                 to={`/product/${product?.item.slug}`}
                                             >
-                                                {product?.item.name}
+                                                {product?.item[`name_${i18n.language}`]}
                                             </Link>
                                         </h6>
                                         <small>by {product?.item.partner_id}</small>

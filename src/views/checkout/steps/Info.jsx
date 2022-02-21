@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react'
 import ReactSelect from 'react-select'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCurrency } from '@store/App'
+import { useTranslation } from "react-i18next"
 
 const Payment = ({ handleSubmit, address, cart, setForm, form }) => {
   const [open, setOpen] = useState(false)
   const { currency } = useSelector(state => state.app)
   const dispatch = useDispatch()
+  const { i18n } = useTranslation()
 
   useEffect(() => {
     dispatch(getCurrency())
@@ -21,7 +23,7 @@ const Payment = ({ handleSubmit, address, cart, setForm, form }) => {
     },
     {
       name: 'Mahsulot Nomi',
-      selector: row => row.item?.name
+      selector: row => row.item[`name_${i18n.language}`]
     },
     {
       name: 'Mahsulot soni',

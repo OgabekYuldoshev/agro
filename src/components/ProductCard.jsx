@@ -4,12 +4,14 @@ import * as I from 'react-feather'
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart, removeFromCart } from "@store/Ecommerce"
 import { addToWishList, deleteFromWishList } from "@store/Wishlist"
-import { inCart, inWishList } from "@utils"
+import { inCart, inWishList, baseUrl } from "@utils"
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 // import { useSelector } from 'react-redux'
 
 export default ({ item }) => {
     const dispatch = useDispatch()
+    const { i18n } = useTranslation()
     const wishlist = useSelector(state => state.wishlist?.wishlist)
     const handleAddToCart = () => {
         dispatch(addToCart({
@@ -29,12 +31,12 @@ export default ({ item }) => {
         <RS.Card className='border rounded'>
             <div>
                 <Link to={`/product/${item?.id}`}>
-                    <img className='img-fluid card-img-top' src={require('@src/assets/images/pages/eCommerce/26.png').default} alt="he" />
+                    <img className='img-fluid card-img-top' width={100} height={100} src={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt="he" />
                 </Link>
             </div>
             <RS.CardBody>
                 <Link to={`/product/${item?.id}`}>
-                    <h6>{item?.name}</h6>
+                    <h6>{item[`name_${i18n?.language}`]}</h6>
                 </Link>
                 <div>
                     ${item?.price}

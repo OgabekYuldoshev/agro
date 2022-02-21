@@ -3,7 +3,7 @@
 // import { Link } from 'react-router-dom'
 import ReactImageZoom from 'react-image-zoom'
 // ** Third Party Components
-import { Star, ShoppingCart, DollarSign, Heart, Share2, Facebook, Twitter, Youtube, Instagram } from 'react-feather'
+import { ShoppingCart, DollarSign, Heart } from 'react-feather'
 // ** Reactstrap Imports
 import {
   Row,
@@ -11,12 +11,14 @@ import {
   Button,
   CardText
 } from 'reactstrap'
-import { inCart, inWishList } from "@utils"
+import { inCart, inWishList, baseUrl } from "@utils"
 import { useHistory } from 'react-router-dom'
+import { useTranslation } from "react-i18next"
 
 const Product = (props) => {
   // ** Props
   const { item, dispatch, addToCart, handleRemoveFromWishlist, addToWishList } = props
+  const { i18n } = useTranslation()
 
   const history = useHistory()
   // ** State
@@ -69,11 +71,11 @@ const Product = (props) => {
     <Row className='my-2'>
       <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
         <div className='d-flex align-items-center justify-content-center'>
-          <ReactImageZoom className='img-fluid product-img' width={300} height={400} zoomPosition="original" zoomWidth={500} img={require('@src/assets/images/pages/eCommerce/26.png').default} />
+          <ReactImageZoom className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={400} img={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} />
         </div>
       </Col>
       <Col md='7' xs='12'>
-        <h4>{item?.name}</h4>
+        <h4>{item[`name_${i18n.language}`]}</h4>
         <CardText tag='span' className='item-company'>
           By
           <a className='company-name' href='/' onClick={e => e.preventDefault()}>
@@ -101,9 +103,7 @@ const Product = (props) => {
           Available -<span className='text-success ms-25'>In stock</span>
         </CardText>
         <CardText>
-          <p>
-            {item?.specification}
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
         </CardText>
         <ul className='product-features list-unstyled'>
           {/* {item?.hasFreeShipping && (

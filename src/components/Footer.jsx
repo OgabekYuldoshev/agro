@@ -1,7 +1,8 @@
 import * as RS from "reactstrap"
 import * as I from "react-feather"
 import { useFormik } from "formik"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from "react-i18next"
 import * as yup from "yup"
 import { sendMessage } from "@store/App"
 
@@ -13,6 +14,9 @@ const ValidateSchema = yup.object({
 })
 export default () => {
     const dispatch = useDispatch()
+    const { i18n } = useTranslation()
+    const { pages } = useSelector(state => state.app)
+    const useful = pages.filter(item => item === 3)
     const formik = useFormik({
         validationSchema: ValidateSchema,
         initialValues: {
@@ -34,10 +38,11 @@ export default () => {
                         Foydali havolalar
                     </h3>
                     <div className="d-flex flex-column">
-                        <p className="cursor-pointer">Shaxsiy Kabinet</p>
-                        <p className="cursor-pointer">Shaxsiy Kabinet</p>
-                        <p className="cursor-pointer">Shaxsiy Kabinet</p>
-                        <p className="cursor-pointer">Shaxsiy Kabinet</p>
+                        {
+                            useful?.map((item, index) => (
+                                <p key={index} className="cursor-pointer">{item[`title_${i18n.language}`]}</p>
+                            ))
+                        }
                     </div>
                 </RS.Col>
                 <RS.Col className="mb-1" xl={3}>
@@ -93,7 +98,7 @@ export default () => {
                 </RS.Col>
             </RS.Row>
             <p className="py-1 border-top text-center">
-                Developed by <a href="https://yuldoshev.vercel.app/">Ogabek Yuldoshev</a>, 2022
+                Developed by <b><a target="_blank" className="text-white" href="https://yuldoshev.vercel.app/">Ogabek Yuldoshev</a></b>, 2022
             </p>
         </footer>
     )
