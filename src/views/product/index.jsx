@@ -12,7 +12,7 @@ import BreadCrumbs from '@components/breadcrumbs'
 
 // ** Reactstrap Imports
 import { Card, CardBody } from 'reactstrap'
-
+import { useTranslation } from "react-i18next"
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '@store/Ecommerce'
@@ -23,6 +23,7 @@ import Loading from "components/Loading"
 
 const Details = () => {
   const params = useParams()
+  const { i18n } = useTranslation()
   const dispatch = useDispatch()
   const store = useSelector(state => state.product)
   const wishlist = useSelector(state => state.wishlist?.wishlist)
@@ -41,7 +42,7 @@ const Details = () => {
 
   return (
     <div className="mt-2">
-      <BreadCrumbs breadCrumbTitle='Product Details' breadCrumbParent='Details' breadCrumbActive={store.productDetails?.name} />
+      <BreadCrumbs breadCrumbTitle='Product Details' breadCrumbParent='Details' breadCrumbActive={store.productDetails[`name_${i18n.language}`]} />
       <div className='app-ecommerce-details'>
         <Card>
           <CardBody>
