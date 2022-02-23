@@ -29,9 +29,9 @@ export default ({ item }) => {
     }
     return (
         <RS.Card className='border rounded'>
-            <div>
+            <div className='d-flex justify-content-center'>
                 <Link to={`/product/${item?.id}`}>
-                    <img className='img-fluid card-img-top' width={100} height={100} src={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt="he" />
+                    <img width={200} height={200} className="mx-auto" src={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={item?.name} />
                 </Link>
             </div>
             <RS.CardBody>

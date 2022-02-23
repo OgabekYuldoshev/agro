@@ -1,66 +1,44 @@
-// ** React Imports
-import { Row, Col } from "reactstrap"
-import { useEffect } from "react"
-import ReactSelect from "react-select"
-// ** Shop Components
-import Sidebar from './sidebar'
+import { useEffect, useState } from "react"
+import FilterCom from './Filter'
 import Products from './products'
-
-// ** Custom Components
-import Breadcrumbs from '@components/breadcrumbs'
-
-// // ** Store & Actions
+import { Button } from "reactstrap"
+import { Filter } from "react-feather"
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategoryProducts } from '@store/Category'
-import { useParams } from "react-router-dom"
-// import qs from "qs"
+import { useParams, useLocation } from "react-router-dom"
+import qs from "qs"
 import '@styles/react/apps/app-ecommerce.scss'
 
 const Shop = () => {
-    // ** States
-    // const [activeView, setActiveView] = useState('grid')
-    // const [sidebarOpen, setSidebarOpen] = useState(false)
-
-    // ** Vars
     const dispatch = useDispatch()
+    const location = useLocation()
+    const [open, setOpen] = useState(false)
+    const toggle = () => setOpen(cur => !cur)
     const { products } = useSelector(state => state.category)
     const params = useParams()
-
+    const defaultQs = qs.parse(location.search, { ignoreQueryPrefix: true })
     const query = {
+        ...defaultQs,
         category_id: params?.id
     }
-    // const param = qs.stringify(query)
 
     useEffect(() => {
         dispatch(getCategoryProducts(query))
-    }, [dispatch])
+    }, [location])
 
     return (
         <div className='my-2'>
-            <Breadcrumbs breadCrumbTitle='Shop' breadCrumbParent='eCommerce' breadCrumbActive='Shop' />
-            <Row xl={2}>
-                <Col xl={3}>
-                    <Sidebar sidebarOpen={true} />
-                </Col>
-                <Col xl={9}>
-                    <HeaderBar />
-                    <Products
-                        data={products}
-                    />
-                </Col>
-            </Row>
+            <div className="d-flex align-items-center justify-content-between">
+                <h1>Shopname</h1>
+                <Button.Ripple color="primary" outline onClick={toggle}>
+                    <Filter size={16} />
+                </Button.Ripple>
+            </div>
+            <FilterCom toggle={toggle} open={open} />
+
+            <Products items={products} />
         </div>
     )
 }
 
-const HeaderBar = () => {
-    return (
-        <>
-            <ReactSelect
-                options={[25, 50, 75]}
-                getOptionLabel={option => option}
-                getOptionValue={option => option} />
-        </>
-    )
-}
 export default Shop

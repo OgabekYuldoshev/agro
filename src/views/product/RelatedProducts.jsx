@@ -1,13 +1,12 @@
 import { Fragment } from 'react'
 import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
-import { slider } from "@db"
 import { CardText } from 'reactstrap'
 import ProductCard from "../../components/ProductCard"
 // ** Styles
 import '@styles/react/libs/swiper/swiper.scss'
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ data }) => {
   SwiperCore.use([Navigation])
   const params = {
     className: 'swiper-responsive-breakpoints swiper-container px-4 py-2',
@@ -40,7 +39,7 @@ const RelatedProducts = () => {
         <CardText>People also search for this items</CardText>
       </div>
       <Swiper {...params}>
-        {slider.map(item => {
+        {data.map(item => {
           return (
             <SwiperSlide key={item.id}>
               <ProductCard item={item} />

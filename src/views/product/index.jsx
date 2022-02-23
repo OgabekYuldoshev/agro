@@ -39,6 +39,7 @@ const Details = () => {
     if (found) return dispatch(deleteFromWishList(found.id))
     return toast.error("Bunaqa mahsulot wishlistda topilmadi!")
   }
+  console.log(store?.productDetails)
 
   return (
     <div className="mt-2">
@@ -56,7 +57,7 @@ const Details = () => {
           </CardBody>
           <ItemFeatures />
           <CardBody>
-            <RelatedProducts />
+            <RelatedProducts data={store?.review_products} />
           </CardBody>
         </Card>
       </div>

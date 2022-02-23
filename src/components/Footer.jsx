@@ -15,7 +15,7 @@ const ValidateSchema = yup.object({
 export default () => {
     const dispatch = useDispatch()
     const { i18n } = useTranslation()
-    const { pages } = useSelector(state => state.app)
+    const { pages, contacts } = useSelector(state => state.app)
     const useful = pages.filter(item => item === 3)
     const formik = useFormik({
         validationSchema: ValidateSchema,
@@ -52,19 +52,15 @@ export default () => {
                     <div className="d-flex flex-column">
                         <div className="d-flex gap-1">
                             <I.MapPin />
-                            <p className="cursor-pointer">QFY Hasanboy, TKAY yoqasida</p>
-                        </div>
-                        <div className="d-flex gap-1">
-                            <I.Map />
-                            <p className="cursor-pointer">O'zbekiston, Toshkent viloyati</p>
+                            <p className="cursor-pointer">{contacts[0]?.address}</p>
                         </div>
                         <div className="d-flex gap-1">
                             <I.Phone />
-                            <p className="cursor-pointer">+998(71) 209-68-68, 209-68-26</p>
+                            <p className="cursor-pointer">{contacts[0]?.tel}, {contacts[0]?.shop_phone_number}</p>
                         </div>
                         <div className="d-flex gap-1">
                             <I.Mail />
-                            <p className="cursor-pointer">info@agro.house</p>
+                            <p className="cursor-pointer">{contacts[0]?.email}</p>
                         </div>
                     </div>
                 </RS.Col>

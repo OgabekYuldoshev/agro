@@ -28,6 +28,16 @@ const Routes = [
     exact: true
   },
   {
+    path: '/contacts',
+    component: lazy(() => import('../../views/contacts')),
+    exact: true
+  },
+  {
+    path: '/partners',
+    component: lazy(() => import('../../views/partners')),
+    exact: true
+  },
+  {
     path: '/checkout',
     component: lazy(() => import('../../views/checkout')),
     exact: true

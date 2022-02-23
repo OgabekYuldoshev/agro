@@ -12,6 +12,7 @@ export const productSlice = createSlice({
     name: 'product',
     initialState: {
         productDetails: {},
+        review_products: [],
         isLoading: false
     },
     reducers: {
@@ -32,8 +33,9 @@ export const productSlice = createSlice({
             state.isLoading = true
         },
         [getProductDetails.fulfilled]: (state, action) => {
-            const { data } = action?.payload
+            const { data, review_products } = action?.payload
             state.productDetails = data
+            state.review_products = review_products
             state.isLoading = false
         },
         [getProductDetails.rejected]: () => {

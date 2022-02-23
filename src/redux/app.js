@@ -77,6 +77,15 @@ export const getCurrency = createAsyncThunk('app/getCurrency', async (undefined,
         return rejectWithValue(error)
     }
 })
+// Partners
+export const getPartners = createAsyncThunk('app/getPartners', async (undefined, { rejectWithValue }) => {
+    try {
+        const response = await http.get('/partners')
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
 
 export const apphSlice = createSlice({
     name: 'app',
@@ -88,7 +97,9 @@ export const apphSlice = createSlice({
         address: [],
         sliders: [],
         pages: [],
-        currency: []
+        currency: [],
+        contacts: [],
+        allPartners: []
     },
     reducers: {
     },
@@ -105,11 +116,18 @@ export const apphSlice = createSlice({
         [getAddress.rejected]: (undefined, action) => {
             toast.error(action.payload.message)
         },
+        [getPartners.fulfilled]: (state, action) => {
+            state.allPartners = action.payload
+        },
+        [getPartners.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
         [home.fulfilled]: (state, action) => {
-            const { categories, new_comers, recommended, partners, sliders } = action?.payload
+            const { categories, new_comers, recommended, partners, sliders, cantacts } = action?.payload
             state.categories = categories
             state.newProducts = new_comers
             state.recProducts = recommended
+            state.contacts = cantacts
             state.partners = partners
             state.sliders = sliders
         },

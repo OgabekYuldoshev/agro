@@ -5,6 +5,8 @@ import '@styles/react/libs/swiper/swiper.scss'
 import SwiperCore, {
   Navigation
 } from 'swiper'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'react-feather'
 // ** Images
 
 const params = {
@@ -42,7 +44,13 @@ SwiperCore.use([Navigation])
 const SwiperProducts = ({ title, data }) => {
   return (
     <div className='my-2'>
-      <h1 className='mb-2'>{title}</h1>
+      <div className='d-flex align-items-center gap-1 mb-2'>
+        <h1>{title}</h1>
+        <Link to="/partners">
+          <span>Barchasi</span>
+          <ArrowRight size={15} />
+        </Link>
+      </div>
       <Swiper {...params}>
         {
           data?.map((item, index) => (
