@@ -1,6 +1,6 @@
 // ** Third Party Components
 import { useFormik } from 'formik'
-import { getAddress, addAddress, deleteAddress } from "@store/App"
+import { getAddress, addAddress, deleteAddress } from "@store/app"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as Yup from "yup"

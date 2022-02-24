@@ -4,7 +4,7 @@ import { useFormik } from "formik"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
 import * as yup from "yup"
-import { sendMessage } from "@store/App"
+import { sendMessage } from "@store/app"
 
 const ValidateSchema = yup.object({
     name: yup.string().required(),

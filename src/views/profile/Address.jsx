@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Label, Row, Col, Input, Form, Button } from "reactstrap"
-import { getAddress, addAddress } from "@store/App"
+import { getAddress, addAddress } from "@store/app"
 import { useFormik } from "formik"
 import { useDispatch } from "react-redux"
 import * as Yup from "yup"

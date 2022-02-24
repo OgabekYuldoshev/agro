@@ -7,7 +7,7 @@ import Address from "./Address"
 import Sercurity from "./Sercurity"
 import { useSelector, useDispatch } from "react-redux"
 import NotAuthorized from "../NotAuthorized"
-import { deleteAddress } from "@store/App"
+import { deleteAddress } from "@store/app"
 
 const ProfilePage = () => {
     const store = useSelector(state => state.auth)

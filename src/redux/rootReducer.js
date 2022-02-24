@@ -1,8 +1,8 @@
 // ** Reducers Imports
 import auth from './Auth'
-import app from './App'
-import ecommerce from './Ecommerce'
-import product from './Product'
+import app from './app'
+import ecommerce from './ecommerce'
+import product from './product'
 import wishlist from './Wishlist'
 import category from './Category'
 

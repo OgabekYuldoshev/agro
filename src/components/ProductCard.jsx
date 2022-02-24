@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import * as RS from 'reactstrap'
 import * as I from 'react-feather'
 import { useDispatch, useSelector } from "react-redux"
-import { addToCart, removeFromCart } from "@store/Ecommerce"
+import { addToCart, removeFromCart } from "@store/ecommerce"
 import { addToWishList, deleteFromWishList } from "@store/Wishlist"
 import { inCart, inWishList, baseUrl } from "@utils"
 import { toast } from 'react-toastify'

@@ -3,7 +3,7 @@ import DataTable from 'react-data-table-component'
 import { useState, useEffect } from 'react'
 import ReactSelect from 'react-select'
 import { useSelector, useDispatch } from 'react-redux'
-import { getCurrency } from '@store/App'
+import { getCurrency } from '@store/app'
 import { useTranslation } from "react-i18next"
 
 const Payment = ({ handleSubmit, address, cart, setForm, form }) => {

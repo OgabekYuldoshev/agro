@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Card, CardBody } from "reactstrap"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { getPageContent } from "@store/App"
+import { getPageContent } from "@store/app"
 import Empty from "components/Empty"
 
 const Page = () => {

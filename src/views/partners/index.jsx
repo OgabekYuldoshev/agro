@@ -1,7 +1,7 @@
 import { Card, CardBody, Row, Col } from "reactstrap"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getPartners } from "@store/App"
+import { getPartners } from "@store/app"
 import { baseUrl } from '@utils'
 
 const Contacts = () => {

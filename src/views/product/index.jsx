@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import ItemFeatures from './ItemFeatures'
 import ProductDetails from './ProductDetails'
 import RelatedProducts from './RelatedProducts'
-import { getProductDetails } from "@store/Product"
+import { getProductDetails } from "@store/product"
 // ** Custom Components
 import BreadCrumbs from '@components/breadcrumbs'
 
@@ -15,7 +15,7 @@ import { Card, CardBody } from 'reactstrap'
 import { useTranslation } from "react-i18next"
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from '@store/Ecommerce'
+import { addToCart } from '@store/ecommerce'
 import { addToWishList, deleteFromWishList } from "@store/Wishlist"
 import { useParams } from "react-router-dom"
 import '@styles/base/pages/app-ecommerce-details.scss'

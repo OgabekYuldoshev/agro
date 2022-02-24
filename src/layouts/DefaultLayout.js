@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import NavBar from "../components/NavBar"
 import Footer from "../components/Footer"
 import { useDispatch } from 'react-redux'
-import { checkLocalStorage } from "@store/Ecommerce"
+import { checkLocalStorage } from "@store/ecommerce"
 
 export default props => {
     const dispatch = useDispatch()

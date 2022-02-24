@@ -3,8 +3,6 @@ import { Fragment, useRef, useState } from 'react'
 
 // ** Custom Components
 import Wizard from '@components/wizard'
-import BreadCrumbs from '@components/breadcrumbs'
-
 // ** Steps
 import Cart from './steps/Cart'
 import Address from './steps/Address'
@@ -15,9 +13,9 @@ import { ShoppingCart, Home, CreditCard, Check } from 'react-feather'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteAllProducts, removeFromCart, updateProduct } from '@store/Ecommerce'
+import { deleteAllProducts, removeFromCart, updateProduct } from '@store/ecommerce'
 import Empty from '../../components/Empty'
-import { createOrder } from '@store/App'
+import { createOrder } from '@store/app'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { useHistory } from 'react-router-dom'
 

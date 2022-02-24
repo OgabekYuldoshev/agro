@@ -2,7 +2,7 @@
 import Router from './router/Router'
 import { loadUser } from "@store/Auth"
 import { getWishLists } from "@store/Wishlist"
-import { home, getPageContent } from "@store/App"
+import { home, getPageContent } from "@store/app"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from 'react'
 
