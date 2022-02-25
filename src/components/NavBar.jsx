@@ -35,15 +35,19 @@ export default () => {
     const ecommerce = useSelector(state => state.ecommerce)
     return (
         <>
-            <nav className="bg-primary shadow layout text-white">
-                <div className=" d-flex align-items-center justify-content-between border-bottom">
+            <nav style={{ borderBottom: "2px solid #074C8F" }} className="text-pirmary shadow layout text-white">
+                <div style={{ borderBottom: "1px solid #074C8F" }} className="text-primary d-flex align-items-center justify-content-between ">
                     <span className="">
                         <I.Phone size={18} />
                         +998(71) 209-68-68
                     </span>
                     <RS.UncontrolledButtonDropdown>
-                        <RS.DropdownToggle className="text-white" color='flat-white' outline caret>
-                            {i18n.language}
+                        <RS.DropdownToggle className="text-primary" color='flat-primary' outline caret>
+                            {{
+                                uz: 'Uzbek',
+                                en: 'English',
+                                ru: "Russian"
+                            }[i18n.language]}
                         </RS.DropdownToggle>
                         <RS.DropdownMenu>
                             <RS.DropdownItem tag='uz' onClick={() => i18n.changeLanguage('uz')}>UZ</RS.DropdownItem>
@@ -56,12 +60,12 @@ export default () => {
                     <RS.Col className="d-flex justify-content-between align-items-center">
                         <Link to='/' className="d-flex align-items-center gap-1">
                             <img src={LOGO} alt="logo" width={100} />
-                            <h5 className="text-white">QoraSuvAgro</h5>
+                            <h5 className="text-primary">QoraSuvAgro</h5>
                         </Link>
                         <I.List onClick={toggle} size={25} className="d-block d-lg-none" />
                     </RS.Col>
                     <RS.Col xl={6} className="d-flex align-items-center gap-1 mb-1 mb-lg-0">
-                        <RS.Button color="light" onClick={toggle} className="d-none d-lg-block" >
+                        <RS.Button color="primary" onClick={toggle} className="d-none d-lg-block" >
                             <I.List size={12} />
                         </RS.Button>
                         <RS.Input type='text' placeholder={t('search')} />
@@ -77,7 +81,7 @@ export default () => {
                                     </RS.Badge>
                                 )
                             }
-                            <I.Heart size={25} />
+                            <I.Heart className='text-primary' size={25} />
                         </div>
                         {
                             auth.isAuth ? (
@@ -85,7 +89,7 @@ export default () => {
 
                             ) : (
                                 <div onClick={openAuthModal} className="cursor-pointer">
-                                    <I.LogIn size={25} />
+                                    <I.LogIn className='text-primary' size={25} />
                                 </div>
                             )
                         }
@@ -94,7 +98,7 @@ export default () => {
                 <div style={styleBar} className="bg-primary d-lg-none">
                     {/* <CartDropdown t={t} store={ecommerce} /> */}
                     <div onClick={() => history.push('/checkout')} className="position-relative">
-                        <I.ShoppingCart size={25} />
+                        <I.ShoppingCart className='text-primary' size={25} />
                         {ecommerce?.cart?.length > 0 && (
                             <RS.Badge pill color='danger' className='badge-up'>
                                 {ecommerce?.cart?.length}
@@ -109,14 +113,14 @@ export default () => {
                                 </RS.Badge>
                             )
                         }
-                        <I.Heart size={25} />
+                        <I.Heart className='text-primary' size={25} />
                     </div>
                     {
                         auth.isAuth ? (
                             <DropdownMenu t={t} data={auth} />
                         ) : (
                             <div onClick={openAuthModal} className="cursor-pointer">
-                                <I.LogIn size={25} />
+                                <I.LogIn className='text-primary' size={25} />
                             </div>
                         )
                     }
@@ -136,7 +140,7 @@ const DropdownMenu = ({ t, data }) => {
     return (
         <RS.UncontrolledButtonDropdown>
             <RS.DropdownToggle tag='div' className="cursor-pointer">
-                <I.User size={25} />
+                <I.User className='text-primary' size={25} />
             </RS.DropdownToggle>
             <RS.DropdownMenu>
                 <RS.DropdownItem tag={Link} to="/profile" className="d-flex align-items-center gap-1">

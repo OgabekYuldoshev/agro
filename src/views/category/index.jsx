@@ -19,7 +19,7 @@ const Shop = () => {
     const defaultQs = qs.parse(location.search, { ignoreQueryPrefix: true })
     const query = {
         ...defaultQs,
-        category_id: params?.id
+        main_parent_id: params?.id
     }
 
     useEffect(() => {

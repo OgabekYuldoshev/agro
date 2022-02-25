@@ -25,7 +25,7 @@ export default ({ item }) => {
     const handleRemoveFromWishlist = () => {
         const found = wishlist?.find((product) => product.products.id === item.id)
         if (found) return dispatch(deleteFromWishList(found.id))
-        return toast.error("Bunaqa mahsulot wishlistda topilmadi!")
+        return toast.error(t('not_found_to_wishlist'))
     }
     return (
         <RS.Card className='border rounded'>

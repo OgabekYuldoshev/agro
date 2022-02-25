@@ -34,12 +34,15 @@ import { Trash } from 'react-feather'
 const Address = props => {
   // ** Props
   const { stepper, setAddress } = props
+  const { isAuth } = useSelector(state => state.auth)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAddress())
-  }, [])
+    if (isAuth) {
+      dispatch(getAddress())
+    }
+  }, [isAuth, stepper])
 
   const address = useSelector(state => state.app?.address)
 
@@ -149,6 +152,9 @@ const Address = props => {
             </Card>
           ))
         }
+      </Col>
+      <Col xl={12}>
+        <Button outline color='danger' onClick={() => stepper.previous()}>Orqaga</Button>
       </Col>
     </Row>
   )

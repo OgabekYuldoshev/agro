@@ -18,10 +18,12 @@ import Empty from '../../components/Empty'
 import { createOrder } from '@store/app'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Checkout = () => {
   // ** Ref & State
   const history = useHistory()
+  const { t, i18n } = useTranslation()
   const ref = useRef(null)
   const [stepper, setStepper] = useState(null)
   const [address, setAddress] = useState(null)
@@ -29,7 +31,6 @@ const Checkout = () => {
     currency_id: null,
     notes: null
   })
-  console.log(form)
 
   // // ** Store Vars
   const dispatch = useDispatch()
@@ -60,42 +61,38 @@ const Checkout = () => {
   const steps = [
     {
       id: 'cart',
-      title: 'Savat',
-      subtitle: 'Your Cart Items',
+      title: t('my_cart'),
       icon: <ShoppingCart size={18} />,
       content: (
         <Cart
+          t={t}
+          i18n={i18n}
           stepper={stepper}
           dispatch={dispatch}
           products={store.cart}
           deleteAllProducts={deleteAllProducts}
           removeFromCart={removeFromCart}
           updateProduct={updateProduct}
-        // addToWishlist={addToWishlist}
-        // deleteCartItem={deleteCartItem}
-        // deleteWishlistItem={deleteWishlistItem}
         />
       )
     },
     {
       id: 'address',
-      title: 'Manzil',
-      subtitle: 'Enter Your Address',
+      title: t('address'),
       icon: <Home size={18} />,
-      content: <Address setAddress={setAddress} stepper={stepper} />
+      content: <Address t={t} setAddress={setAddress} stepper={stepper} />
     },
     {
       id: 'confirm',
-      title: 'Tasdiqlash',
-      subtitle: 'Select Payment Method',
+      title: t('confirmation'),
       icon: <Check size={18} />,
-      content: <Info handleSubmit={handleSubmit} address={address} cart={store.cart} stepper={stepper} form setForm={setForm} form={form} />
+      content: <Info t={t} handleSubmit={handleSubmit} address={address} cart={store.cart} stepper={stepper} form setForm={setForm} form={form} />
     }
   ]
 
   return (
     <Fragment>
-      <h1 className='mt-2'>Checkout</h1>
+      <h1 className='mt-2'>{t('checkout')}</h1>
       {
         store?.cart?.length ? (
           <Wizard
@@ -104,11 +101,8 @@ const Checkout = () => {
             type='modern-horizontal'
             className="mb-2"
             instance={el => setStepper(el)}
-          // options={{
-          //   linear: false
-          // }}
           />
-        ) : <Empty label="Your cart is empty!" type="empty" />
+        ) : <Empty type="empty" />
       }
     </Fragment>
   )

@@ -9,11 +9,11 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: 'en',
+    lng: 'uz',
     backend: {
       loadPath: '/assets/locales/{{lng}}.json'
     },
-    fallbackLng: 'en',
+    fallbackLng: 'uz',
     debug: false,
     keySeparator: false,
     react: {

@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getCurrency } from '@store/app'
 import { useTranslation } from "react-i18next"
 
-const Payment = ({ handleSubmit, address, cart, setForm, form }) => {
+const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
   const [open, setOpen] = useState(false)
   const { currency } = useSelector(state => state.app)
   const dispatch = useDispatch()
@@ -132,6 +132,9 @@ const Payment = ({ handleSubmit, address, cart, setForm, form }) => {
               </Row>
             </ModalBody>
           </Modal>
+        </Col>
+        <Col xl={12}>
+          <Button outline color='danger' onClick={() => stepper.previous()}>Orqaga</Button>
         </Col>
       </Row>
     </div>

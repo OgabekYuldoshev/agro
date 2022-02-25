@@ -91,7 +91,7 @@ const CartDropdown = ({ t, store }) => {
     return (
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle tag='a'>
-                <ShoppingCart size={25} />
+                <ShoppingCart className='text-primary' size={25} />
                 {store?.cart?.length > 0 && (
                     <Badge pill color='danger' className='badge-up'>
                         {store?.cart?.length}

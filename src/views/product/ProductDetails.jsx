@@ -14,19 +14,29 @@ import {
 import { inCart, inWishList, baseUrl } from "@utils"
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from "react-i18next"
+import { useState } from 'react'
 
 const Product = (props) => {
   // ** Props
   const { item, dispatch, addToCart, handleRemoveFromWishlist, addToWishList } = props
   const { i18n } = useTranslation()
-
+  const [img, setImg] = useState(item?.photos && item?.photos[0]?.image)
   const history = useHistory()
 
   return (
     <Row className='my-2'>
       <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
-        <div className='d-flex align-items-center justify-content-center'>
-          <ReactImageZoom className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={400} img={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} />
+        <div className='d-flex flex-column align-items-center justify-content-center'>
+          <ReactImageZoom className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={300} img={item?.photos?.length ? baseUrl + img : require('@src/assets/images/pages/eCommerce/26.png').default} />
+          <Row className='mt-1'>
+            {
+              item?.photos?.map((item, index) => (
+                <Col key={index}>
+                  <img key={index} className="cursor-pointer" onClick={() => setImg(item?.image)} src={baseUrl + item?.image} alt={index} width={100} height={100} />
+                </Col>
+              ))
+            }
+          </Row>
         </div>
       </Col>
       <Col md='7' xs='12'>

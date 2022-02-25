@@ -22,7 +22,7 @@ const Category = ({ t, open, toggle }) => {
                 <OffcanvasBody>
                     <Accordion className='accordion-margin' open={accardion} toggle={toggleAccardion}>
                         <AccordionItem>
-                            <AccordionHeader targetId='1'>Kategoryalar</AccordionHeader>
+                            <AccordionHeader targetId='1'>{t('category')}</AccordionHeader>
                             <AccordionBody accordionId='1'>
                                 <ListGroup flush>
                                     {
@@ -38,7 +38,7 @@ const Category = ({ t, open, toggle }) => {
                             </AccordionBody>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionHeader targetId='2'>Bizning Xizmatlar</AccordionHeader>
+                            <AccordionHeader targetId='2'>{t('our_services')}</AccordionHeader>
                             <AccordionBody accordionId='2'>
                                 {
                                     service?.map((item, index) => (
@@ -52,7 +52,7 @@ const Category = ({ t, open, toggle }) => {
                             </AccordionBody>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionHeader targetId='3'>Biz Haqimizda</AccordionHeader>
+                            <AccordionHeader targetId='3'>{t('about')}</AccordionHeader>
                             <AccordionBody accordionId='3'>
                                 <ListGroup flush>
                                     {
@@ -66,7 +66,7 @@ const Category = ({ t, open, toggle }) => {
                                     }
                                     <ListGroupItem>
                                         <Link to={'/partners'}>
-                                            Partnerlar
+                                        {t('partners')}
                                         </Link>
                                     </ListGroupItem>
                                 </ListGroup>
@@ -75,7 +75,7 @@ const Category = ({ t, open, toggle }) => {
 
                         <AccordionItem>
                             <AccordionHeader targetId='null'>
-                                <Link to={'/contacts'}>Aloqa</Link>
+                                <Link to={'/contacts'}>{t('contancts')}</Link>
                             </AccordionHeader>
                         </AccordionItem>
                     </Accordion>
