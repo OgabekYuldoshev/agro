@@ -19,7 +19,7 @@ import { useState } from 'react'
 const Product = (props) => {
   // ** Props
   const { item, dispatch, addToCart, handleRemoveFromWishlist, addToWishList } = props
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [img, setImg] = useState(item?.photos && item?.photos[0]?.image)
   const history = useHistory()
 
@@ -48,7 +48,7 @@ const Product = (props) => {
           </a>
         </CardText>
         <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
-          <h4 className='item-price me-1'>${item?.price}</h4>
+          <h4 className='item-price me-1'>{item?.price}{" "}{t('som')}</h4>
         </div>
         <CardText>
           Available -<span className='text-success ms-25'>In stock</span>

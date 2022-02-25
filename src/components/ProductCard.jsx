@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 
 export default ({ item }) => {
     const dispatch = useDispatch()
-    const { i18n } = useTranslation()
+    const { t, i18n } = useTranslation()
     const wishlist = useSelector(state => state.wishlist?.wishlist)
     const handleAddToCart = () => {
         dispatch(addToCart({
@@ -39,7 +39,7 @@ export default ({ item }) => {
                     <h6>{item[`name_${i18n?.language}`]}</h6>
                 </Link>
                 <div>
-                    ${item?.price}
+                    {item?.price}{' '}{t('som')}
                 </div>
             </RS.CardBody>
             <div className='border-top py-1 mx-1 d-flex justify-content-between'>

@@ -24,6 +24,8 @@ const Cart = (props) => {
   const wishlist = useSelector(state => state.wishlist?.wishlist)
   const auth = useSelector(state => state.auth.isAuth)
   let total = 0
+  let totalProduts = 0
+
   const handleRemoveFromWishlist = (item) => {
     const found = wishlist?.find((product) => product.products.id === item.id)
     if (found) return dispatch(deleteFromWishList(found.id))
@@ -33,6 +35,7 @@ const Cart = (props) => {
   const renderCart = () => {
     return products?.map((product, index) => {
       total += product?.qty * product?.item?.price
+      totalProduts += product?.qty
       return (
         <Card key={index}>
           <CardBody>
@@ -74,7 +77,7 @@ const Cart = (props) => {
                 <div className='item-options text-center'>
                   <div className='item-wrapper'>
                     <div className='item-cost'>
-                      <h4 className='item-price'>${product?.item?.price}</h4>
+                      <h4 className='item-price'>{product?.item?.price}{' '}{t('som')}</h4>
                     </div>
                   </div>
                   <div className="d-flex flex-column gap-1">
@@ -131,7 +134,7 @@ const Cart = (props) => {
                 </li>
                 <li className='d-flex justify-content-between align-items-center mb-1'>
                   <div className='detail-title'>Total Items</div>
-                  <div className='detail-amt'>{"s" || 0}</div>
+                  <div className='detail-amt'>{totalProduts}</div>
                 </li>
               </ul>
               <hr />

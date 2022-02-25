@@ -7,7 +7,7 @@ const Loader = () => {
             <Grid
                 heigth="100"
                 width="100"
-                color='#5E8C6A'
+                color='#074C8F'
                 ariaLabel='loading'
             />
         </div>

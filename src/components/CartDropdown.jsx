@@ -55,7 +55,7 @@ const CartDropdown = ({ t, store }) => {
                                         <small>by {product?.item.partner_id}</small>
                                     </Col>
                                     <Col className='d-flex flex-column align-items-center justify-content-center'>
-                                        <h5 >${product?.item.price}</h5>
+                                        <h5 >{product?.item.price}{" "}{t('som')}</h5>
                                         <div>
                                             <InputNumber
                                                 min={1}
@@ -75,7 +75,7 @@ const CartDropdown = ({ t, store }) => {
                     <li className='border-top pt-1'>
                         <div className='d-flex justify-content-between mb-1'>
                             <h6 className='mb-0'>{t('total')}:</h6>
-                            <h6 className='text-primary mb-0'>${Number(total.toFixed(2))}</h6>
+                            <h6 className='text-primary mb-0'>{Number(total.toFixed(2))}{' '}{t('som')}</h6>
                         </div>
                         <Button tag={Link} to='/checkout' color='primary' block onClick={toggle}>
                             {t('checkout')}

@@ -10,7 +10,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
   const [open, setOpen] = useState(false)
   const { currency } = useSelector(state => state.app)
   const dispatch = useDispatch()
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     dispatch(getCurrency())
@@ -31,7 +31,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
     },
     {
       name: 'Mahsulot narxi',
-      selector: row => row.item?.price
+      cell: row => <span>{row.item?.price}{' '}{t('som')}</span>
     }
   ]
 
@@ -49,6 +49,8 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
       value: `${address?.region_name} ${address?.district_name} ${address?.street_name}`
     }
   ]
+
+  const allPrice = cart?.reduce((t, c) => t + (c?.qty * c?.item?.price), 0)
 
   return (
     <div
@@ -87,9 +89,9 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
             <CardBody>
               <ul className='list-unstyled price-details'>
                 <li className='price-detail'>
-                  <div className='details-title'>Price of 3 items</div>
+                  <div className='details-title'>Price of items</div>
                   <div className='detail-amt'>
-                    <strong>$699.30</strong>
+                    <strong>{allPrice}{' '}{t('som')}</strong>
                   </div>
                 </li>
                 <li className='price-detail'>
@@ -101,7 +103,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
               <ul className='list-unstyled price-details'>
                 <li className='price-detail'>
                   <div className='details-title'>Amount Payable</div>
-                  <div className='detail-amt fw-bolder'>$699.30</div>
+                  <div className='detail-amt fw-bolder'>{allPrice}{' '}{t('som')}</div>
                 </li>
               </ul>
             </CardBody>
