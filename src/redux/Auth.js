@@ -4,7 +4,7 @@ import { http } from "@utils"
 import { toast } from "react-toastify"
 import { clearWishlist } from './Wishlist'
 
-export const loadUser = createAsyncThunk('app/getProfile', async (id, { dispatch }) => {
+export const loadUser = createAsyncThunk('app/getProfile', async (undefined, { dispatch }) => {
   const token = localStorage.getItem('accessToken')
   if (token) {
     http.defaults.headers["Authorization"] = `Bearer ${token}`
@@ -33,8 +33,9 @@ export const register = createAsyncThunk('app/Register', async (data) => {
   return response.data
 })
 
-export const updateUser = createAsyncThunk('app/UpdateUser', async (data) => {
+export const updateUser = createAsyncThunk('app/UpdateUser', async (data, { dispatch }) => {
   const response = await http.post('/auth/my-profile-update', data)
+  dispatch(loadUser())
   return response.data
 })
 

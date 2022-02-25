@@ -14,7 +14,7 @@ const Main = () => {
 
   return (
     <>
-      <SwiperNavigation sliders={app?.sliders} />
+      <SwiperNavigation className='mt-2' sliders={app?.sliders} />
       <SwiperProducts data={app?.newProducts} title="Yangilari" />
       <RS.Row xl={3} md={2} sm={1} xs={1} className="mt-2">
         {

@@ -35,7 +35,6 @@ const Shop = () => {
                 </Button.Ripple>
             </div>
             <FilterCom toggle={toggle} open={open} />
-
             <Products items={products} />
         </div>
     )

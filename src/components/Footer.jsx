@@ -98,7 +98,7 @@ export default () => {
                 </RS.Col>
             </RS.Row>
             <p className="py-1 border-top text-center">
-                Developed by <b><a target="_blank" className="text-white" href="https://yuldoshev.vercel.app/">Ogabek Yuldoshev</a></b>, 2022
+                Developed by <b><a target="_blank" className="text-white" href="https://yuldoshev.vercel.app/">Ogabek Yuldoshev</a></b> and <b><a target="_blank" className="text-white" href="https://github.com/Turgunov188/">Jahongir Turgunov</a></b>, 2022
             </p>
         </footer>
     )

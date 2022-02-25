@@ -24,104 +24,107 @@ const Product = (props) => {
   const history = useHistory()
 
   return (
-    <Row className='my-2'>
-      <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
-        <div className='d-flex flex-column align-items-center justify-content-center'>
-          <ReactImageZoom className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={300} img={item?.photos?.length ? baseUrl + img : require('@src/assets/images/pages/eCommerce/26.png').default} />
-          <Row className='mt-1'>
+    <>
+      <Row className='my-2'>
+        <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
+          <div className='d-flex flex-column align-items-center justify-content-center'>
+            <ReactImageZoom className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={300} img={item?.photos?.length ? baseUrl + img : require('@src/assets/images/pages/eCommerce/26.png').default} />
+            <Row className='mt-1'>
+              {
+                item?.photos?.map((item, index) => (
+                  <Col key={index}>
+                    <img key={index} className="cursor-pointer" onClick={() => setImg(item?.image)} src={baseUrl + item?.image} alt={index} width={100} height={100} />
+                  </Col>
+                ))
+              }
+            </Row>
+          </div>
+        </Col>
+        <Col md='7' xs='12'>
+          <h4>{item[`name_${i18n.language}`]}</h4>
+          <CardText tag='span' className='item-company'>
+            By
+            <a className='company-name' href='/' onClick={e => e.preventDefault()}>
+              {item?.partner_id}
+            </a>
+          </CardText>
+          <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
+            <h4 className='item-price me-1'>{item?.price}{" "}{t('som')}</h4>
+          </div>
+          <CardText>
+            Available -<span className='text-success ms-25'>In stock</span>
+          </CardText>
+          <ul className='product-features list-unstyled'>
+            <li>
+              <DollarSign size={19} />
+              <span>EMI options available</span>
+            </li>
+          </ul>
+          <hr />
+          <div className='d-flex flex-column flex-sm-row pt-1'>
             {
-              item?.photos?.map((item, index) => (
-                <Col key={index}>
-                  <img key={index} className="cursor-pointer" onClick={() => setImg(item?.image)} src={baseUrl + item?.image} alt={index} width={100} height={100} />
-                </Col>
-              ))
+              inCart(item) ? (
+                <Button
+                  className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
+                  color='primary'
+                  outline
+                  onClick={() => history.push('/checkout')}
+                >
+                  <ShoppingCart className='me-50' size={14} />
+                  View in cart
+                </Button>
+              ) : (
+                <Button
+                  className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
+                  color='success'
+                  onClick={
+                    () => dispatch(addToCart({
+                      item,
+                      qty: 1
+                    }))}
+                >
+                  <ShoppingCart className='me-50' size={14} />
+                  Add to Cart
+                </Button>
+              )
             }
-          </Row>
-        </div>
-      </Col>
-      <Col md='7' xs='12'>
-        <h4>{item[`name_${i18n.language}`]}</h4>
-        <CardText tag='span' className='item-company'>
-          By
-          <a className='company-name' href='/' onClick={e => e.preventDefault()}>
-            {item?.partner_id}
-          </a>
-        </CardText>
-        <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
-          <h4 className='item-price me-1'>{item?.price}{" "}{t('som')}</h4>
-        </div>
-        <CardText>
-          Available -<span className='text-success ms-25'>In stock</span>
-        </CardText>
-        <CardText>
-          <div dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
-        </CardText>
-        <ul className='product-features list-unstyled'>
-          <li>
-            <DollarSign size={19} />
-            <span>EMI options available</span>
-          </li>
-        </ul>
-        <hr />
-        <div className='d-flex flex-column flex-sm-row pt-1'>
-          {
-            inCart(item) ? (
-              <Button
-                className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
-                color='primary'
-                outline
-                onClick={() => history.push('/checkout')}
-              >
-                <ShoppingCart className='me-50' size={14} />
-                View in cart
-              </Button>
-            ) : (
-              <Button
-                className='btn-cart me-0 me-sm-1 mb-1 mb-sm-0'
-                color='success'
-                onClick={
-                  () => dispatch(addToCart({
-                    item,
-                    qty: 1
-                  }))}
-              >
-                <ShoppingCart className='me-50' size={14} />
-                Add to Cart
-              </Button>
-            )
-          }
 
-          {
-            inWishList(item) ? (
-              <Button
-                className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
-                color='danger'
-                outline
-                onClick={() => handleRemoveFromWishlist(item)}
-              >
-                <Heart
-                  fill='red'
-                  size={15}
-                />
-                <span>Remove from Wishlist</span>
-              </Button>
-            ) : (
-              <Button
-                className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
-                color='secondary'
-                outline
-                onClick={() => dispatch(addToWishList(item.id))}
-              >
-                <Heart
-                  size={15}
-                />
-                <span>Wishlist</span>
-              </Button>
-            )
-          }
-        </div>
-      </Col>
-    </Row >
+            {
+              inWishList(item) ? (
+                <Button
+                  className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
+                  color='danger'
+                  outline
+                  onClick={() => handleRemoveFromWishlist(item)}
+                >
+                  <Heart
+                    fill='red'
+                    size={15}
+                  />
+                  <span>Remove from Wishlist</span>
+                </Button>
+              ) : (
+                <Button
+                  className='btn-wishlist me-0 me-sm-1 mb-1 mb-sm-0'
+                  color='secondary'
+                  outline
+                  onClick={() => dispatch(addToWishList(item.id))}
+                >
+                  <Heart
+                    size={15}
+                  />
+                  <span>Wishlist</span>
+                </Button>
+              )
+            }
+          </div>
+        </Col>
+      </Row >
+      <div className='mt-2'>
+        <h4 className='my-2'>Mahulot haqida</h4>
+        <div dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
+      </div>
+    </>
   )
 }
 

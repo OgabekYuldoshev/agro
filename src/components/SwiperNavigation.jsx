@@ -30,7 +30,7 @@ SwiperCore.use([Autoplay])
 
 const SwiperAutoplay = ({ sliders }) => {
   return (
-    <Swiper {...params}>
+    <Swiper className='mt-2' {...params}>
       {
         sliders?.map((slide, index) => (
           <SwiperSlide key={index} style={{ height: "10vh" }}>
