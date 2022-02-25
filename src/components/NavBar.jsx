@@ -98,7 +98,7 @@ export default () => {
                 <div style={styleBar} className="bg-primary d-lg-none">
                     {/* <CartDropdown t={t} store={ecommerce} /> */}
                     <div onClick={() => history.push('/checkout')} className="position-relative">
-                        <I.ShoppingCart className='text-primary' size={25} />
+                        <I.ShoppingCart className='text-white' size={25} />
                         {ecommerce?.cart?.length > 0 && (
                             <RS.Badge pill color='danger' className='badge-up'>
                                 {ecommerce?.cart?.length}
@@ -113,14 +113,14 @@ export default () => {
                                 </RS.Badge>
                             )
                         }
-                        <I.Heart className='text-primary' size={25} />
+                        <I.Heart className='text-white' size={25} />
                     </div>
                     {
                         auth.isAuth ? (
                             <DropdownMenu t={t} data={auth} />
                         ) : (
                             <div onClick={openAuthModal} className="cursor-pointer">
-                                <I.LogIn className='text-primary' size={25} />
+                                <I.LogIn className='text-white' size={25} />
                             </div>
                         )
                     }
