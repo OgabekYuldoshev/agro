@@ -4,6 +4,7 @@ import { getAddress, addAddress } from "@store/app"
 import { useFormik } from "formik"
 import { useDispatch } from "react-redux"
 import * as Yup from "yup"
+import { useTranslation } from "react-i18next"
 
 const ValidSchema = Yup.object({
     receiver_name: Yup.string()
@@ -30,6 +31,7 @@ const ValidSchema = Yup.object({
 const Address = () => {
 
     const dispatch = useDispatch()
+    const { t } = useTranslation()
 
     useEffect(() => {
         dispatch(getAddress())
@@ -51,52 +53,52 @@ const Address = () => {
     })
     return (
         <>
-            <h2>Address Qoshish</h2>
+            <h2>{t('add_new_address')}</h2>
             <Form onSubmit={formik.handleSubmit}>
                 <Row xl={2} xs={1}>
                     <Col className="mb-1">
-                        <Label>Qabul qiluvchi ismi</Label>
+                        <Label>{t('recipient_name')}</Label>
                         <Input
                             onChange={formik.handleChange}
                             name="receiver_name"
                             type="text"
-                            placeholder="Kiriting..." />
+                            placeholder={t('placeholder:enter')} />
                     </Col>
                     <Col className="mb-1">
-                        <Label>Viloyat</Label>
+                        <Label>{t('region')}</Label>
                         <Input
                             onChange={formik.handleChange}
                             name="region_name"
                             type="text"
-                            placeholder="Kiriting..." />
+                            placeholder={t('placeholder:enter')} />
                     </Col>
                     <Col className="mb-1">
-                        <Label>Tuman</Label>
+                        <Label>{t('sub_region')}</Label>
                         <Input
                             onChange={formik.handleChange}
                             name="district_name"
                             type="text"
-                            placeholder="Kiriting..." />
+                            placeholder={t('placeholder:enter')} />
                     </Col>
                     <Col className="mb-1">
-                        <Label>Manzil</Label>
+                        <Label>{t('address')}</Label>
                         <Input
                             onChange={formik.handleChange}
                             name="street_name"
                             type="text"
-                            placeholder="Kiriting..." />
+                            placeholder={t('placeholder:enter')} />
                     </Col>
                     <Col className="mb-1">
-                        <Label>Telefon nomer</Label>
+                        <Label>{t('phone_number')}</Label>
                         <Input
                             onChange={formik.handleChange}
                             name="phone_number"
                             type="text"
-                            placeholder="Kiriting..." />
+                            placeholder={t('placeholder:enter')} />
                     </Col>
                 </Row>
                 <div className="d-flex justify-content-end gap-2">
-                    <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">Saqlash</Button>
+                    <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">{t('save')}</Button>
                 </div>
             </Form>
         </>

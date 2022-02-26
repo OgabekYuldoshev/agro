@@ -35,8 +35,8 @@ const RelatedProducts = ({ data }) => {
   return (
     <Fragment>
       <div className='mt-4 mb-2 text-center'>
-        <h4>Related Products</h4>
-        <CardText>People also search for this items</CardText>
+        <h4>{t('related_products')}</h4>
+        <CardText>{t('people_olso')}</CardText>
       </div>
       <Swiper {...params}>
         {data.map(item => {

@@ -3,10 +3,12 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getPartners } from "@store/app"
 import { baseUrl } from '@utils'
+import { useTranslation } from "react-i18next"
 
 const Contacts = () => {
     const { allPartners } = useSelector(state => state.app)
     const dispatch = useDispatch()
+    const { t } = useTranslation()
     useEffect(() => {
         dispatch(getPartners())
     }, [])
@@ -17,12 +19,12 @@ const Contacts = () => {
 
     return (
         <>
-            <h1 className="my-1">Hamkorlar</h1>
+            <h1 className="my-1">{t('partners')}</h1>
             {
                 main_partners?.length ? (
                     <Card>
                         <CardBody>
-                            <h3 className="mb-2">Asosiy hamkorlar</h3>
+                            <h3 className="mb-2">{t('main_partners')}</h3>
                             <Row xl={9} md={6} sm={3} xs={2}>
                                 {
                                     main_partners?.map((item, index) => (
@@ -43,7 +45,7 @@ const Contacts = () => {
                 partners?.length ? (
                     <Card>
                         <CardBody>
-                            <h3 className="mb-2">Hamkorlar</h3>
+                            <h3 className="mb-2">{t('partners')}</h3>
                             <Row xl={9} md={6} sm={3} xs={2}>
                                 {
                                     partners?.map((item, index) => (
@@ -64,7 +66,7 @@ const Contacts = () => {
                 client?.length ? (
                     <Card>
                         <CardBody>
-                            <h3 className="mb-2">Mijozlar</h3>
+                            <h3 className="mb-2">{t('customers')}</h3>
                             <Row xl={9} md={6} sm={3} xs={2}>
                                 {
                                     client?.map((item, index) => (

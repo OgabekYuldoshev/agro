@@ -1,11 +1,13 @@
 import { Card, CardBody, Row, Col } from "reactstrap"
 import { useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
+
 const Contacts = () => {
     const { contacts } = useSelector(state => state.app)
-
+    const { t } = useTranslation()
     return (
         <>
-            <h1 className="my-1">Aloqa</h1>
+            <h1 className="my-1">{t('network')}</h1>
             {
                 contacts?.map((item, index) => (
                     <Card key={index}>
@@ -15,19 +17,19 @@ const Contacts = () => {
                                     <h3>{item?.title}</h3>
                                     <div style={{ fontSize: '16px' }} className="h-100 p-2 d-flex flex-column align-items-center justify-center">
                                         <div className="d-flex gap-2">
-                                            <b>Manzil:</b>
+                                            <b>{t('address')}:</b>
                                             <span>{item?.address}</span>
                                         </div>
                                         <div className="d-flex gap-2">
-                                            <b>Tel:</b>
+                                            <b>{t('phone_number')}:</b>
                                             <span>{item?.tel}</span>
                                         </div>
                                         <div className="d-flex gap-2">
-                                            <b>Qo'shimcha raqamlar:</b>
+                                            <b>{t('additional_phone_numbers')}:</b>
                                             <span>{item?.shop_phone_number}</span>
                                         </div>
                                         <div className="d-flex gap-2">
-                                            <b>Email:</b>
+                                            <b>{t('email')}:</b>
                                             <span>{item?.email}</span>
                                         </div>
                                         {

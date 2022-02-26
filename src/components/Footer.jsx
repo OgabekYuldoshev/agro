@@ -75,7 +75,7 @@ export default () => {
                     <RS.Form onSubmit={formik.handleSubmit}>
                         <RS.Row xl={2} >
                             <RS.Col xl={12} className="mb-2">
-                                <RS.Label className="text-white">{t("label:fullname")}</RS.Label>
+                                <RS.Label className="text-white">{t("lebal:fullname")}</RS.Label>
                                 <RS.Input type="name" name="name" placeholder={t("placeholder:enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                             <RS.Col className="mb-2">

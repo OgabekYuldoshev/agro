@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 
 const Page = () => {
     const { id } = useParams()
-    const { i18n } = useTranslation()
+    const { t, i18n } = useTranslation()
     const { pages } = useSelector(state => state.app)
     const page = () => { return pages?.find(p => { return p?.id === parseInt(id) }) }
 
@@ -21,7 +21,7 @@ const Page = () => {
                 </CardBody>
             </Card>
         </>
-    ) : <Empty label="Sahifa topilmadi" />
+    ) : <Empty label={t('not_found_to_wishlist')} />
 
 }
 export default Page

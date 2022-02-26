@@ -8,10 +8,12 @@ import Sercurity from "./Sercurity"
 import { useSelector, useDispatch } from "react-redux"
 import NotAuthorized from "../NotAuthorized"
 import { deleteAddress } from "@store/app"
+import { useTranslation } from "react-i18next"
 
 const ProfilePage = () => {
     const store = useSelector(state => state.auth)
     const [active, setActive] = useState('1')
+    const { t } = useTranslation()
 
     const toggle = tab => {
         if (active !== tab) {
@@ -36,7 +38,7 @@ const ProfilePage = () => {
                             }}
                         >
                             <Home size={18} />
-                            Account
+                            {t('account')}
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -47,7 +49,7 @@ const ProfilePage = () => {
                             }}
                         >
                             <Navigation size={18} />
-                            Address
+                            {t('address')}
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -58,7 +60,7 @@ const ProfilePage = () => {
                             }}
                         >
                             <Lock size={18} />
-                            Security
+                            {t('security')}
                         </NavLink>
                     </NavItem>
                 </Nav>

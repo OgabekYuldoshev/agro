@@ -43,7 +43,7 @@ const Product = (props) => {
         <Col md='7' xs='12'>
           <h4>{item[`name_${i18n.language}`]}</h4>
           <CardText tag='span' className='item-company'>
-            By
+            {t('by')}
             <a className='company-name' href='/' onClick={e => e.preventDefault()}>
               {item?.partner_id}
             </a>
@@ -52,12 +52,12 @@ const Product = (props) => {
             <h4 className='item-price me-1'>{item?.price}{" "}{t('som')}</h4>
           </div>
           <CardText>
-            Available -<span className='text-success ms-25'>In stock</span>
+            {t('available')} -<span className='text-success ms-25'>{t('in_stock')}</span>
           </CardText>
           <ul className='product-features list-unstyled'>
             <li>
               <DollarSign size={19} />
-              <span>EMI options available</span>
+              <span>{t('emi_options')}</span>
             </li>
           </ul>
           <hr />
@@ -71,7 +71,7 @@ const Product = (props) => {
                   onClick={() => history.push('/checkout')}
                 >
                   <ShoppingCart className='me-50' size={14} />
-                  View in cart
+                  {t('view_in_cart')}
                 </Button>
               ) : (
                 <Button
@@ -84,7 +84,7 @@ const Product = (props) => {
                     }))}
                 >
                   <ShoppingCart className='me-50' size={14} />
-                  Add to Cart
+                  {t('add_cart')}
                 </Button>
               )
             }
@@ -101,7 +101,7 @@ const Product = (props) => {
                     fill='red'
                     size={15}
                   />
-                  <span>Remove from Wishlist</span>
+                  <span>{t('delete_to_wishlist')}</span>
                 </Button>
               ) : (
                 <Button
@@ -113,7 +113,7 @@ const Product = (props) => {
                   <Heart
                     size={15}
                   />
-                  <span>Wishlist</span>
+                  <span>{t('wishlist')}</span>
                 </Button>
               )
             }
@@ -121,7 +121,7 @@ const Product = (props) => {
         </Col>
       </Row >
       <div className='mt-2'>
-        <h4 className='my-2'>Mahulot haqida</h4>
+        <h4 className='my-2'>{t('about_products')}</h4>
         <div dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
       </div>
     </>

@@ -23,7 +23,7 @@ import Loading from "components/Loading"
 
 const Details = () => {
   const params = useParams()
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const dispatch = useDispatch()
   const store = useSelector(state => state.product)
   const wishlist = useSelector(state => state.wishlist?.wishlist)
@@ -37,7 +37,7 @@ const Details = () => {
   const handleRemoveFromWishlist = (item) => {
     const found = wishlist?.find((product) => product.products.id === item.id)
     if (found) return dispatch(deleteFromWishList(found.id))
-    return toast.error("Bunaqa mahsulot wishlistda topilmadi!")
+    return toast.error(t('not_found_to_wishlist'))
   }
   console.log(store?.productDetails)
 

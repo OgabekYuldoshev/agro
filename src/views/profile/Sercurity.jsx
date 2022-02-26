@@ -2,6 +2,7 @@ import { useFormik } from "formik"
 import { Label, Row, Col, Input, Form, Button } from "reactstrap"
 import { changePassword } from "@store/Auth"
 import { useDispatch } from "react-redux"
+import { useTranslation } from "react-i18next"
 
 import * as Yup from "yup"
 const ValidSchema = Yup.object({
@@ -18,6 +19,7 @@ const ValidSchema = Yup.object({
 
 const Account = () => {
     const dispatch = useDispatch()
+    const { t } = useTranslation()
 
     const formik = useFormik({
         initialValues: {
@@ -33,24 +35,24 @@ const Account = () => {
     })
     return (
         <>
-            <h2>Xavfsizlik Sozlamalari</h2>
+            <h2>{t('security_settings')}</h2>
             <Form onSubmit={formik.handleSubmit}>
                 <Row xl={3} xs={1}>
                     <Col className="mb-1">
-                        <Label>Eski parol</Label>
-                        <Input name="old_password" onChange={formik.handleChange} type="text" placeholder="Kiriting..." defaultValue={formik.values.old_password} />
+                        <Label>{t('old_password')}</Label>
+                        <Input name="old_password" onChange={formik.handleChange} type="text" placeholder={t('placeholder:enter')} defaultValue={formik.values.old_password} />
                     </Col>
                     <Col className="mb-1">
-                        <Label>Yangi parol</Label>
-                        <Input name="new_password" onChange={formik.handleChange} type="password" placeholder="Kiriting..." defaultValue={formik.values.new_password} />
+                        <Label>{t('new_password')}</Label>
+                        <Input name="new_password" onChange={formik.handleChange} type="password" placeholder={t('placeholder:enter')} defaultValue={formik.values.new_password} />
                     </Col>
                     <Col className="mb-1">
-                        <Label>Parolni tasdiqlang</Label>
-                        <Input name="confirm_password" onChange={formik.handleChange} type="password" placeholder="Kiriting..." defaultValue={formik.values.confirm_password} />
+                        <Label>{t('password_confirmation')}</Label>
+                        <Input name="confirm_password" onChange={formik.handleChange} type="password" placeholder={t('placeholder:enter')} defaultValue={formik.values.confirm_password} />
                     </Col>
                 </Row>
                 <div className="d-flex justify-content-end">
-                    <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">Saqlash</Button>
+                    <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">{t('save')}</Button>
                 </div>
             </Form>
         </>

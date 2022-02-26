@@ -18,34 +18,34 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
 
   const columns = [
     {
-      name: 'Mahsulot kodi',
+      name: t('code_product'),
       selector: row => row.item?.code
     },
     {
-      name: 'Mahsulot Nomi',
+      name: t('name_product'),
       selector: row => row.item[`name_${i18n.language}`]
     },
     {
-      name: 'Mahsulot soni',
+      name: t('number_product'),
       selector: row => row.qty
     },
     {
-      name: 'Mahsulot narxi',
+      name: t('price_product'),
       cell: row => <span>{row.item?.price}{' '}{t('som')}</span>
     }
   ]
 
   const defaultAddress = [
     {
-      name: 'Qabul qiluvchi',
+      name: t('receiver'),
       value: address?.receiver_name
     },
     {
-      name: 'Telfon raqam',
+      name: t('phone_number'),
       value: address?.phone_number
     },
     {
-      name: 'Manzil',
+      name: t('address'),
       value: `${address?.region_name} ${address?.district_name} ${address?.street_name}`
     }
   ]
