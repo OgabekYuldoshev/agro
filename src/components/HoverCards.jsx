@@ -18,6 +18,7 @@ export default ({ item }) => {
                             <I.ShoppingCart size={14} />
                             <span className='align-middle ms-25'>{item[`name_${i18n?.language}`]}</span>
                         </RS.Button.Ripple>
+                        <RS.CardText>{item[`description_${i18n?.language}`]}</RS.CardText>
                     </RS.CardBody>
                 </RS.CardBody>
             </RS.CardImgOverlay>

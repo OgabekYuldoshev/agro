@@ -2,12 +2,19 @@ import { useState } from 'react'
 import { Offcanvas, OffcanvasHeader, OffcanvasBody, Button, Col, Row } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import Range from "components/Range"
-
+import { useSelector } from 'react-redux'
 
 const Filter = ({ open, toggle }) => {
     const { t } = useTranslation()
-    const [minMax, setMinMax] = useState([21, 69])
-    console.log(minMax)
+    const { products } = useSelector(state => state.category)
+    // const sorted = products?.sort((a, b) => parseInt(a.price) - parseInt(b.price))
+    // const MIN = sorted[0]?.price || 0
+    // const MAX = sorted[sorted.length - 1]?.price || 0
+    // console.log(sorted)
+    const [minMax, setMinMax] = useState([2, 3])
+
+    console.log(products)
+
     return (
         <div className='demo-inline-spacing'>
             <Offcanvas direction="end" isOpen={open} toggle={toggle}>

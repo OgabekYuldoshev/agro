@@ -66,7 +66,7 @@ const Category = ({ t, open, toggle }) => {
                                     }
                                     <ListGroupItem>
                                         <Link to={'/partners'}>
-                                        {t('partners')}
+                                            {t('partners')}
                                         </Link>
                                     </ListGroupItem>
                                 </ListGroup>
@@ -75,7 +75,7 @@ const Category = ({ t, open, toggle }) => {
 
                         <AccordionItem>
                             <AccordionHeader targetId='null'>
-                                <Link to={'/contacts'}>{t('contancts')}</Link>
+                                <Link to={'/contacts'}>{t('network')}</Link>
                             </AccordionHeader>
                         </AccordionItem>
                     </Accordion>

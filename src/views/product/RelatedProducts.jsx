@@ -16,14 +16,6 @@ const RelatedProducts = ({ data }) => {
     spaceBetween: 55,
     navigation: true,
     breakpoints: {
-      1600: {
-        slidesPerView: 4,
-        spaceBetween: 55
-      },
-      1300: {
-        slidesPerView: 4,
-        spaceBetween: 55
-      },
       768: {
         slidesPerView: 3,
         spaceBetween: 55
@@ -38,7 +30,6 @@ const RelatedProducts = ({ data }) => {
     <Fragment>
       <div className='mt-4 mb-2 text-center'>
         <h4>{t('related_products')}</h4>
-        <CardText>{t('people_olso')}</CardText>
       </div>
       <Swiper {...params}>
         {data.map(item => {

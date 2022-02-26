@@ -51,7 +51,7 @@ const Product = (props) => {
           <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
             <h4 className='item-price me-1'>{item?.price}{" "}{t('som')}</h4>
           </div>
-          <CardText>
+          {/* <CardText>
             {t('available')} -<span className='text-success ms-25'>{t('in_stock')}</span>
           </CardText>
           <ul className='product-features list-unstyled'>
@@ -59,7 +59,7 @@ const Product = (props) => {
               <DollarSign size={19} />
               <span>{t('emi_options')}</span>
             </li>
-          </ul>
+          </ul> */}
           <hr />
           <div className='d-flex flex-column flex-sm-row pt-1'>
             {

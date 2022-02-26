@@ -13,7 +13,7 @@ i18n
     backend: {
       loadPath: '/assets/locales/{{lng}}.json'
     },
-    fallbackLng: 'uz',
+    fallbackLng: 'en',
     debug: false,
     keySeparator: false,
     react: {

@@ -15,7 +15,7 @@ const Contacts = () => {
                             <Row xl={2} xs={1}>
                                 <Col>
                                     <h3>{item?.title}</h3>
-                                    <div style={{ fontSize: '16px' }} className="h-100 p-2 d-flex flex-column align-items-center justify-center">
+                                    <div style={{ fontSize: '15px' }} className="h-100 p-2 d-flex flex-column align-items-center justify-center">
                                         <div className="d-flex gap-2">
                                             <b>{t('address')}:</b>
                                             <span>{item?.address}</span>

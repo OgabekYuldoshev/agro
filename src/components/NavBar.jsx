@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
 import { clearWishlist } from '@store/Wishlist'
 import { searchProducts } from "@store/product"
+import { baseUrl } from "@utils"
 
 const styleBar = {
     width: '100%',
@@ -27,6 +28,7 @@ export default () => {
     const { i18n, t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
+    const { contacts } = useSelector(state => state.app)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -36,6 +38,7 @@ export default () => {
     const ecommerce = useSelector(state => state.ecommerce)
     const { searchProduct, searchLoading } = useSelector(state => state.product)
     const handleSearch = (e) => {
+        setIsOpenMenu(true)
         dispatch(searchProducts(e.target.value))
     }
     return (
@@ -44,7 +47,7 @@ export default () => {
                 <div style={{ borderBottom: "1px solid #074C8F" }} className="text-primary d-flex align-items-center justify-content-between ">
                     <span className="">
                         <I.Phone size={18} />
-                        +998(71) 209-68-68
+                        <a href={`tel:${contacts[0]?.tel}`}>{contacts[0]?.tel}</a>
                     </span>
                     <RS.UncontrolledButtonDropdown>
                         <RS.DropdownToggle className="text-primary" color='flat-primary' outline caret>
@@ -73,9 +76,9 @@ export default () => {
                         <RS.Button color="primary" onClick={toggle} className="d-none d-md-block" >
                             <I.List size={12} />
                         </RS.Button>
-                        <RS.Input type='text' placeholder={t('search')} onChange={handleSearch} onFocus={() => setIsOpenMenu(true)} onBlur={() => setIsOpenMenu(false)} />
+                        <RS.Input type='text' placeholder={t('search')} onChange={handleSearch} />
                         {
-                            isOpenMenu ? <DropdownItemMenu i18n={i18n} t={t} products={searchProduct} isLoading={searchLoading} /> : null
+                            isOpenMenu ? <DropdownItemMenu onBlur={() => setIsOpenMenu(false)} i18n={i18n} t={t} products={searchProduct} isLoading={searchLoading} /> : null
                         }
                         <CategoryComponent t={t} open={isOpen} toggle={toggle} />
                     </RS.Col>
@@ -140,12 +143,12 @@ export default () => {
     )
 }
 
-const DropdownItemMenu = ({ products, i18n, t }) => {
+const DropdownItemMenu = ({ products, i18n, t, onBlur }) => {
     return (
-        <RS.ListGroup tag='div' style={{ zIndex: 10 }} className="position-absolute top-100 start-0 bg-white w-full text-black mt-1">
+        <RS.ListGroup onMouseLeave={onBlur} tag='div' style={{ zIndex: 10 }} className="position-absolute top-100 start-0 bg-white w-full text-black mt-1">
             {
                 products?.length !== 0 ? products?.slice(0, 12)?.map((item) => (
-                    <RS.ListGroupItem tag={Link} to={`/product/${item?.id}`} className="d-flex align-items-center justify-content-between gap-2">
+                    <RS.ListGroupItem onClick={onBlur} tag={Link} to={`/product/${item?.id}`} className="d-flex align-items-center justify-content-between gap-2">
                         <img width={30} height={30} src={item.photos?.length ? baseUrl + item.photos[0].image : 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'} />
                         <span>
                             <b>{item[`name_${i18n.language}`]}</b>
@@ -162,7 +165,7 @@ const DropdownItemMenu = ({ products, i18n, t }) => {
                     </RS.ListGroupItem>
                 )
             }
-        </RS.ListGroup>
+        </RS.ListGroup >
     )
 }
 

@@ -20,10 +20,11 @@ import { addToWishList, deleteFromWishList } from "@store/Wishlist"
 import { useParams } from "react-router-dom"
 import '@styles/base/pages/app-ecommerce-details.scss'
 import Loading from "components/Loading"
+import { ArrowRight } from 'react-feather'
 
 const Details = () => {
   const params = useParams()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const store = useSelector(state => state.product)
   const wishlist = useSelector(state => state.wishlist?.wishlist)
@@ -39,11 +40,18 @@ const Details = () => {
     if (found) return dispatch(deleteFromWishList(found.id))
     return toast.error(t('not_found_to_wishlist'))
   }
-  console.log(store?.productDetails)
-
   return (
     <div className="mt-2">
-      <BreadCrumbs breadCrumbTitle='Product Details' breadCrumbParent='Details' breadCrumbActive={store.productDetails[`name_${i18n.language}`]} />
+      <div className='d-flex align-items-end justify-content-between gap-1 my-1'>
+        <div className='d-flex align-items-center gap-1'>
+          <h1>{t('product_details')}</h1>
+          {/* <ArrowRight />
+          <span>{store.productDetails[`name_${i18n.language}`]}</span> */}
+        </div>
+        <span>#{store.productDetails?.code}</span>
+      </div>
+
+
       <div className='app-ecommerce-details'>
         <Card>
           <CardBody>

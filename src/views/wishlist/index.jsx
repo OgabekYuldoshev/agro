@@ -17,7 +17,7 @@ const WishListPage = () => {
             <h1 className="my-2">{t('wishlist')}</h1>
             {
                 wishlist.length !== 0 ? (
-                    <Row xl={5} lg={3} sm={1}>
+                    <Row xl={4} lg={3} md={2} sm={1}>
                         {
                             wishlist?.map((item, index) => (
                                 <Col key={index}>

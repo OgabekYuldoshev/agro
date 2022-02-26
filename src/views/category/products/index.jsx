@@ -5,7 +5,7 @@ import ReactPaginate from "react-paginate"
 import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
 
-const ProductsPage = ({ items }) => {
+const ProductsPage = ({ items, currentPage, totalPages }) => {
   const history = useHistory()
   const location = useLocation()
   const defaultQs = qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -24,11 +24,11 @@ const ProductsPage = ({ items }) => {
   return (
     <div>
       <div>
-        {items?.data?.length ? (
+        {items?.length ? (
           <>
-            <Row xl={4}>
+            <Row xl={4} lg={3} sm={2}>
               {
-                items?.data?.map((item, index) => (
+                items?.map((item, index) => (
                   <Col key={index} className="mt-2">
                     <ProductCard item={item} />
                   </Col>
@@ -39,9 +39,9 @@ const ProductsPage = ({ items }) => {
               <ReactPaginate
                 previousLabel={''}
                 nextLabel={''}
-                forcePage={items?.current_page - 1}
+                forcePage={currentPage - 1}
                 onPageChange={handlePageClick}
-                pageCount={items?.last_page}
+                pageCount={totalPages}
                 breakLabel={'...'}
                 pageRangeDisplayed={2}
                 marginPagesDisplayed={2}

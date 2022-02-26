@@ -9,7 +9,7 @@ export const getCategoryProducts = createAsyncThunk('category/getCategoryProduct
         const response = await http.get('/products', {
             params: data
         })
-        return response.data
+        return response.data?.data
     } catch (error) {
         return rejectWithValue(error)
     }
@@ -19,9 +19,11 @@ export const categorySlice = createSlice({
     name: 'category',
     initialState: {
         products: [],
+        category: {},
         isLoading: false,
         currentPage: 0,
         perPage: 25,
+        totalPages: 0,
         total: 0
     },
     reducers: {
@@ -31,11 +33,14 @@ export const categorySlice = createSlice({
             state.isLoading = true
         },
         [getCategoryProducts.fulfilled]: (state, action) => {
-            const { current_page, data, per_page, total } = action?.payload
-            state.products = data
-            state.currentPage = current_page
-            state.perPage = per_page
-            state.total = total
+            const { products, categories } = action?.payload
+            console.log(action?.payload)
+            state.products = products?.data
+            state.category = categories
+            state.currentPage = products?.current_page
+            state.perPage = products?.per_page
+            state.total = products?.total
+            state.totalPages = products?.last_page
             state.isLoading = false
         },
         [getCategoryProducts.rejected]: () => {

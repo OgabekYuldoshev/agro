@@ -19,10 +19,6 @@ const params = {
     clickable: true
   },
   breakpoints: {
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 40
-    },
     768: {
       slidesPerView: 3,
       spaceBetween: 30
@@ -31,8 +27,12 @@ const params = {
       slidesPerView: 2,
       spaceBetween: 20
     },
+    425: {
+      slidesPerView: 1,
+      spaceBetween: 10
+    },
     320: {
-      slidesPerView: 2,
+      slidesPerView: 1,
       spaceBetween: 10
     }
   }
