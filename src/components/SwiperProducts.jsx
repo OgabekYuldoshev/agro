@@ -20,7 +20,7 @@ const params = {
   },
   breakpoints: {
     1024: {
-      slidesPerView: 4,
+      slidesPerView: 3,
       spaceBetween: 40
     },
     768: {

@@ -94,6 +94,7 @@
   "account": "Account",
   "wishlist_empty": "Your Wishlist is empty",
   "page_not_found": "Page Not Found",
+  "not_found": "Not Found",
   "oops_bad_request": " Oops! 😖 The requested URL was not found on this server.",
   "back_to_home": "Back to home",
   "not_authorized": "You are not authorized!",

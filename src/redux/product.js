@@ -8,12 +8,23 @@ export const getProductDetails = createAsyncThunk('app/GetProductDetails', async
     return response.data
 })
 
+export const searchProducts = createAsyncThunk('app/searchProducts', async (name) => {
+    const response = await http.get(`/product-search`, {
+        params: {
+            name
+        }
+    })
+    return response.data?.data
+})
+
 export const productSlice = createSlice({
     name: 'product',
     initialState: {
         productDetails: {},
         review_products: [],
-        isLoading: false
+        searchProduct: [],
+        isLoading: false,
+        searchLoading: false
     },
     reducers: {
         // handleLogout: state => {
@@ -24,9 +35,9 @@ export const productSlice = createSlice({
         //     localStorage.removeItem('accessToken')
         //     toast.success("Siz muvaffaqiyatli profilingizdan chiqdingiz!")
         // },
-        // handleAuthModal: state => {
-        //     state.modal = !state.modal
-        // }
+        handleClear: state => {
+            state.searchProduct = []
+        }
     },
     extraReducers: {
         [getProductDetails.pending]: (state) => {
@@ -38,13 +49,24 @@ export const productSlice = createSlice({
             state.review_products = review_products
             state.isLoading = false
         },
-        [getProductDetails.rejected]: () => {
+        [getProductDetails.rejected]: (state) => {
             state.isLoading = false
+            toast.error("Serverda xatolik!")
+        },
+        [searchProducts.pending]: (state) => {
+            state.searchLoading = true
+        },
+        [searchProducts.fulfilled]: (state, action) => {
+            state.searchProduct = action.payload
+            state.searchLoading = false
+        },
+        [searchProducts.rejected]: (state) => {
+            state.searchLoading = false
             toast.error("Serverda xatolik!")
         }
     }
 })
 
-export const { } = productSlice.actions
+export const { handleClear } = productSlice.actions
 
 export default productSlice.reducer

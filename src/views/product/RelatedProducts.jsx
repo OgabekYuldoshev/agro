@@ -3,10 +3,12 @@ import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
 import { CardText } from 'reactstrap'
 import ProductCard from "../../components/ProductCard"
+import { useTranslation } from "react-i18next"
 // ** Styles
 import '@styles/react/libs/swiper/swiper.scss'
 
 const RelatedProducts = ({ data }) => {
+  const { t } = useTranslation()
   SwiperCore.use([Navigation])
   const params = {
     className: 'swiper-responsive-breakpoints swiper-container px-4 py-2',
