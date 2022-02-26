@@ -12,17 +12,17 @@ const ProfilePage = ({ data }) => {
                 <Avatar color='light-danger' content={data.first_name} initials size="xl" />
                 <h4 className="mt-2 text-center">{data.first_name} {data.last_name} {data.second_name}</h4>
                 <hr />
-                <Row className="justify-content-between">
+                <Row xl={3} className="justify-content-between">
                     <Col className="d-flex gap-1 align-items-center">
-                        <Avatar color='light-primary' icon={<ShoppingCart size={20} />} />
+                        <Avatar color='light-primary' icon={<ShoppingCart size={18} />} />
                         <b>{cart.length}</b>
                     </Col>
                     <Col className="d-flex gap-1 align-items-center">
-                        <Avatar color='light-danger' icon={<Heart size={20} />} />
+                        <Avatar color='light-danger' icon={<Heart size={18} />} />
                         <b>{wishlist.length}</b>
                     </Col>
                     <Col className="d-flex gap-1 align-items-center">
-                        <Avatar color='light-primary' icon={<Clipboard size={20} />} />
+                        <Avatar color='light-primary' icon={<Clipboard size={18} />} />
                         <b>1</b>
                     </Col>
                 </Row>

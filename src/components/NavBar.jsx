@@ -62,7 +62,7 @@ export default () => {
                             <img src={LOGO} alt="logo" width={100} />
                             <h5 className="text-primary">QoraSuvAgro</h5>
                         </Link>
-                        <I.List onClick={toggle} size={25} className="d-block d-lg-none" />
+                        <I.List onClick={toggle} size={25} className="d-block text-primary d-lg-none" />
                     </RS.Col>
                     <RS.Col xl={6} className="d-flex align-items-center gap-1 mb-1 mb-lg-0">
                         <RS.Button color="primary" onClick={toggle} className="d-none d-lg-block" >
@@ -95,6 +95,7 @@ export default () => {
                         }
                     </RS.Col>
                 </RS.Row>
+
                 <div style={styleBar} className="bg-primary d-lg-none">
                     {/* <CartDropdown t={t} store={ecommerce} /> */}
                     <div onClick={() => history.push('/checkout')} className="position-relative">
@@ -117,7 +118,7 @@ export default () => {
                     </div>
                     {
                         auth.isAuth ? (
-                            <DropdownMenu t={t} data={auth} />
+                            <DropdownMenu text="white" t={t} data={auth} />
                         ) : (
                             <div onClick={openAuthModal} className="cursor-pointer">
                                 <I.LogIn className='text-white' size={25} />
@@ -131,7 +132,7 @@ export default () => {
     )
 }
 
-const DropdownMenu = ({ t, data }) => {
+const DropdownMenu = ({ t, data, text }) => {
     const dispatch = useDispatch()
     const logOut = () => {
         dispatch(handleLogout())
@@ -140,7 +141,7 @@ const DropdownMenu = ({ t, data }) => {
     return (
         <RS.UncontrolledButtonDropdown>
             <RS.DropdownToggle tag='div' className="cursor-pointer">
-                <I.User className='text-primary' size={25} />
+                <I.User className={text ? "text-white" : "text-primary"} size={25} />
             </RS.DropdownToggle>
             <RS.DropdownMenu>
                 <RS.DropdownItem tag={Link} to="/profile" className="d-flex align-items-center gap-1">

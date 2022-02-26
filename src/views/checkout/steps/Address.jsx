@@ -33,7 +33,7 @@ import { Trash } from 'react-feather'
 
 const Address = props => {
   // ** Props
-  const { stepper, setAddress } = props
+  const { stepper, setAddress, t } = props
   const { isAuth } = useSelector(state => state.auth)
 
   const dispatch = useDispatch()
@@ -71,57 +71,54 @@ const Address = props => {
       <Col xl={9}>
         <Card>
           <CardHeader className='flex-column align-items-start'>
-            <CardTitle tag='h4'>Add New Address</CardTitle>
-            <CardText className='text-muted mt-25'>
-              Be sure to check "Deliver to this address" when you have finished
-            </CardText>
+            <CardTitle tag='h4'>{t('add_new_address')}</CardTitle>
           </CardHeader>
           <CardBody>
             <Form onSubmit={formik.handleSubmit}>
               <Row xl={2} xs={1}>
                 <Col className="mb-1">
-                  <Label>Qabul qiluvchi ismi</Label>
+                  <Label>{t('reciver_name')}</Label>
                   <Input
                     onChange={formik.handleChange}
                     name="receiver_name"
                     type="text"
-                    placeholder="Kiriting..." />
+                    placeholder={t('placeholder:enter')} />
                 </Col>
                 <Col className="mb-1">
-                  <Label>Viloyat</Label>
+                  <Label>{t('region')}</Label>
                   <Input
                     onChange={formik.handleChange}
                     name="region_name"
                     type="text"
-                    placeholder="Kiriting..." />
+                    placeholder={t('placeholder:enter')} />
                 </Col>
                 <Col className="mb-1">
-                  <Label>Tuman</Label>
+                  <Label>{t('district')}</Label>
                   <Input
                     onChange={formik.handleChange}
                     name="district_name"
                     type="text"
-                    placeholder="Kiriting..." />
+                    placeholder={t('placeholder:enter')} />
                 </Col>
                 <Col className="mb-1">
-                  <Label>Manzil</Label>
+                  <Label>{t('address')}</Label>
                   <Input
                     onChange={formik.handleChange}
                     name="street_name"
                     type="text"
-                    placeholder="Kiriting..." />
+                    placeholder={t('placeholder:enter')} />
                 </Col>
                 <Col className="mb-1">
-                  <Label>Telefon nomer</Label>
+                  <Label>{t('phone_number')}</Label>
                   <Input
                     onChange={formik.handleChange}
                     name="phone_number"
                     type="text"
-                    placeholder="Kiriting..." />
+                    placeholder={t('placeholder:enter')} />
                 </Col>
               </Row>
               <div className="d-flex justify-content-end gap-2">
-                <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">Saqlash</Button>
+                <Button type="submit" disabled={!(formik.isValid && formik.dirty)} color="success">{t('save')}</Button>
               </div>
             </Form>
           </CardBody>
@@ -146,7 +143,7 @@ const Address = props => {
                   onClick={() => handleSelect(el)}
                   className='btn-next delivery-address mt-2'
                 >
-                  Deliver To This Address
+                  {t('delevery_this')}
                 </Button>
               </CardBody>
             </Card>
@@ -154,7 +151,7 @@ const Address = props => {
         }
       </Col>
       <Col xl={12}>
-        <Button outline color='danger' onClick={() => stepper.previous()}>Orqaga</Button>
+        <Button outline color='danger' onClick={() => stepper.previous()}>{t('back')}</Button>
       </Col>
     </Row>
   )

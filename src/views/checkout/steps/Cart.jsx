@@ -129,11 +129,11 @@ const Cart = (props) => {
               <h6 className='mb-2'>{t('price_details')}</h6>
               <ul>
                 <li className='d-flex justify-content-between align-items-center mb-1'>
-                  <div className='detail-title'>Items</div>
+                  <div className='detail-title'>{t('items')}</div>
                   <div className='detail-amt'>{products?.length || 0}</div>
                 </li>
                 <li className='d-flex justify-content-between align-items-center mb-1'>
-                  <div className='detail-title'>Total Items</div>
+                  <div className='detail-title'>{t('total')} {t('items')}</div>
                   <div className='detail-amt'>{totalProduts}</div>
                 </li>
               </ul>
@@ -141,7 +141,7 @@ const Cart = (props) => {
               <ul className='list-unstyled'>
                 <li className='d-flex justify-content-between align-items-center'>
                   <div className='detail-title detail-total'>{t("total")}</div>
-                  <div className='detail-amt fw-bolder'>{total} som</div>
+                  <div className='detail-amt fw-bolder'>{total} {t('som')}</div>
                 </li>
               </ul>
               <Button
