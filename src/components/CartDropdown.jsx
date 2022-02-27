@@ -52,7 +52,9 @@ const CartDropdown = ({ t, store }) => {
                                                 {product?.item[`name_${i18n.language}`]}
                                             </Link>
                                         </h6>
-                                        <small>by {product?.item.partner_id}</small>
+                                        <small>{t('by')} {product?.item?.partners?.name}</small>
+                                        <br />
+                                        <small>{t('size')} <b>{product?.item?.nett_weight} {product?.item?.units?.name}</b></small>
                                     </Col>
                                     <Col className='d-flex flex-column align-items-center justify-content-center'>
                                         <h5 >{product?.item.price}{" "}{t('som')}</h5>

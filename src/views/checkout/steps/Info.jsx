@@ -117,7 +117,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
               <Row xs={1}>
                 <Col>
                   <Label>{t('type_money')}</Label>
-                  <ReactSelect placeholder={t('placeholder:select')} getOptionLabel={option => option?.desc} getOptionValue={option => option?.id} options={currency} onChange={(e) => setForm(current => {
+                  <ReactSelect placeholder={t('select')} getOptionLabel={option => option?.desc} getOptionValue={option => option?.id} options={currency} onChange={(e) => setForm(current => {
                     return { ...current, currency_id: e?.id }
                   })} />
                 </Col>
@@ -128,7 +128,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
                   })} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
-                  <Button onClick={() => setOpen(current => !current)} type="reset" color="danger" outline>{t("button:cancel")}</Button>
+                  <Button onClick={() => setOpen(current => !current)} type="reset" color="danger" outline>{t("cancel")}</Button>
                   <Button disabled={form?.currency_id === null} onClick={handleSubmit} type="submit" color="primary">{t('confirmation_order')}</Button>
                 </Col>
               </Row>

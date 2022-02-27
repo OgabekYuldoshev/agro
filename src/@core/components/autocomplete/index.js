@@ -341,7 +341,7 @@ Autocomplete.propTypes = {
   onKeyDown: PropTypes.func,
   onChange: PropTypes.func,
   clearInput: PropTypes.func,
-  placeholder: PropTypes.string,
+   PropTypes.string,
   externalClick: PropTypes.func,
   defaultValue: PropTypes.string,
   wrapperClass: PropTypes.string,

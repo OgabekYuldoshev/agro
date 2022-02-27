@@ -105,16 +105,11 @@
   "number_product": "Product of number",
   "price_product": "Product price",
   "receiver": "Receiver",
-  "placeholder": {
-    "enter": "Enter ",
-    "code": "Enter the code",
-    "select": "select"
-  },
-  "button": {
-    "send": "Send",
-    "cancel": "Cancel"
-  },
-  "lebal": {
-    "fullname": "Fullname"
-  }
+  "enter": "Enter ",
+  "code": "Enter the code",
+  "select": "select",
+  "send": "Send",
+  "cancel": "Cancel",
+  "fullname": "Fullname",
+  "size": "Size"
 }

@@ -105,16 +105,11 @@
   "number_mahsulot": "Raqam mahsuloti",
   "price_product": "Mahsulot narxi",
   "receiver": "Qabul qiluvchi",
-  "placeholder": {
-    "enter": "Kirish",
-    "code": "Kodni kiriting",
-    "select": "tanlash"
-  },
-  "button": {
-    "send": "Yuborish",
-    "bekor qilish": "Bekor qilish"
-  },
-  "lebal": {
-    "fullname": "To'liq ism"
-  }
+  "enter": "Kirish",
+  "code": "Kodni kiriting",
+  "select": "tanlash",
+  "send": "Yuborish",
+  "bekor qilish": "Bekor qilish",
+  "fullname": "To'liq ism",
+  "size": "Hajmi"
 }

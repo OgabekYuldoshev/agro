@@ -34,24 +34,28 @@ export default () => {
     return (
         <footer className="bg-primary layout text-white">
             <RS.Row xl={3} md={2} sm={1} className="py-4">
-                <RS.Col className="mb-1" xl={3}>
-                    <h3 className="text-white mb-1">
-                        {t('useful_links')}
-                    </h3>
-                    <div className="d-flex flex-column">
-                        {
-                            useful?.map((item, index) => (
-                                <Link className="text-white" to={`/page/${item?.id}`}>
-                                    <p key={index} className="cursor-pointer">{item[`title_${i18n.language}`]}</p>
-                                </Link>
-                            ))
-                        }
-                    </div>
-                </RS.Col>
-                <RS.Col className="mb-1" xl={3}>
-                    <h3 className="text-white mb-1">
-                        {t('connect_to_contact')}
+                {
+                    useful?.length ? (
+                        <RS.Col className="mb-1" xl={3}>
+                            <h3 className="text-white mb-1">
+                                {t('useful_links')}
+                            </h3>
+                            <div className="d-flex flex-column">
+                                {
+                                    useful?.map((item, index) => (
+                                        <Link className="text-white" to={`/page/${item?.id}`}>
+                                            <p key={index} className="cursor-pointer">{item[`title_${i18n.language}`]}</p>
+                                        </Link>
+                                    ))
+                                }
+                            </div>
+                        </RS.Col>
+                    ) : null
+                }
 
+                <RS.Col className="mb-1" xl={useful?.length ? 3 : 6}>
+                    <h3 className="text-white mb-1">
+                        {t('network')}
                     </h3>
                     <div className="d-flex flex-column">
                         <div className="d-flex gap-1">
@@ -75,8 +79,8 @@ export default () => {
                     <RS.Form onSubmit={formik.handleSubmit}>
                         <RS.Row xl={2} >
                             <RS.Col xl={12} className="mb-2">
-                                <RS.Label className="text-white">{t("lebal:fullname")}</RS.Label>
-                                <RS.Input type="name" name="name" placeholder={t("placeholder:enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Label className="text-white">{t("fullname")}</RS.Label>
+                                <RS.Input type="name" name="name" placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                             <RS.Col className="mb-2">
                                 <RS.Label className="text-white">{t("phone_number")}</RS.Label>
@@ -84,15 +88,15 @@ export default () => {
                             </RS.Col>
                             <RS.Col className="mb-2">
                                 <RS.Label className="text-white">{t("email")}</RS.Label>
-                                <RS.Input type="email" name="email" placeholder={t("placeholder:enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Input type="email" name="email" placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                             <RS.Col xl={12} className="mb-2">
                                 <RS.Label className="text-white">{t('about_subject')}</RS.Label>
-                                <RS.Input type="textarea" name="text" placeholder={t("placeholder:enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Input type="textarea" name="text" placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                         </RS.Row>
                         <div className="d-flex justify-content-end">
-                            <RS.Button color="success" type="submit" disabled={!(formik.isValid && formik.dirty)} >{t('button:send')}</RS.Button>
+                            <RS.Button color="success" type="submit" disabled={!(formik.isValid && formik.dirty)} >{t('send')}</RS.Button>
                         </div>
                     </RS.Form>
                 </RS.Col>

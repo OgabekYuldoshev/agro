@@ -40,15 +40,15 @@ const Account = () => {
                 <Row xl={3} xs={1}>
                     <Col className="mb-1">
                         <Label>{t('old_password')}</Label>
-                        <Input name="old_password" onChange={formik.handleChange} type="text" placeholder={t('placeholder:enter')} defaultValue={formik.values.old_password} />
+                        <Input name="old_password" onChange={formik.handleChange} type="text" placeholder={t('enter')} defaultValue={formik.values.old_password} />
                     </Col>
                     <Col className="mb-1">
                         <Label>{t('new_password')}</Label>
-                        <Input name="new_password" onChange={formik.handleChange} type="password" placeholder={t('placeholder:enter')} defaultValue={formik.values.new_password} />
+                        <Input name="new_password" onChange={formik.handleChange} type="password" placeholder={t('enter')} defaultValue={formik.values.new_password} />
                     </Col>
                     <Col className="mb-1">
                         <Label>{t('password_confirmation')}</Label>
-                        <Input name="confirm_password" onChange={formik.handleChange} type="password" placeholder={t('placeholder:enter')} defaultValue={formik.values.confirm_password} />
+                        <Input name="confirm_password" onChange={formik.handleChange} type="password" placeholder={t('enter')} defaultValue={formik.values.confirm_password} />
                     </Col>
                 </Row>
                 <div className="d-flex justify-content-end">

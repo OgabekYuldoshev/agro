@@ -93,7 +93,7 @@ const Login = ({ t, toggle }) => {
                         invalid={formik?.errors['email'] && formik?.touched['email'] && true}
                         type="email"
                         name="email"
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mt-2">
                     <Label>{t("password")}</Label>
@@ -103,7 +103,7 @@ const Login = ({ t, toggle }) => {
                         invalid={formik?.errors['password'] && formik?.touched['password'] && true}
                         name="password"
                         type="password"
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
                     <Button onClick={() => {
@@ -159,7 +159,7 @@ const Register = ({ t, tab, toggle }) => {
     //         title: t('email_confirmation'),
     //         text: t('send_code_text'),
     //         input: 'text',
-    //         inputPlaceholder: t("placeholder:code"),
+    //         inputPlaceholder: t("code"),
     //         inputAttributes: {
     //             maxlength: 4
     //         },
@@ -224,7 +224,7 @@ const Register = ({ t, tab, toggle }) => {
                         onBlur={formik.handleBlur}
                         name="first_name"
                         invalid={formik?.errors["first_name"] && formik?.touched["first_name"] && true}
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mb-1" xl={4}>
                     <Label>{t("last_name")}</Label>
@@ -233,7 +233,7 @@ const Register = ({ t, tab, toggle }) => {
                         onBlur={formik.handleBlur}
                         invalid={formik?.errors['last_name'] && formik?.touched["last_name"] && true}
                         name="last_name"
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mb-1" xl={4}>
                     <Label>{t("second_name")}</Label>
@@ -242,7 +242,7 @@ const Register = ({ t, tab, toggle }) => {
                         onBlur={formik.handleBlur}
                         name="second_name"
                         invalid={formik?.errors['second_name'] && formik?.touched["second_name"] && true}
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
                     <Label>{t("email")}</Label>
@@ -252,7 +252,7 @@ const Register = ({ t, tab, toggle }) => {
                         invalid={formik?.errors['email'] && formik?.touched["email"] && true}
                         name="email"
                         type="email"
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
                     <Label>{t("phone_number")}</Label>
@@ -261,7 +261,7 @@ const Register = ({ t, tab, toggle }) => {
                         onBlur={formik.handleBlur}
                         name="phone_number"
                         invalid={formik?.errors['phone_number'] && formik?.touched["phone_number"] && true}
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
                     <Label>{t("password")}</Label>
@@ -271,7 +271,7 @@ const Register = ({ t, tab, toggle }) => {
                         onBlur={formik.handleBlur}
                         invalid={formik?.errors['password'] && formik?.touched["password"] && true}
                         name="password"
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mb-1" xl={6}>
                     <Label>{t("password_confirmation")}</Label>
@@ -281,7 +281,7 @@ const Register = ({ t, tab, toggle }) => {
                         onBlur={formik.handleBlur}
                         name="password_confirmation"
                         invalid={formik?.errors['password_confirmation'] && formik?.touched["password_confirmation"] && true}
-                        placeholder={t("placeholder:enter")} />
+                        placeholder={t("enter")} />
                 </Col>
                 <Col className="mt-2 d-flex justify-content-end gap-1">
                     <Button onClick={() => {

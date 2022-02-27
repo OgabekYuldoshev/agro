@@ -107,17 +107,11 @@
   "number_product": "Произведение числа",
   "price_product": "Цена товара",
   "reciever": "Получатель",
-  "placeholder": {
-    "enter": "Введите",
-    "code": "Введите код",
-    "select": "Выбрать"
-  },
-  "button": {
-    "send": "Отправить",
-    "cansel": "Отмена"
-  },
-
-  "lebal": {
-    "fullname": "Полное имя"
-  }
+  "enter": "Введите",
+  "code": "Введите код",
+  "select": "Выбрать",
+  "send": "Отправить",
+  "cancel": "Отмена",
+  "fullname": "Полное имя",
+  "size": "Размер"
 }

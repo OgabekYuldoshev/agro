@@ -82,7 +82,7 @@ const Address = props => {
                     onChange={formik.handleChange}
                     name="receiver_name"
                     type="text"
-                    placeholder={t('placeholder:enter')} />
+                    placeholder={t('enter')} />
                 </Col>
                 <Col className="mb-1">
                   <Label>{t('region')}</Label>
@@ -90,7 +90,7 @@ const Address = props => {
                     onChange={formik.handleChange}
                     name="region_name"
                     type="text"
-                    placeholder={t('placeholder:enter')} />
+                    placeholder={t('enter')} />
                 </Col>
                 <Col className="mb-1">
                   <Label>{t('district')}</Label>
@@ -98,7 +98,7 @@ const Address = props => {
                     onChange={formik.handleChange}
                     name="district_name"
                     type="text"
-                    placeholder={t('placeholder:enter')} />
+                    placeholder={t('enter')} />
                 </Col>
                 <Col className="mb-1">
                   <Label>{t('address')}</Label>
@@ -106,7 +106,7 @@ const Address = props => {
                     onChange={formik.handleChange}
                     name="street_name"
                     type="text"
-                    placeholder={t('placeholder:enter')} />
+                    placeholder={t('enter')} />
                 </Col>
                 <Col className="mb-1">
                   <Label>{t('phone_number')}</Label>
@@ -114,7 +114,7 @@ const Address = props => {
                     onChange={formik.handleChange}
                     name="phone_number"
                     type="text"
-                    placeholder={t('placeholder:enter')} />
+                    placeholder={t('enter')} />
                 </Col>
               </Row>
               <div className="d-flex justify-content-end gap-2">

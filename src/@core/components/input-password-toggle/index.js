@@ -86,7 +86,7 @@ InputPasswordToggle.propTypes = {
   showIcon: PropTypes.node,
   visible: PropTypes.bool,
   className: PropTypes.string,
-  placeholder: PropTypes.string,
+   PropTypes.string,
   iconSize: PropTypes.number,
   inputClassName: PropTypes.string,
   label(props, propName) {

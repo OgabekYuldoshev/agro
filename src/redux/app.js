@@ -104,6 +104,7 @@ export const apphSlice = createSlice({
     reducers: {
     },
     extraReducers: {
+
         [getCurrency.fulfilled]: (state, action) => {
             state.currency = action.payload
         },

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import FilterCom from './Filter'
 import Products from './products'
-import { Button, Card, CardBody, CardImg, CardImgOverlay } from "reactstrap"
+import { Button } from "reactstrap"
 import { Filter } from "react-feather"
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategoryProducts } from '@store/Category'

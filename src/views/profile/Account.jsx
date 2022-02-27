@@ -26,23 +26,23 @@ const Account = ({ data }) => {
                 <Row xl={3} xs={1}>
                     <Col className="mb-1">
                         <Label>{t('first_name')}</Label>
-                        <Input type="text" name="first_name" placeholder={t('placeholder:enter')} onChange={formik.handleChange} defaultValue={formik.values.first_name} />
+                        <Input type="text" name="first_name" placeholder={t('enter')} onChange={formik.handleChange} defaultValue={formik.values.first_name} />
                     </Col>
                     <Col className="mb-1">
                         <Label>{t('last_name')}</Label>
-                        <Input type="text" name="last_name" placeholder={t('placeholder:enter')} onChange={formik.handleChange} defaultValue={formik.values.last_name} />
+                        <Input type="text" name="last_name" placeholder={t('enter')} onChange={formik.handleChange} defaultValue={formik.values.last_name} />
                     </Col>
                     <Col className="mb-1">
                         <Label>{t('seccond_name')}</Label>
-                        <Input type="text" name="second_name" placeholder={t('placeholder:enter')} onChange={formik.handleChange} defaultValue={formik.values.second_name} />
+                        <Input type="text" name="second_name" placeholder={t('enter')} onChange={formik.handleChange} defaultValue={formik.values.second_name} />
                     </Col>
                     <Col xl={6} className="mb-1">
                         <Label>{t('email')}</Label>
-                        <Input type="text" name="email" disabled placeholder={t('placeholder:enter')} onChange={formik.handleChange} defaultValue={formik.values.email} />
+                        <Input type="text" name="email" disabled placeholder={t('enter')} onChange={formik.handleChange} defaultValue={formik.values.email} />
                     </Col>
                     <Col xl={6} className="mb-1">
                         <Label>{t('phone_number')}</Label>
-                        <Input type="tel" name="phone_number" placeholder={t('placeholder:enter')} onChange={formik.handleChange} defaultValue={formik.values.phone_number} />
+                        <Input type="tel" name="phone_number" placeholder={t('enter')} onChange={formik.handleChange} defaultValue={formik.values.phone_number} />
                     </Col>
                 </Row>
                 <div className="d-flex justify-content-end">
