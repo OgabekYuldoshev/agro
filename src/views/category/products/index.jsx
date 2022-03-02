@@ -29,7 +29,7 @@ const ProductsPage = ({ items, currentPage, totalPages }) => {
             <Row xl={4} lg={3} sm={2}>
               {
                 items?.map((item, index) => (
-                  <Col key={index} className="mt-2">
+                  <Col key={index}>
                     <ProductCard item={item} />
                   </Col>
                 ))
@@ -59,7 +59,7 @@ const ProductsPage = ({ items, currentPage, totalPages }) => {
             </div>
           </>
         ) : (
-          <div className='d-flex justify-content-center mt-2'>
+          <div className='d-flex justify-content-center'>
             <p>No Results</p>
           </div>
         )}

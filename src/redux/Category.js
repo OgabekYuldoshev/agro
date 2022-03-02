@@ -43,7 +43,7 @@ export const categorySlice = createSlice({
             state.totalPages = products?.last_page
             state.isLoading = false
         },
-        [getCategoryProducts.rejected]: () => {
+        [getCategoryProducts.rejected]: (state) => {
             state.isLoading = false
             toast.error("Serverda xatolik!")
         }

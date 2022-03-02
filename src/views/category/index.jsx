@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
-import FilterCom from './Filter'
+import { useEffect } from "react"
+import SideBar from './SideBar'
 import Products from './products'
-import { Button } from "reactstrap"
+import { Col, Row } from "reactstrap"
 import { Filter } from "react-feather"
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategoryProducts } from '@store/Category'
@@ -15,14 +15,12 @@ const Shop = () => {
     const dispatch = useDispatch()
     const { t, i18n } = useTranslation()
     const location = useLocation()
-    const [open, setOpen] = useState(false)
-    const toggle = () => setOpen(cur => !cur)
     const { products, category, currentPage, perPage, totalPages, total } = useSelector(state => state.category)
     const params = useParams()
     const defaultQs = qs.parse(location.search, { ignoreQueryPrefix: true })
     const query = {
         ...defaultQs,
-        main_parent_id: params?.id
+        category_id: params?.id
     }
     const props = {
         currentPage,
@@ -58,14 +56,20 @@ const Shop = () => {
                     </CardBody>
                 </CardImgOverlay>
             </Card> */}
-            <div className="mt-2 d-flex align-items-center justify-content-between">
+            <div className="my-2 d-flex align-items-center justify-content-between">
                 <h3>{t('items')}</h3>
-                <Button.Ripple color="primary" outline onClick={toggle}>
+                {/* <Button.Ripple color="primary" outline onClick={toggle}>
                     <Filter size={16} />
-                </Button.Ripple>
+                </Button.Ripple> */}
             </div>
-            <FilterCom toggle={toggle} open={open} />
-            <Products items={products} {...props} />
+            <Row sm={1} md={1} xl={2}>
+                <Col xl={3}>
+                    <SideBar />
+                </Col>
+                <Col xl={9}>
+                    <Products items={products} {...props} />
+                </Col>
+            </Row>
         </div>
     )
 }

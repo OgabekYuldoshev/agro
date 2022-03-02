@@ -47,7 +47,7 @@ export default () => {
                 <div style={{ borderBottom: "1px solid #074C8F" }} className="text-primary d-flex align-items-center justify-content-between ">
                     <span className="">
                         <I.Phone size={18} />
-                        <a href={`tel:${contacts[0]?.tel}`}>{contacts[0]?.tel}</a>
+                        <a href={`tel:${contacts && contacts[0]?.tel}`}>{contacts && contacts[0]?.tel}</a>
                     </span>
                     <RS.UncontrolledButtonDropdown>
                         <RS.DropdownToggle className="text-primary" color='flat-primary' outline caret>

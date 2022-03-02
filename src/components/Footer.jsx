@@ -17,7 +17,7 @@ export default () => {
     const dispatch = useDispatch()
     const { t, i18n } = useTranslation()
     const { pages, contacts } = useSelector(state => state.app)
-    const useful = pages.filter(item => item?.page_id === 3)
+    const useful = pages?.filter(item => item?.page_id === 3)
     const formik = useFormik({
         validationSchema: ValidateSchema,
         initialValues: {
@@ -60,15 +60,15 @@ export default () => {
                     <div className="d-flex flex-column">
                         <div className="d-flex gap-1">
                             <I.MapPin />
-                            <p className="cursor-pointer">{contacts[0]?.address}</p>
+                            <p className="cursor-pointer">{contacts && contacts[0]?.address}</p>
                         </div>
                         <div className="d-flex gap-1">
                             <I.Phone />
-                            <p className="cursor-pointer">{contacts[0]?.tel}, {contacts[0]?.shop_phone_number}</p>
+                            <p className="cursor-pointer">{contacts && contacts[0]?.tel}, {contacts && contacts[0]?.shop_phone_number}</p>
                         </div>
                         <div className="d-flex gap-1">
                             <I.Mail />
-                            <p className="cursor-pointer">{contacts[0]?.email}</p>
+                            <p className="cursor-pointer">{contacts && contacts[0]?.email}</p>
                         </div>
                     </div>
                 </RS.Col>
