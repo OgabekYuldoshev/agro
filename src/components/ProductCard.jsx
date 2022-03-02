@@ -31,7 +31,7 @@ export default ({ item }) => {
         <RS.Card className='border rounded'>
             <RS.CardHeader className='d-flex justify-content-center'>
                 <Link to={`/product/${item?.id}`}>
-                    <img width={200} height={200} className="mx-auto" src={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={item?.name} />
+                    <img width={200} height={200} className="mx-auto" id="imgUNcover" src={item?.photos?.length ? baseUrl + item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={item?.name} />
                 </Link>
             </RS.CardHeader>
             <RS.CardBody>

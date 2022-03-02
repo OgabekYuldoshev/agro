@@ -10,7 +10,7 @@ export default ({ item }) => {
 
     return (
         <RS.Card className='text-white border-0'>
-            <RS.CardImg top width={300} height={300} src={baseUrl + item?.image} alt='card-overlay' />
+            <RS.CardImg id="imgUNcover" top width={300} height={300} src={item?.image ? baseUrl + item?.image : 'https://via.placeholder.com/150'} alt='card-overlay' />
             <RS.CardImgOverlay className='bg-overlay'>
                 <RS.CardBody>
                     <RS.CardBody>

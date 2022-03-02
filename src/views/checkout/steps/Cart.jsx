@@ -11,11 +11,12 @@ import { handleAuthModal } from "@store/Auth"
 import { inWishList } from "@utils"
 
 // ** Reactstrap Imports
-import { Card, CardBody, CardText, Button, Badge, Row, Col } from 'reactstrap'
+import { Card, CardBody, Button, Row, Col } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import { toast } from 'react-toastify'
+import { baseUrl } from '../../../utility/Utils'
 
 const Cart = (props) => {
   const { products, stepper, removeFromCart, updateProduct, t, i18n } = props
@@ -39,11 +40,11 @@ const Cart = (props) => {
       return (
         <Card key={index}>
           <CardBody>
-            <Row xl={4}>
+            <Row xl={4} className="align-items-center">
               <Col>
-                <div className='item-img'>
+                <div className='d-flex align-items-center justify-content-center'>
                   <Link to={`/products/${product?.item?.id}`}>
-                    <img className='img-fluid' width={200} height={300} src={require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} />
+                    <img id="imgUNcover" width={150} height={150} src={product?.item?.photos?.length ? baseUrl + product?.item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} />
                   </Link>
                 </div>
               </Col>

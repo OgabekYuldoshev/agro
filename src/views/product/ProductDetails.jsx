@@ -28,12 +28,12 @@ const Product = (props) => {
       <Row className='my-2'>
         <Col className='d-flex align-items-center justify-content-center mb-2 mb-md-0' md='5' xs='12'>
           <div className='d-flex flex-column align-items-center justify-content-center'>
-            <ReactImageZoom className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={300} img={item?.photos?.length ? baseUrl + img : require('@src/assets/images/pages/eCommerce/26.png').default} />
+            <ReactImageZoom id="imgUNcover" className='img-fluid product-img' width={300} height={300} zoomPosition="original" zoomWidth={300} img={item?.photos?.length ? baseUrl + img : require('@src/assets/images/pages/eCommerce/26.png').default} />
             <Row className='mt-1'>
               {
                 item?.photos?.map((item, index) => (
                   <Col key={index}>
-                    <img key={index} className="cursor-pointer" onClick={() => setImg(item?.image)} src={baseUrl + item?.image} alt={index} width={100} height={100} />
+                    <img key={index} id="imgUNcover" className="cursor-pointer" onClick={() => setImg(item?.image)} src={baseUrl + item?.image} alt={index} width={100} height={100} />
                   </Col>
                 ))
               }

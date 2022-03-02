@@ -33,8 +33,8 @@ const SwiperAutoplay = ({ sliders }) => {
     <Swiper className='mt-2' {...params}>
       {
         sliders?.map((slide, index) => (
-          <SwiperSlide key={index} style={{ height: "10vh" }}>
-            <img src={baseUrl + slide.image} alt={slide.name} style={{ height: "100%", objectFit: 'cover', objectPosition: "center" }} />
+          <SwiperSlide key={index} className="d-flex align-items-center justify-content-center" style={{ height: "10vh" }}>
+            <img src={baseUrl + slide.image} alt={slide.name} id="imgUNcover" />
           </SwiperSlide>
         ))
       }

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 
 import axios from "axios"
 // export const baseUrl = 'https://guarded-cliffs-29944.herokuapp.com/'
-export const baseUrl = 'https://api.qorasuvagro.uz/api'
+export const baseUrl = 'https://api.qorasuvagro.uz/'
 
 export const http = axios.create({
   baseURL: 'https://api.qorasuvagro.uz/api',

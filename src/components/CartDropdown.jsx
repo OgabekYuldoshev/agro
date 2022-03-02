@@ -39,7 +39,7 @@ const CartDropdown = ({ t, store }) => {
                             return (
                                 <Row xl={3} key={product?.item.id} className='d-flex align-items-center my-1'>
                                     <Col>
-                                        <img className='d-block rounded me-1' src={product?.item?.photos?.length ? baseUrl + product?.item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} height={100} />
+                                        <img className='d-block rounded me-1' id="imgUNcover" src={product?.item?.photos?.length ? baseUrl + product?.item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} height={100} width={150} />
                                     </Col>
 
                                     {/* <X size={30} /> */}

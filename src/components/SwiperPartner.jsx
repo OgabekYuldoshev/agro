@@ -7,6 +7,7 @@ import SwiperCore, {
 } from 'swiper'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'react-feather'
+import { baseUrl } from '../utility/Utils'
 // ** Images
 
 const params = {
@@ -50,13 +51,18 @@ const SwiperProducts = ({ title, data }) => {
       <Swiper {...params}>
         {
           data?.map((item, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="d-flex flex-column align-items-center justify-content-center">
               <img
+                id="imgUNcover"
                 width={200}
                 height={200}
-                src="https://www.clipartkey.com/mpngs/m/125-1254131_pepsi-old-pepsi-logo-png.png"
-                // src={baseUrl + item?.image}
+                src={item.image ? baseUrl + item.image : 'https://via.placeholder.com/150'}
                 alt={item.name} />
+              <span>
+                <b>
+                  <em>{item.name}</em>
+                </b>
+              </span>
             </SwiperSlide>
           ))
         }
