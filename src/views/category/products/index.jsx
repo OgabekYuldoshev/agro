@@ -26,7 +26,7 @@ const ProductsPage = ({ items, currentPage, totalPages }) => {
       <div>
         {items?.length ? (
           <>
-            <Row xl={4} lg={3} sm={2}>
+            <Row xl={4} lg={3} sm={2} xs={2}>
               {
                 items?.map((item, index) => (
                   <Col key={index}>

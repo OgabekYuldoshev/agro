@@ -29,6 +29,8 @@
   "wishlist": "Wishlist",
   "password": "Password",
   "password_confirmation": "Confirmation password",
+  "clear":"Clear",
+  
   "first_name": "First Name",
   "region": "Region",
   "product_details": "Product Details",
