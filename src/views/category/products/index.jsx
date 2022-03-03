@@ -4,8 +4,9 @@ import ProductCard from "components/ProductCard"
 import ReactPaginate from "react-paginate"
 import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
-
-const ProductsPage = ({ items, currentPage, totalPages }) => {
+import UILoader from '@components/ui-loader'
+import Spinner from '@components/spinner/Loading-spinner'
+const ProductsPage = ({ items, currentPage, totalPages, isLoading }) => {
   const history = useHistory()
   const location = useLocation()
   const defaultQs = qs.parse(location.search, { ignoreQueryPrefix: true })
@@ -25,7 +26,7 @@ const ProductsPage = ({ items, currentPage, totalPages }) => {
     <div>
       <div>
         {items?.length ? (
-          <>
+          <UILoader blocking={isLoading} loader={<Spinner />}>
             <Row xl={4} lg={3} sm={2} xs={2}>
               {
                 items?.map((item, index) => (
@@ -57,7 +58,7 @@ const ProductsPage = ({ items, currentPage, totalPages }) => {
                 containerClassName={'pagination react-paginate separated-pagination pagination-sm justify-content-end pe-1'}
               />
             </div>
-          </>
+          </UILoader>
         ) : (
           <div className='d-flex justify-content-center'>
             <p>No Results</p>

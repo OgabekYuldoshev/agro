@@ -13,9 +13,9 @@ const Contacts = () => {
         dispatch(getPartners())
     }, [])
 
-    const main_partners = allPartners?.filter(part => part?.type_id === 1)
-    const partners = allPartners?.filter(part => part?.type_id === 2)
-    const client = allPartners?.filter(part => part?.type_id === 3)
+    const main_partners = allPartners?.filter(part => parseInt(part?.type_id) === 1)
+    const partners = allPartners?.filter(part => parseInt(part?.type_id) === 2)
+    const client = allPartners?.filter(part => parseInt(part?.type_id) === 3)
 
     return (
         <>
@@ -30,7 +30,7 @@ const Contacts = () => {
                                     main_partners?.map((item, index) => (
                                         <Col key={index}>
                                             <a target="_blank" href={item?.link} className="d-flex flex-column align-items-center">
-                                                <img width={100} height={100} src={baseUrl + item?.image} alt={item.id} />
+                                                <img width={100} height={100} src={item?.image ? baseUrl + item?.image : 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80'} alt={item.id} />
                                                 <p className="text-center mt-1">{item.name}</p>
                                             </a>
                                         </Col>
@@ -51,7 +51,7 @@ const Contacts = () => {
                                     partners?.map((item, index) => (
                                         <Col key={index}>
                                             <a target="_blank" href={item?.link} className="d-flex flex-column align-items-center">
-                                                <img width={100} height={100} src={baseUrl + item?.image} alt={item.id} />
+                                                <img width={100} height={100} src={item?.image ? baseUrl + item?.image : 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80'} alt={item.id} />
                                                 <p className="text-center mt-1">{item.name}</p>
                                             </a>
                                         </Col>
@@ -72,7 +72,7 @@ const Contacts = () => {
                                     client?.map((item, index) => (
                                         <Col key={index}>
                                             <a target="_blank" href={item?.link} className="d-flex flex-column align-items-center">
-                                                <img width={100} height={100} src={baseUrl + item?.image} alt={item.id} />
+                                                <img width={100} height={100} src={item?.image ? baseUrl + item?.image : 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80'} alt={item.id} />
                                                 <p className="text-center mt-1">{item.name}</p>
                                             </a>
                                         </Col>
