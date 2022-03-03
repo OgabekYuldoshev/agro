@@ -51,18 +51,20 @@ const SwiperProducts = ({ title, data }) => {
       <Swiper {...params}>
         {
           data?.map((item, index) => (
-            <SwiperSlide key={index} className="d-flex flex-column align-items-center justify-content-center">
-              <img
-                id="imgUNcover"
-                width={200}
-                height={200}
-                src={item.image ? baseUrl + item.image : 'https://via.placeholder.com/150'}
-                alt={item.name} />
-              <span>
-                <b>
-                  <em>{item.name}</em>
-                </b>
-              </span>
+            <SwiperSlide key={index}>
+              <a href={item?.link} target="_blank" className="d-flex flex-column align-items-center justify-content-center">
+                <img
+                  id="imgUNcover"
+                  width={200}
+                  height={200}
+                  src={item.image ? baseUrl + item.image : 'https://via.placeholder.com/150'}
+                  alt={item.name} />
+                <span className='mt-1'>
+                  <b>
+                    <em>{item.name}</em>
+                  </b>
+                </span>
+              </a>
             </SwiperSlide>
           ))
         }

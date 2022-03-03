@@ -20,6 +20,10 @@ export const categorySlice = createSlice({
     initialState: {
         products: [],
         category: {},
+        partners: [],
+        units: [],
+        min: null,
+        max: null,
         isLoading: false,
         currentPage: 0,
         perPage: 25,
@@ -33,10 +37,14 @@ export const categorySlice = createSlice({
             state.isLoading = true
         },
         [getCategoryProducts.fulfilled]: (state, action) => {
-            const { products, categories } = action?.payload
+            const { products, categories, partnerFilter, unitsFilter, priceMax, priceMin } = action?.payload
             console.log(action?.payload)
             state.products = products?.data
             state.category = categories
+            state.min = priceMin
+            state.max = priceMax
+            state.partners = partnerFilter
+            state.units = unitsFilter
             state.currentPage = products?.current_page
             state.perPage = products?.per_page
             state.total = products?.total
