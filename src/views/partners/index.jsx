@@ -19,7 +19,7 @@ const Contacts = () => {
 
     return (
         <>
-            <h1 className="my-1">{t('partners')}</h1>
+            <h1 className="my-2">{t('partners')}</h1>
             {
                 main_partners?.length ? (
                     <Card>

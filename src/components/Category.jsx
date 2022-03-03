@@ -52,6 +52,18 @@ const Category = ({ t, open, toggle }) => {
                             </AccordionBody>
                         </AccordionItem>
                         <AccordionItem>
+                            <AccordionHeader targetId='4'>{t('media')}</AccordionHeader>
+                            <AccordionBody accordionId='4'>
+                                <ListGroup flush>
+                                    <ListGroupItem>
+                                        <Link to={'/media'}>
+                                            {t('gallery')}
+                                        </Link>
+                                    </ListGroupItem>
+                                </ListGroup>
+                            </AccordionBody>
+                        </AccordionItem>
+                        <AccordionItem>
                             <AccordionHeader targetId='3'>{t('about')}</AccordionHeader>
                             <AccordionBody accordionId='3'>
                                 <ListGroup flush>

@@ -87,6 +87,23 @@ export const getPartners = createAsyncThunk('app/getPartners', async (undefined,
     }
 })
 
+export const getMedia = createAsyncThunk('app/getMedia', async (undefined, { rejectWithValue }) => {
+    try {
+        const response = await http.get('/media-images')
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
+export const getSingleMedia = createAsyncThunk('app/getSingleMedia', async (id, { rejectWithValue }) => {
+    try {
+        const response = await http.get(`/media-images/${id}`)
+        return response.data?.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
 export const apphSlice = createSlice({
     name: 'app',
     initialState: {
@@ -99,11 +116,25 @@ export const apphSlice = createSlice({
         pages: [],
         currency: [],
         contacts: [],
-        allPartners: []
+        allPartners: [],
+        media: [],
+        singleMedia: null
     },
     reducers: {
     },
     extraReducers: {
+        [getMedia.fulfilled]: (state, action) => {
+            state.media = action.payload
+        },
+        [getMedia.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
+        [getSingleMedia.fulfilled]: (state, action) => {
+            state.singleMedia = action.payload
+        },
+        [getSingleMedia.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
 
         [getCurrency.fulfilled]: (state, action) => {
             state.currency = action.payload

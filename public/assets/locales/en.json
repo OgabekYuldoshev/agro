@@ -12,6 +12,9 @@
   "logout": "Log Out",
   "by": "By",
   "som": "Som",
+  "seminar": "Seminar",
+  "shop": "Our shops",
+  "gallery":"Gallery",
   "quantity": "Quantity",
   "item": "Product",
   "items": "Products",
@@ -29,8 +32,8 @@
   "wishlist": "Wishlist",
   "password": "Password",
   "password_confirmation": "Confirmation password",
-  "clear":"Clear",
-  
+  "clear": "Clear",
+
   "first_name": "First Name",
   "region": "Region",
   "product_details": "Product Details",

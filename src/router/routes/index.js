@@ -43,6 +43,16 @@ const Routes = [
     exact: true
   },
   {
+    path: '/media',
+    component: lazy(() => import('../../views/media')),
+    exact: true
+  },
+  {
+    path: '/media/:id',
+    component: lazy(() => import('../../views/media/View')),
+    exact: true
+  },
+  {
     path: '/product/:id',
     component: lazy(() => import('../../views/product')),
     exact: true
