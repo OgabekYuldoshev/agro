@@ -35,15 +35,17 @@ const Details = () => {
   if (store.isLoading) {
     return <Loading />
   }
+
   const handleRemoveFromWishlist = (item) => {
     const found = wishlist?.find((product) => product.products.id === item.id)
     if (found) return dispatch(deleteFromWishList(found.id))
     return toast.error(t('not_found_to_wishlist'))
   }
 
-  if (!store?.productDetails) {
+  if (Object.keys(store?.productDetails)?.length === 0) {
     return <Empty />
   }
+
   return (
     <div className="mt-2">
       <div className='d-flex align-items-end justify-content-between gap-1 my-1'>

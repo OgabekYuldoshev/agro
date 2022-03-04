@@ -20,7 +20,7 @@ export const searchProducts = createAsyncThunk('app/searchProducts', async (name
 export const productSlice = createSlice({
     name: 'product',
     initialState: {
-        productDetails: null,
+        productDetails: {},
         review_products: [],
         searchProduct: [],
         isLoading: false,
