@@ -8,7 +8,7 @@ import ProductDetails from './ProductDetails'
 import RelatedProducts from './RelatedProducts'
 import { getProductDetails } from "@store/product"
 // ** Custom Components
-import BreadCrumbs from '@components/breadcrumbs'
+import Empty from '../../components/Empty'
 
 // ** Reactstrap Imports
 import { Card, CardBody } from 'reactstrap'
@@ -20,7 +20,7 @@ import { addToWishList, deleteFromWishList } from "@store/Wishlist"
 import { useParams } from "react-router-dom"
 import '@styles/base/pages/app-ecommerce-details.scss'
 import Loading from "components/Loading"
-import { ArrowRight } from 'react-feather'
+// import { ArrowRight } from 'react-feather'
 
 const Details = () => {
   const params = useParams()
@@ -40,6 +40,10 @@ const Details = () => {
     if (found) return dispatch(deleteFromWishList(found.id))
     return toast.error(t('not_found_to_wishlist'))
   }
+
+  if (!store?.productDetails) {
+    return <Empty />
+  }
   return (
     <div className="mt-2">
       <div className='d-flex align-items-end justify-content-between gap-1 my-1'>
@@ -58,7 +62,7 @@ const Details = () => {
             <ProductDetails
               dispatch={dispatch}
               addToCart={addToCart}
-              item={store.productDetails}
+              item={store?.productDetails}
               handleRemoveFromWishlist={handleRemoveFromWishlist}
               addToWishList={addToWishList}
             />
