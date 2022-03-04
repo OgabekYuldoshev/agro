@@ -1,6 +1,7 @@
 #imgUNcover {
     width: 100%;
-    object-fit: contain;
+    object-position: center;
+    object-fit: cover;
   }
 .layout {
     padding: 0px 250px;

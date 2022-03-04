@@ -21,10 +21,10 @@ const ProfilePage = ({ data }) => {
                         <Avatar color='light-danger' icon={<Heart size={18} />} />
                         <b>{wishlist.length}</b>
                     </Col>
-                    <Col className="d-flex gap-1 align-items-center">
+                    {/* <Col className="d-flex gap-1 align-items-center">
                         <Avatar color='light-primary' icon={<Clipboard size={18} />} />
                         <b>1</b>
-                    </Col>
+                    </Col> */}
                 </Row>
                 {/* <Row sm={1} xl={2} className="gap-2">
                     <Col className="d-flex align-items-center gap-2">

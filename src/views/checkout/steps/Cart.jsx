@@ -43,7 +43,7 @@ const Cart = (props) => {
             <Row xl={4} className="align-items-center">
               <Col>
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Link to={`/products/${product?.item?.id}`}>
+                  <Link to={`/product/${product?.item?.id}`}>
                     <img id="imgUNcover" width={150} height={150} src={product?.item?.photos?.length ? baseUrl + product?.item?.photos[0]?.image : require('@src/assets/images/pages/eCommerce/26.png').default} alt={product?.item?.name} />
                   </Link>
                 </div>
