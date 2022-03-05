@@ -28,7 +28,7 @@ export default () => {
     const { i18n, t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
-    const { contacts } = useSelector(state => state.app)
+    const { contacts, categories, pages } = useSelector(state => state.app)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -41,9 +41,13 @@ export default () => {
         setIsOpenMenu(true)
         dispatch(searchProducts(e.target.value))
     }
+    const about = pages?.filter(p => parseInt(p.page_id) === 1)
+    const service = pages?.filter(p => parseInt(p.page_id) === 2)
+    const useful = pages?.filter(p => parseInt(p.page_id) === 3)
+
     return (
         <>
-            <nav style={{ borderBottom: "2px solid #074C8F" }} className="text-pirmary shadow layout text-white">
+            <nav className="text-pirmary shadow layout text-white">
                 <div style={{ borderBottom: "1px solid #074C8F" }} className="text-primary d-flex align-items-center justify-content-between ">
                     <span className="">
                         <I.Phone size={18} />
@@ -73,9 +77,9 @@ export default () => {
                         <I.List onClick={toggle} size={25} className="d-block text-primary d-lg-none" />
                     </RS.Col>
                     <RS.Col xl={4} md={5} className="position-relative d-flex align-items-center gap-1 mb-1 mb-lg-0">
-                        <RS.Button color="primary" onClick={toggle} className="d-none d-md-block" >
+                        {/* <RS.Button color="primary" onClick={toggle} className="d-none d-md-block" >
                             <I.List size={12} />
-                        </RS.Button>
+                        </RS.Button> */}
                         <RS.Input type='text' placeholder={t('search')} onChange={handleSearch} />
                         {
                             isOpenMenu ? <DropdownItemMenu onBlur={() => setIsOpenMenu(false)} i18n={i18n} t={t} products={searchProduct} isLoading={searchLoading} /> : null
@@ -106,6 +110,83 @@ export default () => {
                         }
                     </RS.Col>
                 </RS.Row>
+                <div className="d-none d-sm-flex text-black align-items-center justify-content-center" >
+                    <RS.UncontrolledButtonDropdown>
+                        <RS.DropdownToggle color='flat-primary' caret>
+                            {t('about')}
+                        </RS.DropdownToggle>
+                        <RS.DropdownMenu>
+                            {
+                                about?.map((item, index) => (
+                                    <RS.DropdownItem key={index} to={`/page/${item?.id}`} tag={Link}>{item[`title_${i18n.language}`]}</RS.DropdownItem>
+                                ))
+                            }
+                            <RS.DropdownItem to={`/partners`} tag={Link}> {t('partners')}</RS.DropdownItem>
+                        </RS.DropdownMenu>
+                    </RS.UncontrolledButtonDropdown>
+                    <RS.UncontrolledButtonDropdown>
+                        <RS.DropdownToggle color='flat-primary' caret>
+                            {t('category')}
+                        </RS.DropdownToggle>
+                        <RS.DropdownMenu>
+                            {
+                                categories?.map((item, index) => (
+                                    <RS.DropdownItem key={index} to={`/category/${item?.id}`} tag={Link}>{item[`name_${i18n.language}`]}</RS.DropdownItem>
+                                ))
+                            }
+
+                        </RS.DropdownMenu>
+                    </RS.UncontrolledButtonDropdown>
+                    {
+                        service?.length ? (
+                            <RS.UncontrolledButtonDropdown>
+                                <RS.DropdownToggle color='flat-primary' caret>
+                                    {t('our_services')}
+                                </RS.DropdownToggle>
+                                <RS.DropdownMenu>
+                                    {
+                                        service?.map((item, index) => (
+                                            <RS.DropdownItem key={index} to={`/page/${item?.id}`} tag={Link}>{item[`title_${i18n.language}`]}</RS.DropdownItem>
+                                        ))
+                                    }
+
+                                </RS.DropdownMenu>
+                            </RS.UncontrolledButtonDropdown>
+                        ) : null
+                    }
+                    {
+                        useful?.length ? (
+                            <RS.UncontrolledButtonDropdown>
+                                <RS.DropdownToggle color='flat-primary' caret>
+                                    {t('our_services')}
+                                </RS.DropdownToggle>
+                                <RS.DropdownMenu>
+                                    {
+                                        useful?.map((item, index) => (
+                                            <RS.DropdownItem key={index} to={`/page/${item?.id}`} tag={Link}>{item[`title_${i18n.language}`]}</RS.DropdownItem>
+                                        ))
+                                    }
+
+                                </RS.DropdownMenu>
+                            </RS.UncontrolledButtonDropdown>
+                        ) : null
+                    }
+                    <RS.UncontrolledButtonDropdown>
+                        <RS.DropdownToggle color='flat-primary' caret>
+                            {t('media')}
+                        </RS.DropdownToggle>
+                        <RS.DropdownMenu>
+                            <RS.DropdownItem to={`/media`} tag={Link}>{t('gallery')}</RS.DropdownItem>
+                        </RS.DropdownMenu>
+                    </RS.UncontrolledButtonDropdown>
+                    <RS.UncontrolledButtonDropdown>
+                        <RS.DropdownToggle color='flat-primary'>
+                            <Link to={'/contacts'}>
+                                {t('network')}
+                            </Link>
+                        </RS.DropdownToggle>
+                    </RS.UncontrolledButtonDropdown>
+                </div>
 
                 <div style={styleBar} className="bg-primary d-lg-none">
                     {/* <CartDropdown t={t} store={ecommerce} /> */}

@@ -9,20 +9,19 @@ import { Link } from "react-router-dom"
 
 const ValidateSchema = yup.object({
     name: yup.string().required(),
-    phone: yup.string().required(),
+    phone_number: yup.string().required(),
     email: yup.string().required(),
     text: yup.string().required()
 })
 export default () => {
     const dispatch = useDispatch()
-    const { t, i18n } = useTranslation()
-    const { pages, contacts } = useSelector(state => state.app)
-    const useful = pages?.filter(item => item?.page_id === 3)
+    const { t } = useTranslation()
+    const { contacts } = useSelector(state => state.app)
     const formik = useFormik({
         validationSchema: ValidateSchema,
         initialValues: {
             name: '',
-            phone: '',
+            phone_number: '',
             email: '',
             text: ''
         },
@@ -31,29 +30,11 @@ export default () => {
             resetForm()
         }
     })
+    console.log(formik.values)
     return (
         <footer className="bg-primary layout text-white">
             <RS.Row xl={3} md={2} sm={1} className="py-4">
-                {
-                    useful?.length ? (
-                        <RS.Col className="mb-1" xl={3}>
-                            <h3 className="text-white mb-1">
-                                {t('useful_links')}
-                            </h3>
-                            <div className="d-flex flex-column">
-                                {
-                                    useful?.map((item, index) => (
-                                        <Link className="text-white" to={`/page/${item?.id}`}>
-                                            <p key={index} className="cursor-pointer">{item[`title_${i18n.language}`]}</p>
-                                        </Link>
-                                    ))
-                                }
-                            </div>
-                        </RS.Col>
-                    ) : null
-                }
-
-                <RS.Col className="mb-1" xl={useful?.length ? 3 : 6}>
+                <RS.Col className="mb-1" xl={6}>
                     <h3 className="text-white mb-1">
                         {t('network')}
                     </h3>
@@ -76,23 +57,23 @@ export default () => {
                     <h3 className="text-white mb-1">
                         {t('for_references')}
                     </h3>
-                    <RS.Form onSubmit={formik.handleSubmit}>
+                    <RS.Form onReset={formik.resetForm} onSubmit={formik.handleSubmit}>
                         <RS.Row xl={2} >
                             <RS.Col xl={12} className="mb-2">
                                 <RS.Label className="text-white">{t("fullname")}</RS.Label>
-                                <RS.Input type="name" name="name" placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Input type="name" name="name" defaultValue={formik.values.name} placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                             <RS.Col className="mb-2">
                                 <RS.Label className="text-white">{t("phone_number")}</RS.Label>
-                                <RS.Input type="tel" name="phone" placeholder="ex: 998 9x xxx xx xx" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Input type="tel" name="phone_number" defaultValue={formik.values.phone_number} placeholder="ex: 998 9x xxx xx xx" onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                             <RS.Col className="mb-2">
                                 <RS.Label className="text-white">{t("email")}</RS.Label>
-                                <RS.Input type="email" name="email" placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Input type="email" name="email" defaultValue={formik.values.email} placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                             <RS.Col xl={12} className="mb-2">
                                 <RS.Label className="text-white">{t('about_subject')}</RS.Label>
-                                <RS.Input type="textarea" name="text" placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                <RS.Input type="textarea" name="text" defaultValue={formik.values.text} placeholder={t("enter")} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </RS.Col>
                         </RS.Row>
                         <div className="d-flex justify-content-end">

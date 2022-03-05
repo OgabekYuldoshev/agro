@@ -27,7 +27,7 @@ const ProductsPage = ({ items, currentPage, totalPages, isLoading }) => {
       <div>
         {items?.length ? (
           <UILoader blocking={isLoading} loader={<Spinner />}>
-            <Row xl={4} lg={3} sm={2} xs={2}>
+            <Row xl={3} lg={3} sm={2} xs={2}>
               {
                 items?.map((item, index) => (
                   <Col key={index}>
