@@ -38,13 +38,13 @@ const params = {
 
 SwiperCore.use([Navigation])
 
-const SwiperProducts = ({ title, data }) => {
+const SwiperProducts = ({ title, data, t }) => {
   return (
     <div className='my-2'>
       <div className='d-flex align-items-center gap-1 mb-2'>
         <h1>{title}</h1>
         <Link to="/partners">
-          <span>Barchasi</span>
+          <span>{t('all')}</span>
           <ArrowRight size={15} />
         </Link>
       </div>

@@ -24,7 +24,7 @@ const Main = () => {
           ))
         }
       </RS.Row>
-      <SwiperPartner data={app?.partners} title={t('partners')} />
+      <SwiperPartner data={app?.partners} t={t} title={t('partners')} />
       <SwiperProducts data={app?.recProducts} title={t('recommended_products')} />
     </>
   )
