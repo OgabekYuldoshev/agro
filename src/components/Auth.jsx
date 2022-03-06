@@ -110,7 +110,7 @@ const Login = ({ t, toggle }) => {
                         formik.resetForm()
                         toggle()
                     }} type="reset" color="danger" outline>{t('cancel')}</Button>
-                    <Button type="submit" color="primary">{t('signin')}</Button>
+                    <Button type="submit" color="primary">{t('login')}</Button>
                 </Col>
             </Row>
         </Form>
@@ -288,7 +288,7 @@ const Register = ({ t, tab, toggle }) => {
                         formik.resetForm()
                         toggle()
                     }} type="reset" color="danger" outline>{t('cancel')}</Button>
-                    <Button color="primary" type="submit">{t('signup')}</Button>
+                    <Button color="primary" type="submit">{t('register')}</Button>
                 </Col>
             </Row>
         </Form>
