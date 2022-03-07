@@ -5,6 +5,7 @@ import ReactSelect from 'react-select'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCurrency } from '@store/app'
 import { useTranslation } from "react-i18next"
+import { priceFormat } from '../../../utility/Utils'
 
 const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
   const [open, setOpen] = useState(false)
@@ -18,10 +19,6 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
 
   const columns = [
     {
-      name: t('code_product'),
-      selector: row => row.item?.code
-    },
-    {
       name: t('name_product'),
       selector: row => row.item[`name_${i18n.language}`]
     },
@@ -31,7 +28,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
     },
     {
       name: t('price_product'),
-      cell: row => <span>{row.item?.price}{' '}{t('som')}</span>
+      cell: row => <span>{priceFormat(row.item?.price)}{' '}{t('som')}</span>
     }
   ]
 
@@ -91,7 +88,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
                 <li className='price-detail'>
                   <div className='details-title'>{t("price_of_items")}</div>
                   <div className='detail-amt'>
-                    <strong>{allPrice}{' '}{t('som')}</strong>
+                    <strong>{priceFormat(allPrice)}{' '}{t('som')}</strong>
                   </div>
                 </li>
                 <li className='price-detail'>
@@ -103,7 +100,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
               <ul className='list-unstyled price-details'>
                 <li className='price-detail'>
                   <div className='details-title'>{t('amount_payable')}</div>
-                  <div className='detail-amt fw-bolder'>{allPrice}{' '}{t('som')}</div>
+                  <div className='detail-amt fw-bolder'>{priceFormat(allPrice)}{' '}{t('som')}</div>
                 </li>
               </ul>
             </CardBody>

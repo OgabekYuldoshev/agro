@@ -7,24 +7,14 @@ import * as Yup from "yup"
 
 const ValidSchema = Yup.object({
   receiver_name: Yup.string()
-    .max(15)
-    .min(3)
     .required("Required"),
   region_name: Yup.string()
-    .min(3)
-    .max(20)
     .required("Required"),
   district_name: Yup.string()
-    .min(3)
-    .max(20)
     .required("Required"),
   street_name: Yup.string()
-    .min(3)
-    .max(20)
     .required("Required"),
   phone_number: Yup.string()
-    .min(3)
-    .max(20)
     .required("Required")
 })
 // ** Reactstrap Imports
@@ -45,7 +35,6 @@ const Address = props => {
   }, [isAuth, stepper])
 
   const address = useSelector(state => state.app?.address)
-
   const formik = useFormik({
     initialValues: {
       receiver_name: '',
