@@ -27,14 +27,6 @@ export const productSlice = createSlice({
         searchLoading: false
     },
     reducers: {
-        // handleLogout: state => {
-        //     state.userData = {}
-        //     state.accessToken = ''
-        //     state.isAuth = false
-        //     localStorage.removeItem('userData')
-        //     localStorage.removeItem('accessToken')
-        //     toast.success("Siz muvaffaqiyatli profilingizdan chiqdingiz!")
-        // },
         handleClear: state => {
             state.searchProduct = []
         }

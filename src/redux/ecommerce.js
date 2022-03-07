@@ -5,15 +5,6 @@ import {
 } from '@reduxjs/toolkit'
 import { toast } from "react-toastify"
 
-// ** Axios Imports
-// import axios from 'axios'
-
-// export const fetchEvents = createAsyncThunk('appCalendar/fetchEvents', async calendars => {
-//   const response = await axios.get('/apps/calendar/events', { calendars })
-//   return response.data
-// })
-
-
 export const appEcommerceSlice = createSlice({
   name: 'ecommerce',
   initialState: {
@@ -36,7 +27,7 @@ export const appEcommerceSlice = createSlice({
         }
         localStorage.setItem("cart", JSON.stringify(state.cart))
       }
-      toast.success("Product successful added to cart!")
+      toast.success("Mahsulot savatga qo'shildi!")
     },
 
     updateProduct: (state, action) => {
@@ -51,13 +42,13 @@ export const appEcommerceSlice = createSlice({
       const index = state.cart.findIndex(f => f.item.id === product?.id)
       state.cart.splice(index, 1)
       localStorage.setItem("cart", JSON.stringify(state.cart))
-      toast.success("Product successful removed from cart!")
+      toast.success("Mahsulot savatdan o'chirildi!")
     },
 
     deleteAllProducts: (state) => {
       localStorage.removeItem('cart')
       state.cart = []
-      toast.success("All product successful removed from cart!")
+      toast.success("Hamma mahsulotlar savatdan o'chirildi!")
     },
 
     checkLocalStorage: (state) => {
@@ -67,13 +58,6 @@ export const appEcommerceSlice = createSlice({
       }
     }
   }
-
-  // extraReducers: builder => {
-  //   builder
-  //     .addCase(fetchEvents.fulfilled, (state, action) => {
-  //       state.events = action.payload
-  //     })
-  // }
 })
 
 export const { addToCart, checkLocalStorage, deleteAllProducts, removeFromCart, updateProduct } = appEcommerceSlice.actions

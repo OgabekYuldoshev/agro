@@ -20,7 +20,7 @@ export const addToWishList = createAsyncThunk('app/addToWishList', async (id, { 
             return rejectWithValue(error)
         }
     } else {
-        return rejectWithValue("Siz wishlistga qo'shish uchun ro'yxatdan o'tgan bolishingiz kerak!")
+        return rejectWithValue("Siz istaklar ro'yxatiga qo'shish uchun ro'yxatdan o'tgan bolishingiz kerak!")
     }
 
 })
@@ -51,14 +51,14 @@ export const wishlistSlice = createSlice({
             toast.error("Tizimda xatolik bor !")
         },
         [addToWishList.fulfilled]: () => {
-            toast.success("WishListga qo'shildi!")
+            toast.success("Istaklar ro'yxatiga qo'shildi!")
         },
         [addToWishList.rejected]: (undefined, action) => {
             if (action.payload?.message) toast.error(action.payload.message)
             toast.warning(action.payload)
         },
         [deleteFromWishList.fulfilled]: () => {
-            toast.success("WishListdan o'chirildi!")
+            toast.success("Istaklar ro'yxatidan o'chirildi!")
         },
         [deleteFromWishList.rejected]: (action) => {
             toast.error(action.payload)
