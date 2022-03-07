@@ -16,7 +16,7 @@ import { Card, CardBody, Button, Row, Col } from 'reactstrap'
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import { toast } from 'react-toastify'
-import { baseUrl } from '../../../utility/Utils'
+import { baseUrl, priceFormat } from '../../../utility/Utils'
 
 const Cart = (props) => {
   const { products, stepper, removeFromCart, updateProduct, t, i18n } = props
@@ -78,7 +78,7 @@ const Cart = (props) => {
                 <div className='item-options text-center'>
                   <div className='item-wrapper'>
                     <div className='item-cost'>
-                      <h4 className='item-price'>{product?.item?.price}{' '}{t('som')}</h4>
+                      <h4 className='item-price'>{priceFormat(product?.item?.price)}{' '}{t('som')}</h4>
                     </div>
                   </div>
                   <div className="d-flex flex-column gap-1">
@@ -142,7 +142,7 @@ const Cart = (props) => {
               <ul className='list-unstyled'>
                 <li className='d-flex justify-content-between align-items-center'>
                   <div className='detail-title detail-total'>{t("total")}</div>
-                  <div className='detail-amt fw-bolder'>{total} {t('som')}</div>
+                  <div className='detail-amt fw-bolder'>{priceFormat(total)} {t('som')}</div>
                 </li>
               </ul>
               <Button

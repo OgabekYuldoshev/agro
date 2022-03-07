@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import currency from "currency.js"
 
 import axios from "axios"
 // export const baseUrl = 'https://guarded-cliffs-29944.herokuapp.com/'
@@ -25,6 +26,12 @@ export const inCart = (item) => {
   }
 }
 
+export const priceFormat = (value, { separator = ' ', precision = 0, decimal = '.', symbol = '' } = {}) => {
+  if (Number(value) === Math.floor(value)) {
+    precision = 0
+  }
+  return currency(value, { separator, precision, decimal, symbol }).format()
+}
 export const inWishList = (item) => {
   const store = useSelector(state => state.wishlist)
   const found = store.wishlist?.find((i) => {

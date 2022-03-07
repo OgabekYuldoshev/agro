@@ -6,7 +6,7 @@ import { Fragment, useState } from 'react'
 import InputNumber from 'rc-input-number'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { ShoppingCart, Plus, Minus, Trash } from 'react-feather'
-import { baseUrl } from "@utils"
+import { baseUrl, priceFormat } from "@utils"
 // ** Reactstrap Imports
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem, Badge, Button, Row, Col, UncontrolledTooltip } from 'reactstrap'
 import { useTranslation } from "react-i18next"
@@ -57,7 +57,7 @@ const CartDropdown = ({ t, store }) => {
                                         <small>{t('size')} <b>{product?.item?.nett_weight} {product?.item?.units?.name}</b></small>
                                     </Col>
                                     <Col className='d-flex flex-column align-items-center justify-content-center'>
-                                        <h5 >{product?.item.price}{" "}{t('som')}</h5>
+                                        <h5 >{priceFormat(product?.item.price)}{" "}{t('som')}</h5>
                                         <div>
                                             <InputNumber
                                                 min={1}
@@ -77,7 +77,7 @@ const CartDropdown = ({ t, store }) => {
                     <li className='border-top pt-1'>
                         <div className='d-flex justify-content-between mb-1'>
                             <h6 className='mb-0'>{t('total')}:</h6>
-                            <h6 className='text-primary mb-0'>{Number(total.toFixed(2))}{' '}{t('som')}</h6>
+                            <h6 className='text-primary mb-0'>{priceFormat(Number(total.toFixed(2)))}{' '}{t('som')}</h6>
                         </div>
                         <Button tag={Link} to='/checkout' color='primary' block onClick={toggle}>
                             {t('checkout')}

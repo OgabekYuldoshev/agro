@@ -4,7 +4,7 @@ import * as I from 'react-feather'
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart, removeFromCart } from "@store/ecommerce"
 import { addToWishList, deleteFromWishList } from "@store/Wishlist"
-import { inCart, inWishList, baseUrl } from "@utils"
+import { inCart, inWishList, baseUrl, priceFormat } from "@utils"
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 // import { useSelector } from 'react-redux'
@@ -39,7 +39,7 @@ export default ({ item }) => {
                     <h6>{item[`name_${i18n?.language}`]}</h6>
                 </Link>
                 <div>
-                    {item?.price}{' '}{t('som')}
+                    {priceFormat(item?.price)}{' '}{t('som')}
                 </div>
             </RS.CardBody>
             <div className='border-top py-1 mx-1 d-flex justify-content-between'>
