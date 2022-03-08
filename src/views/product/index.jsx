@@ -54,7 +54,6 @@ const Details = () => {
           {/* <ArrowRight />
           <span>{store.productDetails[`name_${i18n.language}`]}</span> */}
         </div>
-        <span>#{store.productDetails?.code}</span>
       </div>
 
 

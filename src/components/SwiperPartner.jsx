@@ -54,8 +54,7 @@ const SwiperProducts = ({ title, data, t }) => {
             <SwiperSlide key={index}>
               <a href={item?.link} target="_blank" className="d-flex flex-column align-items-center justify-content-center">
                 <img
-                  id="imgUNcover"
-                  width={200}
+                  id="imgPartner"
                   height={200}
                   src={item.image ? baseUrl + item.image : 'https://via.placeholder.com/150'}
                   alt={item.name} />

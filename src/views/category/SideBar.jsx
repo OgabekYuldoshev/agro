@@ -49,7 +49,7 @@ const SideBar = () => {
                                         </>
                                     ))
                                 }
-                                <b style={{ padding: '5px' }} className='font-bold bg-primary rounded text-white align-items-center'>{category[`name_${i18n.language}`]}</b>
+                                <b className='font-bold rounded text-white align-items-center'>{category[`name_${i18n.language}`]}</b>
                                 {
                                     category?.childs?.map((item, index) => (
                                         <>
