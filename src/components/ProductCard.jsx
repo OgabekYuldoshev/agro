@@ -36,7 +36,7 @@ export default ({ item }) => {
             </RS.CardHeader>
             <RS.CardBody>
                 <Link to={`/product/${item?.id}`}>
-                    <h6>{item[`name_${i18n?.language}`]}</h6>
+                    <h2 className="h6">{item[`name_${i18n?.language}`]}</h2>
                 </Link>
                 <div>
                     {priceFormat(item?.price)}{' '}{t('som')}

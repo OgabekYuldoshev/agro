@@ -15,6 +15,7 @@ import { inCart, inWishList, baseUrl } from "@utils"
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from "react-i18next"
 import { useState } from 'react'
+import { priceFormat } from '../../utility/Utils'
 
 const Product = (props) => {
   // ** Props
@@ -41,7 +42,7 @@ const Product = (props) => {
           </div>
         </Col>
         <Col md='7' xs='12'>
-          <h4>{item[`name_${i18n.language}`]}</h4>
+          <h2 className="h4">{item[`name_${i18n.language}`]}</h2>
           <CardText tag='span' className='item-company'>
             {t('by')}{' '}
             <a className='company-name' target="_blank" href={item?.partners?.link}>
@@ -49,7 +50,7 @@ const Product = (props) => {
             </a>
           </CardText>
           <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
-            <h4 className='item-price me-1'>{item?.price}{" "}{t('som')}</h4>
+            <h3 className='item-price me-1 h4'>{priceFormat(item?.price)}{" "}{t('som')}</h3>
           </div>
           {/* <CardText>
             {t('available')} -<span className='text-success ms-25'>{t('in_stock')}</span>

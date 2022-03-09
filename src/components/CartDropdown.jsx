@@ -102,7 +102,7 @@ const CartDropdown = ({ t, store }) => {
             </DropdownToggle>
             <DropdownMenu end tag='ul' style={{ width: '550px', padding: '20px' }}>
                 <DropdownItem tag='div' className='d-flex border-bottom' header>
-                    <h4 className='mb-0 me-auto'>{t('my_cart')}</h4>
+                    <h2 className='mb-0 h4 me-auto'>{t('my_cart')}</h2>
                     <Badge color='light-primary' pill>
                         {store?.cart?.length || 0} {t('item')}
                     </Badge>

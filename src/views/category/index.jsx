@@ -57,7 +57,7 @@ const Shop = () => {
                 </CardImgOverlay>
             </Card> */}
             <div className="my-2 d-flex align-items-center justify-content-between">
-                <h1>{category[`name_${i18n.language}`]}</h1>
+                <h2 className="h1">{category[`name_${i18n.language}`]}</h2>
             </div>
             <Row sm={1} md={1} xl={2}>
                 <Col xl={3}>

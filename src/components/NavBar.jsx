@@ -72,7 +72,7 @@ export default () => {
                     <RS.Col md={3} className="d-flex justify-content-between align-items-center">
                         <Link to='/' className="d-flex align-items-center gap-1">
                             <img src={LOGO} alt="logo" width={100} />
-                            <h5 className="text-primary text-center">Qorasuv Agro kimyo ta'minot</h5>
+                            <h1 className="text-primary text-center h5">Qorasuv Agro kimyo ta'minot</h1>
                         </Link>
                         <I.List onClick={toggle} size={25} className="d-block text-primary d-lg-none" />
                     </RS.Col>

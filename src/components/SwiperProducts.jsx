@@ -43,7 +43,7 @@ SwiperCore.use([Navigation])
 const SwiperProducts = ({ title, data }) => {
   return (
     <div className='my-2'>
-      <h1 className='mb-2'>{title}</h1>
+      <h2 className='mb-2 h1'>{title}</h2>
       <Swiper {...params}>
         {
           data?.map((item, index) => (

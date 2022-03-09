@@ -42,7 +42,7 @@ const SwiperProducts = ({ title, data, t }) => {
   return (
     <div className='my-2'>
       <div className='d-flex align-items-center gap-1 mb-2'>
-        <h1>{title}</h1>
+        <h2 className='h1'>{title}</h2>
         <Link to="/partners">
           <span>{t('all')}</span>
           <ArrowRight size={15} />
