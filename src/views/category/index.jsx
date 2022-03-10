@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useLayoutEffect } from "react"
 import SideBar from './SideBar'
 import Products from './products'
 import { Col, Row } from "reactstrap"
@@ -29,7 +29,7 @@ const Shop = () => {
         totalPages,
         total
     }
-    useEffect(() => {
+    useLayoutEffect(() => {
         dispatch(getCategoryProducts(query))
     }, [location])
 
