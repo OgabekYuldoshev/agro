@@ -3,7 +3,7 @@
 // import { Link } from 'react-router-dom'
 import ReactImageZoom from 'react-image-zoom'
 // ** Third Party Components
-import { ShoppingCart, DollarSign, Heart } from 'react-feather'
+import { ShoppingCart, Heart } from 'react-feather'
 // ** Reactstrap Imports
 import {
   Row,
@@ -131,7 +131,7 @@ const Product = (props) => {
       </Row >
       <div className='mt-2'>
         <h4 className='my-2'>{t('about_products')}</h4>
-        <div dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
+        <div className='ck-content' dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
       </div>
     </>
   )

@@ -17,7 +17,7 @@ const Page = () => {
             <h2 className="my-2">{page()[`title_${i18n.language}`]}</h2>
             <Card>
                 <CardBody className="overflow-auto">
-                    <div dangerouslySetInnerHTML={{ __html: page()[`content_${i18n.language}`] }} />
+                    <div className='ck-content' dangerouslySetInnerHTML={{ __html: page()[`content_${i18n.language}`] }} />
                 </CardBody>
             </Card>
         </>
