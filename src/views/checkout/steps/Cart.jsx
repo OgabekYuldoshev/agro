@@ -16,12 +16,14 @@ import { Card, CardBody, Button, Row, Col } from 'reactstrap'
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import { toast } from 'react-toastify'
-import { baseUrl, priceFormat } from '../../../utility/Utils'
+import { baseUrl } from '../../../utility/Utils'
+import useCurrency from "../../../hooks/useCurrency"
 
 const Cart = (props) => {
   const { products, stepper, removeFromCart, updateProduct, t, i18n } = props
   const dispatch = useDispatch()
   const handleRemove = (item) => dispatch(removeFromCart(item))
+  const { priceFormat, currencyPrice, symbol } = useCurrency()
   const wishlist = useSelector(state => state.wishlist?.wishlist)
   const auth = useSelector(state => state.auth.isAuth)
   let total = 0
@@ -35,7 +37,7 @@ const Cart = (props) => {
   // console.log(products?.reduce((p, c) => { return p + c.qty }, []))
   const renderCart = () => {
     return products?.map((product, index) => {
-      total += product?.qty * product?.item?.price
+      total += product?.qty * currencyPrice(product?.item?.price)
       totalProduts += product?.qty
       return (
         <Card key={index}>
@@ -78,7 +80,7 @@ const Cart = (props) => {
                 <div className='item-options text-center'>
                   <div className='item-wrapper'>
                     <div className='item-cost'>
-                      <h4 className='item-price'>{priceFormat(product?.item?.price)}{' '}{t('som')}</h4>
+                      <h4 className='item-price'>{priceFormat(currencyPrice(product?.item?.price))}{' '}{t(symbol)}</h4>
                     </div>
                   </div>
                   <div className="d-flex flex-column gap-1">
@@ -142,7 +144,7 @@ const Cart = (props) => {
               <ul className='list-unstyled'>
                 <li className='d-flex justify-content-between align-items-center'>
                   <div className='detail-title detail-total'>{t("total")}</div>
-                  <div className='detail-amt fw-bolder'>{priceFormat(total)} {t('som')}</div>
+                  <div className='detail-amt fw-bolder'>{priceFormat(total)} {t(symbol)}</div>
                 </li>
               </ul>
               <Button

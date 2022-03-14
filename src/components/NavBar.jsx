@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
 import { clearWishlist } from '@store/Wishlist'
 import { searchProducts } from "@store/product"
+import { setExchange } from "@store/app"
 import { baseUrl } from "@utils"
+import ReactSelect from "react-select"
 
 const styleBar = {
     width: '100%',
@@ -28,12 +30,14 @@ export default () => {
     const { i18n, t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
+
     const { contacts, categories, pages } = useSelector(state => state.app)
     const toggle = () => setIsOpen(!isOpen)
     const history = useHistory()
     const dispatch = useDispatch()
     const openAuthModal = () => dispatch(handleAuthModal())
     const auth = useSelector(state => state.auth)
+    const { symbol } = useSelector(state => state.app)
     const wishlist = useSelector(state => state.wishlist?.wishlist)
     const ecommerce = useSelector(state => state.ecommerce)
     const { searchProduct, searchLoading } = useSelector(state => state.product)
@@ -48,25 +52,57 @@ export default () => {
     return (
         <>
             <nav className="text-pirmary shadow layout text-white">
-                <div style={{ borderBottom: "1px solid #074C8F" }} className="text-primary d-flex align-items-center justify-content-between ">
+                <div style={{ borderBottom: "1px solid #074C8F", padding: "5px 5px" }} className="text-primary d-flex align-items-center justify-content-between ">
                     <span className="">
                         <I.Phone size={18} />
                         <a href={`tel:${contacts && contacts[0]?.tel}`}>{contacts && contacts[0]?.tel}</a>
                     </span>
-                    <RS.UncontrolledButtonDropdown>
-                        <RS.DropdownToggle className="text-primary" color='flat-primary' outline caret>
-                            {{
-                                uz: 'Uzbek',
-                                en: 'English',
-                                ru: "Russian"
+                    <div className="d-flex align-items-center justify-content-center gap-1">
+                        {/* <RS.UncontrolledButtonDropdown>
+                            <RS.DropdownToggle className="text-primary" color='flat-primary' outline caret>
+                                {{
+                                    uz: 'Uzbek',
+                                    en: 'English',
+                                    ru: "Russian"
+                                }[i18n.language]}
+                            </RS.DropdownToggle>
+                            <RS.DropdownMenu>
+                                <RS.DropdownItem tag='uz' onClick={() => i18n.changeLanguage('uz')}>UZ</RS.DropdownItem>
+                                <RS.DropdownItem tag='ru' onClick={() => i18n.changeLanguage('ru')}>RU</RS.DropdownItem>
+                                <RS.DropdownItem tag='en' onClick={() => i18n.changeLanguage('en')}>EN</RS.DropdownItem>
+                            </RS.DropdownMenu>
+                        </RS.UncontrolledButtonDropdown> */}
+                        <ReactSelect
+                            isSearchable={false}
+                            defaultValue={
+                                {
+                                    UZS: { label: 'UZS', value: "UZS" },
+                                    USD: { label: 'USD', value: "USD" },
+                                    RUB: { label: 'RUB', value: "RUB" }
+                                }[symbol]
+                            }
+                            onChange={(e) => dispatch(setExchange(e?.value))}
+                            options={[
+                                { label: 'UZS', value: "UZS" },
+                                { label: 'USD', value: "USD" },
+                                { label: 'RUB', value: "RUB" }
+                            ]}
+                        />
+                        <ReactSelect
+                            isSearchable={false}
+                            defaultValue={{
+                                uz: { label: 'Uzbek', value: "uz" },
+                                en: { label: 'English', value: "en" },
+                                ru: { label: 'Russia', value: "ru" }
                             }[i18n.language]}
-                        </RS.DropdownToggle>
-                        <RS.DropdownMenu>
-                            <RS.DropdownItem tag='uz' onClick={() => i18n.changeLanguage('uz')}>UZ</RS.DropdownItem>
-                            <RS.DropdownItem tag='ru' onClick={() => i18n.changeLanguage('ru')}>RU</RS.DropdownItem>
-                            <RS.DropdownItem tag='en' onClick={() => i18n.changeLanguage('en')}>EN</RS.DropdownItem>
-                        </RS.DropdownMenu>
-                    </RS.UncontrolledButtonDropdown>
+                            onChange={(e) => i18n.changeLanguage(e?.value)}
+                            options={[
+                                { label: 'Uzbek', value: "uz" },
+                                { label: 'English', value: "en" },
+                                { label: 'Russia', value: "ru" }
+                            ]}
+                        />
+                    </div>
                 </div>
                 <RS.Row xl={3} sm={1} className="align-items-center justify-content-between">
                     <RS.Col md={3} className="d-flex justify-content-between align-items-center">

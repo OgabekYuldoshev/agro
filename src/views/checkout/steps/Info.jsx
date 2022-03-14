@@ -5,10 +5,11 @@ import ReactSelect from 'react-select'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCurrency } from '@store/app'
 import { useTranslation } from "react-i18next"
-import { priceFormat } from '../../../utility/Utils'
+import useCurrency from '../../../hooks/useCurrency'
 
 const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
   const [open, setOpen] = useState(false)
+  const { priceFormat, currencyPrice, symbol } = useCurrency()
   const { currency } = useSelector(state => state.app)
   const dispatch = useDispatch()
   const { t, i18n } = useTranslation()
@@ -28,7 +29,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
     },
     {
       name: t('price_product'),
-      cell: row => <span>{priceFormat(row.item?.price)}{' '}{t('som')}</span>
+      cell: row => <span>{priceFormat(currencyPrice(row.item?.price))}{' '}{t(symbol)}</span>
     }
   ]
 
@@ -47,7 +48,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
     }
   ]
 
-  const allPrice = cart?.reduce((t, c) => t + (c?.qty * c?.item?.price), 0)
+  const allPrice = cart?.reduce((t, c) => t + (c?.qty * Number(currencyPrice(c?.item?.price))), 0)
 
   return (
     <div
@@ -88,7 +89,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
                 <li className='price-detail'>
                   <div className='details-title'>{t("price_of_items")}</div>
                   <div className='detail-amt'>
-                    <strong>{priceFormat(allPrice)}{' '}{t('som')}</strong>
+                    <strong>{priceFormat(allPrice)}{' '}{t(symbol)}</strong>
                   </div>
                 </li>
                 <li className='price-detail'>
@@ -100,7 +101,7 @@ const Payment = ({ stepper, handleSubmit, address, cart, setForm, form }) => {
               <ul className='list-unstyled price-details'>
                 <li className='price-detail'>
                   <div className='details-title'>{t('amount_payable')}</div>
-                  <div className='detail-amt fw-bolder'>{priceFormat(allPrice)}{' '}{t('som')}</div>
+                  <div className='detail-amt fw-bolder'>{priceFormat(allPrice)}{' '}{t(symbol)}</div>
                 </li>
               </ul>
             </CardBody>

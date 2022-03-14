@@ -4,10 +4,12 @@ import * as I from 'react-feather'
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart, removeFromCart } from "@store/ecommerce"
 import { addToWishList, deleteFromWishList } from "@store/Wishlist"
-import { inCart, inWishList, baseUrl, priceFormat } from "@utils"
+import { inCart, inWishList, baseUrl } from "@utils"
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 // import { useSelector } from 'react-redux'
+import useCurrency from "../hooks/useCurrency"
+
 
 export default ({ item }) => {
     const dispatch = useDispatch()
@@ -19,6 +21,7 @@ export default ({ item }) => {
             qty: 1
         }))
     }
+    const { priceFormat, currencyPrice, symbol } = useCurrency()
     const handleRemove = () => {
         dispatch(removeFromCart(item))
     }
@@ -39,7 +42,7 @@ export default ({ item }) => {
                     <h2 className="h6">{item[`name_${i18n?.language}`]}</h2>
                 </Link>
                 <div>
-                    {priceFormat(item?.price)}{' '}{t('som')}
+                    {priceFormat(currencyPrice(item?.price))}{' '}{t(symbol)}
                 </div>
             </RS.CardBody>
             <div className='border-top py-1 mx-1 d-flex justify-content-between'>

@@ -29,7 +29,6 @@ export default () => {
             resetForm()
         }
     })
-    console.log(formik.values)
     return (
         <footer className="bg-primary layout text-white">
             <RS.Row xl={3} md={2} sm={1} className="py-4">

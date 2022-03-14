@@ -38,7 +38,6 @@ export const categorySlice = createSlice({
         },
         [getCategoryProducts.fulfilled]: (state, action) => {
             const { products, categories, partnerFilter, unitsFilter, priceMax, priceMin } = action?.payload
-            console.log(action?.payload)
             state.products = products?.data
             state.category = categories
             state.min = priceMin

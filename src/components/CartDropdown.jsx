@@ -6,13 +6,14 @@ import { Fragment, useState } from 'react'
 import InputNumber from 'rc-input-number'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { ShoppingCart, Plus, Minus, Trash } from 'react-feather'
-import { baseUrl, priceFormat } from "@utils"
+import { baseUrl } from "@utils"
 // ** Reactstrap Imports
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem, Badge, Button, Row, Col, UncontrolledTooltip } from 'reactstrap'
 import { useTranslation } from "react-i18next"
 // ** Store & Actions
 import { useDispatch } from 'react-redux'
 import { deleteAllProducts, updateProduct } from '@store/ecommerce'
+import useCurrency from '../hooks/useCurrency'
 // ** Styles
 import '@styles/react/libs/input-number/input-number.scss'
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -21,11 +22,11 @@ const CartDropdown = ({ t, store }) => {
     const { i18n } = useTranslation()
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const dispatch = useDispatch()
+    const { priceFormat, currencyPrice, symbol } = useCurrency()
     const toggle = () => setDropdownOpen(prevState => !prevState)
     const renderCartItems = () => {
         if (store?.cart.length) {
             let total = 0
-
             return (
                 <>
                     <PerfectScrollbar
@@ -34,7 +35,7 @@ const CartDropdown = ({ t, store }) => {
                         }}
                     >
                         {store?.cart.map(product => {
-                            total += product?.qty * product?.item?.price
+                            total += product?.qty * currencyPrice(product?.item?.price)
 
                             return (
                                 <Row xl={3} key={product?.item.id} className='d-flex align-items-center my-1'>
@@ -57,7 +58,7 @@ const CartDropdown = ({ t, store }) => {
                                         <small>{t('size')} <b>{product?.item?.nett_weight} {product?.item?.units?.name}</b></small>
                                     </Col>
                                     <Col className='d-flex flex-column align-items-center justify-content-center'>
-                                        <h5 >{priceFormat(product?.item.price)}{" "}{t('som')}</h5>
+                                        <h5 >{priceFormat(currencyPrice(product?.item.price))}{" "}{t(symbol)}</h5>
                                         <div>
                                             <InputNumber
                                                 min={1}
@@ -77,7 +78,7 @@ const CartDropdown = ({ t, store }) => {
                     <li className='border-top pt-1'>
                         <div className='d-flex justify-content-between mb-1'>
                             <h6 className='mb-0'>{t('total')}:</h6>
-                            <h6 className='text-primary mb-0'>{priceFormat(Number(total.toFixed(2)))}{' '}{t('som')}</h6>
+                            <h6 className='text-primary mb-0'>{priceFormat(total)}{' '}{t(symbol)}</h6>
                         </div>
                         <Button tag={Link} to='/checkout' color='primary' block onClick={toggle}>
                             {t('checkout')}

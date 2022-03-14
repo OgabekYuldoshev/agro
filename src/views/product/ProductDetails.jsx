@@ -15,7 +15,7 @@ import { inCart, inWishList, baseUrl } from "@utils"
 import { useHistory, Link } from 'react-router-dom'
 import { useTranslation } from "react-i18next"
 import { useState } from 'react'
-import { priceFormat } from '../../utility/Utils'
+import useCurrency from "../../hooks/useCurrency"
 
 const Product = (props) => {
   // ** Props
@@ -23,7 +23,7 @@ const Product = (props) => {
   const { t, i18n } = useTranslation()
   const [img, setImg] = useState(item?.photos && item?.photos[0]?.image)
   const history = useHistory()
-
+  const { priceFormat, symbol, currencyPrice } = useCurrency()
   return (
     <>
       <Row className='my-2'>
@@ -50,7 +50,7 @@ const Product = (props) => {
             </a>
           </CardText>
           <div className='ecommerce-details-price d-flex flex-wrap mt-1'>
-            <h3 className='item-price me-1 h4'>{priceFormat(item?.price)}{" "}{t('som')}</h3>
+            <h3 className='item-price me-1 h4'>{priceFormat(currencyPrice(item?.price))}{" "}{t(symbol)}</h3>
           </div>
           {/* <CardText>
             {t('available')} -<span className='text-success ms-25'>{t('in_stock')}</span>

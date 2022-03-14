@@ -9,22 +9,21 @@ import { useSelector } from 'react-redux'
 import _ from "lodash"
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import QueryString from 'qs'
-import { priceFormat } from "@utils"
 // import Range from "../../components/Range"
+import useCurrency from '../../hooks/useCurrency'
 
 const SideBar = () => {
     const history = useHistory()
     const location = useLocation()
     const defaultQuery = QueryString.parse(location.search, { ignoreQueryPrefix: true })
     const { t, i18n } = useTranslation()
+    const { priceFormat, currencyPrice, symbol } = useCurrency()
     const { category, min, max, partners, units } = useSelector(state => state.category)
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => setIsOpen(!isOpen)
     useEffect(() => setIsOpen(false), [location])
 
     const [values, setValues] = useState([null, null])
-    console.log(values)
-
     return (
         <Card>
             <CardBody className='d-flex flex-column justify-content-between gap-3' >
@@ -83,7 +82,7 @@ const SideBar = () => {
                                     <Col>
                                         <Label className='mb-2 d-flex align-items-end justify-content-between'>
                                             <span>{t('price')}</span>
-                                            <small style={{ fontSize: '10px' }}>{priceFormat(values[0] || min)} {t('som')} - {priceFormat(values[1] || max)} {t('som')}</small>
+                                            <small style={{ fontSize: '10px' }}>{priceFormat(currencyPrice(values[0] || min))} {t(symbol)} - {priceFormat(currencyPrice(values[1] || max))} {t(symbol)}</small>
                                         </Label>
                                         <Slider range min={parseInt(min)} max={parseInt(max)} onAfterChange={e => {
                                             history.push({
@@ -203,7 +202,7 @@ const SideBar = () => {
                                 <Col>
                                     <Label className='mb-2 d-flex align-items-end justify-content-between'>
                                         <span>{t('price')}</span>
-                                        <small style={{ fontSize: '10px' }}>{priceFormat(values[0] || min)} {t('som')} - {priceFormat(values[1] || max)} {t('som')}</small>
+                                        <small style={{ fontSize: '10px' }}>{priceFormat(currencyPrice(values[0] || min))} {t(symbol)} - {priceFormat(currencyPrice(values[1] || max))} {t(symbol)}</small>
                                     </Label>
                                     <Slider range min={parseInt(min)} max={parseInt(max)} onAfterChange={e => {
                                         history.push({

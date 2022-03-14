@@ -2,9 +2,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { http } from "@utils"
 import { toast } from "react-toastify"
+import axios from "axios"
 
 export const home = createAsyncThunk('app/Home', async (data) => {
     const response = await http.get('/home-page', data)
+    return response.data
+})
+
+export const currency = createAsyncThunk('app/Currency', async () => {
+    const response = await axios.get('https://api.exchangerate-api.com/v4/latest/USD')
     return response.data
 })
 
@@ -111,8 +117,10 @@ export const apphSlice = createSlice({
         categories: [],
         recProducts: [],
         partners: [],
+        exchange: null,
         address: [],
         sliders: [],
+        symbol: localStorage.getItem('exchange') || "UZS",
         pages: [],
         currency: [],
         contacts: [],
@@ -121,6 +129,10 @@ export const apphSlice = createSlice({
         singleMedia: null
     },
     reducers: {
+        setExchange(state, action) {
+            state.symbol = action.payload
+            localStorage.setItem('exchange', action.payload)
+        }
     },
     extraReducers: {
         [getMedia.fulfilled]: (state, action) => {
@@ -166,6 +178,12 @@ export const apphSlice = createSlice({
         [home.rejected]: () => {
             toast.error("Serverda xatolik!")
         },
+        [currency.fulfilled]: (state, action) => {
+            state.exchange = action?.payload?.rates
+        },
+        [currency.rejected]: (undefined, action) => {
+            toast.error(action.payload.message)
+        },
         [addAddress.fulfilled]: () => {
             toast.success("Yangi manzil yaratildi!")
         },
@@ -202,6 +220,6 @@ export const apphSlice = createSlice({
     }
 })
 
-export const { } = apphSlice.actions
+export const { setExchange } = apphSlice.actions
 
 export default apphSlice.reducer
