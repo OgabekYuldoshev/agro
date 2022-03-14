@@ -131,7 +131,7 @@ const Product = (props) => {
       </Row >
       <div className='mt-2'>
         <h4 className='my-2'>{t('about_products')}</h4>
-        <div className='ck-content' dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
+        <div className='ck-content overflow-auto' dangerouslySetInnerHTML={{ __html: item[`specification_${i18n.language}`] }} />
       </div>
     </>
   )
