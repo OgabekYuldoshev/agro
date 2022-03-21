@@ -12,6 +12,8 @@ const Page = () => {
     const { pages } = useSelector(state => state.app)
     const page = () => { return pages?.find(p => { return p?.id === parseInt(id) }) }
 
+    console.log(page())
+
     return pages?.length && page() ? (
         <>
             <h2 className="my-2">{page()[`title_${i18n.language}`]}</h2>

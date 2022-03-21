@@ -14,6 +14,8 @@ import { searchProducts } from "@store/product"
 import { setExchange } from "@store/app"
 import { baseUrl } from "@utils"
 import ReactSelect from "react-select"
+import useCurrency from "../hooks/useCurrency"
+
 
 const styleBar = {
     width: '100%',
@@ -48,6 +50,7 @@ export default () => {
     const about = pages?.filter(p => parseInt(p.page_id) === 1)
     const service = pages?.filter(p => parseInt(p.page_id) === 2)
     const useful = pages?.filter(p => parseInt(p.page_id) === 3)
+    const media = pages?.filter(p => parseInt(p.page_id) === 4)
 
     return (
         <>
@@ -213,6 +216,11 @@ export default () => {
                         </RS.DropdownToggle>
                         <RS.DropdownMenu>
                             <RS.DropdownItem to={`/media`} tag={Link}>{t('gallery')}</RS.DropdownItem>
+                            {
+                                media?.length ? media?.map((item, index) => (
+                                    <RS.DropdownItem key={index} to={`/page/${item?.id}`} tag={Link}>{item[`title_${i18n.language}`]}</RS.DropdownItem>
+                                )) : null
+                            }
                         </RS.DropdownMenu>
                     </RS.UncontrolledButtonDropdown>
                     <RS.UncontrolledButtonDropdown>
@@ -261,6 +269,7 @@ export default () => {
 }
 
 const DropdownItemMenu = ({ products, i18n, t, onBlur }) => {
+    const {priceFormat, currencyPrice, symbol: symbolPrice} = useCurrency()
     return (
         <RS.ListGroup onMouseLeave={onBlur} tag='div' style={{ zIndex: 10 }} className="position-absolute top-100 start-0 bg-white w-full text-black mt-1">
             {
@@ -272,7 +281,7 @@ const DropdownItemMenu = ({ products, i18n, t, onBlur }) => {
                         </span>
                         <span>
                             <b>
-                                {item.price}{' '}{t('som')}
+                                {priceFormat(currencyPrice(item.price))}{' '}{symbolPrice}
                             </b>
                         </span>
                     </RS.ListGroupItem>
